@@ -1,0 +1,13 @@
+{
+    "data": {
+        "id": "b3476de8-be3c-11e4-a0c5-3b35f9015881",
+        "cover_image_url": "http://test.com/users/cover.png",
+        "phone_number": "5555551212",
+        "type": "User",
+        "profile_image_url": "http://test.com/users/profile.png",
+        "first_name": "John",
+        "last_name": "Smith",
+        "email": "abc@cba.com",
+    },
+    "code": "OK"
+}

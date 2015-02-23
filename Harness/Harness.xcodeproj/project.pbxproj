@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		348C72D843D627CD9830DD7F /* Pods_HarnessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D133AD3B00CE24F1C3B5587 /* Pods_HarnessTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7133902A1AB5E17400607562 /* APIMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713390291AB5E17400607562 /* APIMapperTests.swift */; };
+		713763E61AB67E51005E9260 /* MockAccountUserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713763E51AB67E51005E9260 /* MockAccountUserProvider.swift */; };
+		718966791AB27E2F00919AEF /* APIServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718966781AB27E2F00919AEF /* APIServiceClientTests.swift */; };
+		7189667B1AB27E4700919AEF /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189667A1AB27E4700919AEF /* RepositoryTests.swift */; };
+		71CE6BB11AB20E6300C7ABD9 /* HarnessModelFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CE6BAE1AB20E6300C7ABD9 /* HarnessModelFactoryTests.swift */; };
+		71CE6BB21AB20E6300C7ABD9 /* OAuth2SessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CE6BB01AB20E6300C7ABD9 /* OAuth2SessionManagerTests.swift */; };
+		71E7BB891AB5471E00272AC0 /* MockAPISessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7BB841AB5471E00272AC0 /* MockAPISessionManager.swift */; };
+		71E7BB8A1AB5471E00272AC0 /* MockModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7BB851AB5471E00272AC0 /* MockModelFactory.swift */; };
+		71E7BB8B1AB5471E00272AC0 /* MockOAuth2Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7BB861AB5471E00272AC0 /* MockOAuth2Authorization.swift */; };
+		71E7BB8C1AB5471E00272AC0 /* MockOAuth2SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7BB871AB5471E00272AC0 /* MockOAuth2SessionManager.swift */; };
+		71E7BB8D1AB5471E00272AC0 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7BB881AB5471E00272AC0 /* MockURLSessionDataTask.swift */; };
+		71E7BB8F1AB547B100272AC0 /* UserAPIMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7BB8E1AB547B100272AC0 /* UserAPIMapperTests.swift */; };
+		71E7BB911AB547BD00272AC0 /* LocationsAPIMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7BB901AB547BD00272AC0 /* LocationsAPIMapperTests.swift */; };
+		71FB58A81A985CE000DE27AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB58A71A985CE000DE27AD /* Images.xcassets */; };
+		71FF14291AA60C1A0032B20E /* HarnessAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FF14281AA60C1A0032B20E /* HarnessAppDelegate.swift */; };
+		F11860DE98324A69BFB8E6E7 /* Pods_Harness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E51E0514DEE75B98A324AC /* Pods_Harness.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		71FB58B11A985CE000DE27AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71FB58931A985CE000DE27AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71FB589A1A985CE000DE27AD;
+			remoteInfo = Harness;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		10EFB332B2453323C8A84A40 /* Pods-Harness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Harness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Harness/Pods-Harness.debug.xcconfig"; sourceTree = "<group>"; };
+		16E51E0514DEE75B98A324AC /* Pods_Harness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Harness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D861BB6E554E4100DF13CEA /* Pods-HarnessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HarnessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HarnessTests/Pods-HarnessTests.release.xcconfig"; sourceTree = "<group>"; };
+		4D133AD3B00CE24F1C3B5587 /* Pods_HarnessTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HarnessTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		713390291AB5E17400607562 /* APIMapperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMapperTests.swift; sourceTree = "<group>"; };
+		713763E51AB67E51005E9260 /* MockAccountUserProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAccountUserProvider.swift; sourceTree = "<group>"; };
+		7182BD301AA03E9D000D35BA /* Harness-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Harness-Bridging-Header.h"; sourceTree = "<group>"; };
+		718966781AB27E2F00919AEF /* APIServiceClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServiceClientTests.swift; sourceTree = "<group>"; };
+		7189667A1AB27E4700919AEF /* RepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
+		71CE6BAE1AB20E6300C7ABD9 /* HarnessModelFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarnessModelFactoryTests.swift; sourceTree = "<group>"; };
+		71CE6BB01AB20E6300C7ABD9 /* OAuth2SessionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2SessionManagerTests.swift; sourceTree = "<group>"; };
+		71E7BB841AB5471E00272AC0 /* MockAPISessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAPISessionManager.swift; sourceTree = "<group>"; };
+		71E7BB851AB5471E00272AC0 /* MockModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockModelFactory.swift; sourceTree = "<group>"; };
+		71E7BB861AB5471E00272AC0 /* MockOAuth2Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockOAuth2Authorization.swift; sourceTree = "<group>"; };
+		71E7BB871AB5471E00272AC0 /* MockOAuth2SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockOAuth2SessionManager.swift; sourceTree = "<group>"; };
+		71E7BB881AB5471E00272AC0 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
+		71E7BB8E1AB547B100272AC0 /* UserAPIMapperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIMapperTests.swift; sourceTree = "<group>"; };
+		71E7BB901AB547BD00272AC0 /* LocationsAPIMapperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsAPIMapperTests.swift; sourceTree = "<group>"; };
+		71FB589B1A985CE000DE27AD /* Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71FB589F1A985CE000DE27AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71FB58A71A985CE000DE27AD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		71FB58B01A985CE000DE27AD /* HarnessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarnessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71FB58B51A985CE000DE27AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71FF14281AA60C1A0032B20E /* HarnessAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarnessAppDelegate.swift; sourceTree = "<group>"; };
+		8C60732C29541948FE141FC6 /* Pods-Harness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Harness.release.xcconfig"; path = "Pods/Target Support Files/Pods-Harness/Pods-Harness.release.xcconfig"; sourceTree = "<group>"; };
+		FE4409781E39A64FAF5A7C0B /* Pods-HarnessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HarnessTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HarnessTests/Pods-HarnessTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		71FB58981A985CE000DE27AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F11860DE98324A69BFB8E6E7 /* Pods_Harness.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB58AD1A985CE000DE27AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				348C72D843D627CD9830DD7F /* Pods_HarnessTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18CD59A5ED60E59B6E6DE2DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				16E51E0514DEE75B98A324AC /* Pods_Harness.framework */,
+				4D133AD3B00CE24F1C3B5587 /* Pods_HarnessTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5680FC1E803D83DBACEA0B92 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				10EFB332B2453323C8A84A40 /* Pods-Harness.debug.xcconfig */,
+				8C60732C29541948FE141FC6 /* Pods-Harness.release.xcconfig */,
+				FE4409781E39A64FAF5A7C0B /* Pods-HarnessTests.debug.xcconfig */,
+				2D861BB6E554E4100DF13CEA /* Pods-HarnessTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		71CE6BAD1AB20E6300C7ABD9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				713390291AB5E17400607562 /* APIMapperTests.swift */,
+				71CE6BAE1AB20E6300C7ABD9 /* HarnessModelFactoryTests.swift */,
+				71E7BB901AB547BD00272AC0 /* LocationsAPIMapperTests.swift */,
+				71E7BB8E1AB547B100272AC0 /* UserAPIMapperTests.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		71CE6BAF1AB20E6300C7ABD9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				718966781AB27E2F00919AEF /* APIServiceClientTests.swift */,
+				71CE6BB01AB20E6300C7ABD9 /* OAuth2SessionManagerTests.swift */,
+				7189667A1AB27E4700919AEF /* RepositoryTests.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		71E7BB831AB5471E00272AC0 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				713763E51AB67E51005E9260 /* MockAccountUserProvider.swift */,
+				71E7BB841AB5471E00272AC0 /* MockAPISessionManager.swift */,
+				71E7BB851AB5471E00272AC0 /* MockModelFactory.swift */,
+				71E7BB861AB5471E00272AC0 /* MockOAuth2Authorization.swift */,
+				71E7BB871AB5471E00272AC0 /* MockOAuth2SessionManager.swift */,
+				71E7BB881AB5471E00272AC0 /* MockURLSessionDataTask.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		71FB58921A985CE000DE27AD = {
+			isa = PBXGroup;
+			children = (
+				71FB589D1A985CE000DE27AD /* Harness */,
+				71FB58B31A985CE000DE27AD /* HarnessTests */,
+				71FB589C1A985CE000DE27AD /* Products */,
+				5680FC1E803D83DBACEA0B92 /* Pods */,
+				18CD59A5ED60E59B6E6DE2DB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		71FB589C1A985CE000DE27AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71FB589B1A985CE000DE27AD /* Harness.app */,
+				71FB58B01A985CE000DE27AD /* HarnessTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		71FB589D1A985CE000DE27AD /* Harness */ = {
+			isa = PBXGroup;
+			children = (
+				71FF14281AA60C1A0032B20E /* HarnessAppDelegate.swift */,
+				71FB58A71A985CE000DE27AD /* Images.xcassets */,
+				71FB589E1A985CE000DE27AD /* Supporting Files */,
+			);
+			path = Harness;
+			sourceTree = "<group>";
+		};
+		71FB589E1A985CE000DE27AD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				71FB589F1A985CE000DE27AD /* Info.plist */,
+				7182BD301AA03E9D000D35BA /* Harness-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		71FB58B31A985CE000DE27AD /* HarnessTests */ = {
+			isa = PBXGroup;
+			children = (
+				71E7BB831AB5471E00272AC0 /* Mocks */,
+				71CE6BAD1AB20E6300C7ABD9 /* Model */,
+				71CE6BAF1AB20E6300C7ABD9 /* Networking */,
+				71FB58B41A985CE000DE27AD /* Supporting Files */,
+			);
+			path = HarnessTests;
+			sourceTree = "<group>";
+		};
+		71FB58B41A985CE000DE27AD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				71FB58B51A985CE000DE27AD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		71FB589A1A985CE000DE27AD /* Harness */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71FB58BA1A985CE100DE27AD /* Build configuration list for PBXNativeTarget "Harness" */;
+			buildPhases = (
+				066575BC50B6A0081AB2F8A9 /* Check Pods Manifest.lock */,
+				71FB58971A985CE000DE27AD /* Sources */,
+				71FB58981A985CE000DE27AD /* Frameworks */,
+				71FB58991A985CE000DE27AD /* Resources */,
+				37C74906DBC7143EF456FD91 /* Embed Pods Frameworks */,
+				944B362EBEC327D554FC3672 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Harness;
+			productName = Harness;
+			productReference = 71FB589B1A985CE000DE27AD /* Harness.app */;
+			productType = "com.apple.product-type.application";
+		};
+		71FB58AF1A985CE000DE27AD /* HarnessTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71FB58BD1A985CE100DE27AD /* Build configuration list for PBXNativeTarget "HarnessTests" */;
+			buildPhases = (
+				B8EB7DA6B3555EEC85223440 /* Check Pods Manifest.lock */,
+				71FB58AC1A985CE000DE27AD /* Sources */,
+				71FB58AD1A985CE000DE27AD /* Frameworks */,
+				71FB58AE1A985CE000DE27AD /* Resources */,
+				E6F85E19C9DBBEB86C651097 /* Embed Pods Frameworks */,
+				A249DAE0162D8F88D5A2FAD8 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71FB58B21A985CE000DE27AD /* PBXTargetDependency */,
+			);
+			name = HarnessTests;
+			productName = HarnessTests;
+			productReference = 71FB58B01A985CE000DE27AD /* HarnessTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		71FB58931A985CE000DE27AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = bandedo;
+				TargetAttributes = {
+					71FB589A1A985CE000DE27AD = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					71FB58AF1A985CE000DE27AD = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 71FB589A1A985CE000DE27AD;
+					};
+				};
+			};
+			buildConfigurationList = 71FB58961A985CE000DE27AD /* Build configuration list for PBXProject "Harness" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 71FB58921A985CE000DE27AD;
+			productRefGroup = 71FB589C1A985CE000DE27AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				71FB589A1A985CE000DE27AD /* Harness */,
+				71FB58AF1A985CE000DE27AD /* HarnessTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71FB58991A985CE000DE27AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71FB58A81A985CE000DE27AD /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB58AE1A985CE000DE27AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		066575BC50B6A0081AB2F8A9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		37C74906DBC7143EF456FD91 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Harness/Pods-Harness-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		944B362EBEC327D554FC3672 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Harness/Pods-Harness-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A249DAE0162D8F88D5A2FAD8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HarnessTests/Pods-HarnessTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8EB7DA6B3555EEC85223440 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E6F85E19C9DBBEB86C651097 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HarnessTests/Pods-HarnessTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		71FB58971A985CE000DE27AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71FF14291AA60C1A0032B20E /* HarnessAppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB58AC1A985CE000DE27AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				713763E61AB67E51005E9260 /* MockAccountUserProvider.swift in Sources */,
+				71CE6BB11AB20E6300C7ABD9 /* HarnessModelFactoryTests.swift in Sources */,
+				71E7BB8C1AB5471E00272AC0 /* MockOAuth2SessionManager.swift in Sources */,
+				71E7BB8A1AB5471E00272AC0 /* MockModelFactory.swift in Sources */,
+				71E7BB891AB5471E00272AC0 /* MockAPISessionManager.swift in Sources */,
+				7133902A1AB5E17400607562 /* APIMapperTests.swift in Sources */,
+				71CE6BB21AB20E6300C7ABD9 /* OAuth2SessionManagerTests.swift in Sources */,
+				718966791AB27E2F00919AEF /* APIServiceClientTests.swift in Sources */,
+				71E7BB8B1AB5471E00272AC0 /* MockOAuth2Authorization.swift in Sources */,
+				71E7BB911AB547BD00272AC0 /* LocationsAPIMapperTests.swift in Sources */,
+				7189667B1AB27E4700919AEF /* RepositoryTests.swift in Sources */,
+				71E7BB8F1AB547B100272AC0 /* UserAPIMapperTests.swift in Sources */,
+				71E7BB8D1AB5471E00272AC0 /* MockURLSessionDataTask.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		71FB58B21A985CE000DE27AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71FB589A1A985CE000DE27AD /* Harness */;
+			targetProxy = 71FB58B11A985CE000DE27AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		71FB58B81A985CE100DE27AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		71FB58B91A985CE100DE27AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		71FB58BB1A985CE100DE27AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10EFB332B2453323C8A84A40 /* Pods-Harness.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Harness/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Harness/Harness-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		71FB58BC1A985CE100DE27AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C60732C29541948FE141FC6 /* Pods-Harness.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Harness/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Harness/Harness-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		71FB58BE1A985CE100DE27AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE4409781E39A64FAF5A7C0B /* Pods-HarnessTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HarnessTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Harness.app/Harness";
+			};
+			name = Debug;
+		};
+		71FB58BF1A985CE100DE27AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D861BB6E554E4100DF13CEA /* Pods-HarnessTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HarnessTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Harness.app/Harness";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		71FB58961A985CE000DE27AD /* Build configuration list for PBXProject "Harness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71FB58B81A985CE100DE27AD /* Debug */,
+				71FB58B91A985CE100DE27AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71FB58BA1A985CE100DE27AD /* Build configuration list for PBXNativeTarget "Harness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71FB58BB1A985CE100DE27AD /* Debug */,
+				71FB58BC1A985CE100DE27AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71FB58BD1A985CE100DE27AD /* Build configuration list for PBXNativeTarget "HarnessTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71FB58BE1A985CE100DE27AD /* Debug */,
+				71FB58BF1A985CE100DE27AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 71FB58931A985CE000DE27AD /* Project object */;
+}

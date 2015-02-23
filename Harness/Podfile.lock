@@ -1,0 +1,135 @@
+PODS:
+  - AFNetworking/NSURLSession (2.5.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.1)
+  - AFNetworking/Security (2.5.1)
+  - AFNetworking/Serialization (2.5.1)
+  - BDModules (0.0.1):
+    - BDModules/Button (= 0.0.1)
+    - BDModules/Collection (= 0.0.1)
+    - BDModules/Color (= 0.0.1)
+    - BDModules/ContainerViewController (= 0.0.1)
+    - BDModules/HarnessModules (= 0.0.1)
+    - BDModules/JSON (= 0.0.1)
+    - BDModules/Keyboard (= 0.0.1)
+    - BDModules/LifecycleViewController (= 0.0.1)
+    - BDModules/Logging (= 0.0.1)
+    - BDModules/Model (= 0.0.1)
+    - BDModules/Networking (= 0.0.1)
+    - BDModules/Pointers (= 0.0.1)
+  - BDModules/Button (0.0.1):
+    - BDModules/Color
+  - BDModules/Collection (0.0.1)
+  - BDModules/Color (0.0.1)
+  - BDModules/ContainerViewController (0.0.1):
+    - Snap
+  - BDModules/HarnessModules (0.0.1):
+    - BDModules/HarnessModules/AccountUser (= 0.0.1)
+    - BDModules/HarnessModules/API (= 0.0.1)
+    - BDModules/HarnessModules/Application (= 0.0.1)
+    - BDModules/HarnessModules/EntryViewController (= 0.0.1)
+    - BDModules/HarnessModules/JSON (= 0.0.1)
+    - BDModules/HarnessModules/MainViewController (= 0.0.1)
+    - BDModules/HarnessModules/Model (= 0.0.1)
+    - BDModules/HarnessModules/RootViewController (= 0.0.1)
+    - BDModules/Model
+  - BDModules/HarnessModules/AccountUser (0.0.1):
+    - BDModules/JSON
+    - BDModules/Model
+    - FXKeychain
+  - BDModules/HarnessModules/API (0.0.1):
+    - BDModules/Model
+    - BDModules/Networking
+  - BDModules/HarnessModules/Application (0.0.1):
+    - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/JSON
+    - BDModules/HarnessModules/Model
+    - BDModules/HarnessModules/RootViewController
+    - BDModules/Model
+    - FXKeychain
+  - BDModules/HarnessModules/EntryViewController (0.0.1):
+    - BDModules/Button
+    - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/Model
+    - BDModules/Model
+    - Snap
+  - BDModules/HarnessModules/JSON (0.0.1):
+    - BDModules/JSON
+    - BDModules/Model
+  - BDModules/HarnessModules/MainViewController (0.0.1):
+    - BDModules/Button
+    - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/Model
+    - BDModules/Model
+    - Snap
+  - BDModules/HarnessModules/Model (0.0.1):
+    - BDModules/Logging
+    - BDModules/Model
+  - BDModules/HarnessModules/RootViewController (0.0.1):
+    - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/Model
+    - BDModules/Model
+    - Snap
+  - BDModules/JSON (0.0.1)
+  - BDModules/Keyboard (0.0.1)
+  - BDModules/LifecycleViewController (0.0.1)
+  - BDModules/Logging (0.0.1)
+  - BDModules/Model (0.0.1):
+    - BDModules/JSON
+  - BDModules/Networking (0.0.1):
+    - AFNetworking/NSURLSession
+    - BDModules/JSON
+    - BDModules/Logging
+    - BDModules/Networking/APIServiceClient (= 0.0.1)
+    - BDModules/Networking/OAuth2 (= 0.0.1)
+    - BDModules/Pointers
+  - BDModules/Networking/APIServiceClient (0.0.1):
+    - AFNetworking/NSURLSession
+    - BDModules/JSON
+    - BDModules/Logging
+    - BDModules/Model
+    - BDModules/Networking/APIServiceClient/Repository (= 0.0.1)
+    - BDModules/Pointers
+  - BDModules/Networking/APIServiceClient/Repository (0.0.1):
+    - AFNetworking/NSURLSession
+    - BDModules/Collection
+    - BDModules/JSON
+    - BDModules/Logging
+    - BDModules/Model
+    - BDModules/Pointers
+  - BDModules/Networking/OAuth2 (0.0.1):
+    - AFNetworking/NSURLSession
+    - BDModules/JSON
+    - BDModules/Logging
+    - BDModules/Pointers
+  - BDModules/Pointers (0.0.1)
+  - FXKeychain (1.5.2)
+  - Snap (0.0.6)
+
+DEPENDENCIES:
+  - AFNetworking/NSURLSession (~> 2.5.0)
+  - BDModules (from `../`)
+  - FXKeychain (~> 1.5.2)
+  - Snap (from `https://github.com/Masonry/Snap.git`, commit `4158cf0d9980d6b666f7736242423ac473c96800`)
+
+EXTERNAL SOURCES:
+  BDModules:
+    :path: ../
+  Snap:
+    :commit: 4158cf0d9980d6b666f7736242423ac473c96800
+    :git: https://github.com/Masonry/Snap.git
+
+CHECKOUT OPTIONS:
+  Snap:
+    :commit: 4158cf0d9980d6b666f7736242423ac473c96800
+    :git: https://github.com/Masonry/Snap.git
+
+SPEC CHECKSUMS:
+  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
+  BDModules: 9b2e04da3e1c61e4b1512cc0c2742cc311647bd8
+  FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
+  Snap: c691705e45df9cae55cebedde52013683588db52
+
+COCOAPODS: 0.36.0
