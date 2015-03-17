@@ -61,10 +61,12 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
                     let alertController = UIAlertController(
                         title: "Error",
                         message: error!.description,
-                        preferredStyle: UIAlertControllerStyle.Alert)
+                        preferredStyle: UIAlertControllerStyle.Alert
+                    )
                     
                     alertController.addAction(
-                        UIAlertAction(title: "OK",
+                        UIAlertAction(
+                            title: "OK",
                             style: UIAlertActionStyle.Cancel) { action in
                                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
                         }
@@ -111,6 +113,12 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
         delegate?.mapViewControllerDidLogout(self)
     }
     
+    // MARK:- Status Bar
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+
     // MARK:- CLLocationManagerDelegate
     
     public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -123,10 +131,12 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
             let alertController = UIAlertController(
                 title: "Error",
                 message: "Enable location access through phone settings menu.",
-                preferredStyle: UIAlertControllerStyle.Alert)
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
             
             alertController.addAction(
-                UIAlertAction(title: "OK",
+                UIAlertAction(
+                    title: "OK",
                     style: UIAlertActionStyle.Cancel) { action in
                         self.dismissViewControllerAnimated(true, completion: nil)
                 }

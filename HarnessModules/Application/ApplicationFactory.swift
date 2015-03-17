@@ -70,7 +70,7 @@ public class ApplicationFactory {
         logger.thresholdLevel = .Verbose
         return logger
         }()
-        
+
     // MARK:- ModelFactory
 
     public lazy var modelLogger: Logger = {

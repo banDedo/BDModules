@@ -50,6 +50,10 @@ Pod::Spec.new do |s|
       sss.dependency 'BDModules/HarnessModules/RootViewController'
     end
 
+    ss.subspec 'Color' do |sss|
+      sss.source_files = 'HarnessModules/Color/*.swift'
+    end
+
     ss.subspec 'EntryViewController' do |sss|
       sss.source_files = 'HarnessModules/EntryViewController/*.swift'
       sss.dependency 'BDModules/HarnessModules/API'
@@ -71,6 +75,11 @@ Pod::Spec.new do |s|
       sss.dependency 'BDModules/HarnessModules/Model'
       sss.dependency 'BDModules/Button'
       sss.dependency 'Snap'
+    end
+
+    ss.subspec 'NavigationController' do |sss|
+      sss.source_files = 'HarnessModules/NavigationController/*.swift'
+      sss.dependency 'BDModules/Color'
     end
 
     ss.subspec 'Model' do |sss|

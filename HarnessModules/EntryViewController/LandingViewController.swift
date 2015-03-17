@@ -27,7 +27,7 @@ public class LandingViewController: LifecycleViewController {
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton(frame: CGRectZero)
         loginButton.setTitle("Login", forState: UIControlState.Normal)
-        loginButton.setBackgroundColor(UIColor.grayColor(), forControlState: UIControlState.Normal)
+        loginButton.setBackgroundColor(Color.blackColor(), forControlState: UIControlState.Normal)
         loginButton.addTarget(self, action: "handleButtonTap:", forControlEvents: UIControlEvents.TouchUpInside)
         return loginButton
         }()
@@ -59,10 +59,12 @@ public class LandingViewController: LifecycleViewController {
                         let alertController = UIAlertController(
                             title: "Error",
                             message: error!.description,
-                            preferredStyle: UIAlertControllerStyle.Alert)
+                            preferredStyle: UIAlertControllerStyle.Alert
+                        )
                         
                         alertController.addAction(
-                            UIAlertAction(title: "OK",
+                            UIAlertAction(
+                                title: "OK",
                                 style: UIAlertActionStyle.Cancel) { action in
                                     strongSelf.dismissViewControllerAnimated(true, completion: nil)
                             }

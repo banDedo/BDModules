@@ -34,5 +34,7 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Always track location as a proof of concept</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

@@ -34,7 +34,13 @@ public class MainViewController: LifecycleViewController, MapViewControllerDeleg
         super.viewDidLoad()
         replaceRootViewController(mainNavigationController)
     }
+
+    // MARK:- Status bar
     
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return mainNavigationController.preferredStatusBarStyle()
+    }
+
     // MARK:- MapViewControllerDelegate
     
     public func mapViewControllerDidLogout(mapViewController: MapViewController) {
