@@ -40,9 +40,11 @@ public extension UIViewController {
                 toViewController: rootViewController,
                 duration: 0.2,
                 options: UIViewAnimationOptions.TransitionCrossDissolve,
-                animations: nil) { finished in
-                    self.setNeedsStatusBarAppearanceUpdate()
-                    completion?(finished)
+                animations: nil) { [weak self] finished in
+                    if let strongSelf = self {
+                        strongSelf.setNeedsStatusBarAppearanceUpdate()
+                        completion?(finished)
+                    }
             }
         } else {
             if currentRootViewController != nil {
@@ -63,6 +65,7 @@ public extension UIViewController {
             rootViewController.didMoveToParentViewController(self)
             
             if currentRootViewController != nil {
+                currentRootViewController!.removeFromParentViewController()
                 currentRootViewController!.didMoveToParentViewController(nil)
             }
             

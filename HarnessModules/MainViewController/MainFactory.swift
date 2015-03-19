@@ -19,6 +19,7 @@ public class MainFactory: NSObject {
 
     public func mainViewController(#delegate: MainViewControllerDelegate) -> MainViewController {
         let mainViewController = MainViewController()
+        mainViewController.menuViewController = menuViewController(mainViewController)
         mainViewController.mapViewController = mapViewController(delegate: mainViewController)
         mainViewController.delegate = delegate
         return mainViewController
@@ -33,6 +34,12 @@ public class MainFactory: NSObject {
         mapViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
         mapViewController.delegate = delegate
         return mapViewController
+    }
+
+    public func menuViewController(delegate: MenuViewControllerDelegate) -> MenuViewController {
+        let menuViewController = MenuViewController()
+        menuViewController.delegate = delegate
+        return menuViewController
     }
 
     // MARK: - Location

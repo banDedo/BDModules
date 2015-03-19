@@ -10,7 +10,7 @@ import MapKit
 import UIKit
 
 @objc public protocol MapViewControllerDelegate {
-    func mapViewControllerDidLogout(mapViewController: MapViewController)
+    func mapViewController(mapViewController: MapViewController, didTapMenuButton sender: UIButton)
 }
 
 public class MapViewController: LifecycleViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -34,14 +34,20 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
         return mapView
         }()
     
-    private lazy var logoutButton: UIBarButtonItem = {
+    private lazy var menuButton: UIBarButtonItem = {
         return UIBarButtonItem(
-            title: "Logout",
+            title: "Menu",
             style: UIBarButtonItemStyle.Plain,
             target: self,
             action: "handleButtonTap:")
         }()
+
+    // MARK:- Cleanup
     
+    deinit {
+        mapView.delegate = nil
+    }
+
     // MARK:- View lifecycle
     
     public override func viewDidLoad() {
@@ -82,7 +88,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.leftBarButtonItem = logoutButton
+        navigationItem.leftBarButtonItem = menuButton
     }
     
     // MARK:- UI Update
@@ -110,7 +116,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- Action Handlers
     
     public func handleButtonTap(sender: UIButton) {
-        delegate?.mapViewControllerDidLogout(self)
+        delegate?.mapViewController(self, didTapMenuButton: sender)
     }
     
     // MARK:- Status Bar

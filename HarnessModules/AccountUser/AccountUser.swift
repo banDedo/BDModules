@@ -27,7 +27,7 @@ public class AccountUser: NSObject, NSCoding {
 
     // MARK:- NSCoding
     
-    public required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         user = aDecoder.decodeObjectForKey(kAccountUserUserKey) as? User
         oAuth2Credential = aDecoder.decodeObjectForKey(kAccountUserOAuth2CredentialKey) as? OAuth2Credential
         super.init()
