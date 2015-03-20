@@ -10,7 +10,7 @@ import MapKit
 import UIKit
 
 @objc public protocol MapViewControllerDelegate {
-    func mapViewControllerDidLogout(mapViewController: MapViewController)
+    func mapViewController(mapViewController: MapViewController, didTapMenuButton sender: UIButton)
 }
 
 public class MapViewController: LifecycleViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -34,14 +34,20 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
         return mapView
         }()
     
-    private lazy var logoutButton: UIBarButtonItem = {
+    private lazy var menuButton: UIBarButtonItem = {
         return UIBarButtonItem(
-            title: "Logout",
+            title: "Menu",
             style: UIBarButtonItemStyle.Plain,
             target: self,
             action: "handleButtonTap:")
         }()
+
+    // MARK:- Cleanup
     
+    deinit {
+        mapView.delegate = nil
+    }
+
     // MARK:- View lifecycle
     
     public override func viewDidLoad() {
@@ -61,10 +67,12 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
                     let alertController = UIAlertController(
                         title: "Error",
                         message: error!.description,
-                        preferredStyle: UIAlertControllerStyle.Alert)
+                        preferredStyle: UIAlertControllerStyle.Alert
+                    )
                     
                     alertController.addAction(
-                        UIAlertAction(title: "OK",
+                        UIAlertAction(
+                            title: "OK",
                             style: UIAlertActionStyle.Cancel) { action in
                                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
                         }
@@ -80,7 +88,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.leftBarButtonItem = logoutButton
+        navigationItem.leftBarButtonItem = menuButton
     }
     
     // MARK:- UI Update
@@ -108,9 +116,15 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- Action Handlers
     
     public func handleButtonTap(sender: UIButton) {
-        delegate?.mapViewControllerDidLogout(self)
+        delegate?.mapViewController(self, didTapMenuButton: sender)
     }
     
+    // MARK:- Status Bar
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+
     // MARK:- CLLocationManagerDelegate
     
     public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -123,10 +137,12 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
             let alertController = UIAlertController(
                 title: "Error",
                 message: "Enable location access through phone settings menu.",
-                preferredStyle: UIAlertControllerStyle.Alert)
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
             
             alertController.addAction(
-                UIAlertAction(title: "OK",
+                UIAlertAction(
+                    title: "OK",
                     style: UIAlertActionStyle.Cancel) { action in
                         self.dismissViewControllerAnimated(true, completion: nil)
                 }

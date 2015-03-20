@@ -28,7 +28,7 @@ public class OAuth2Credential: NSObject, NSCoding {
     
     // MARK:- NSCoding
 
-    public required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         accessToken = (aDecoder.decodeObjectForKey(kOAuth2AccessTokenKey) as? String)!
         refreshToken = (aDecoder.decodeObjectForKey(kOAuth2RefreshTokenKey) as? String)!
         super.init()

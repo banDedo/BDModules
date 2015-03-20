@@ -17,6 +17,7 @@ PODS:
     - BDModules/LifecycleViewController (= 0.0.1)
     - BDModules/Logging (= 0.0.1)
     - BDModules/Model (= 0.0.1)
+    - BDModules/NavigationDrawerViewController (= 0.0.1)
     - BDModules/Networking (= 0.0.1)
     - BDModules/Pointers (= 0.0.1)
   - BDModules/Button (0.0.1):
@@ -29,10 +30,13 @@ PODS:
     - BDModules/HarnessModules/AccountUser (= 0.0.1)
     - BDModules/HarnessModules/API (= 0.0.1)
     - BDModules/HarnessModules/Application (= 0.0.1)
+    - BDModules/HarnessModules/Color (= 0.0.1)
     - BDModules/HarnessModules/EntryViewController (= 0.0.1)
     - BDModules/HarnessModules/JSON (= 0.0.1)
     - BDModules/HarnessModules/MainViewController (= 0.0.1)
+    - BDModules/HarnessModules/MenuViewController (= 0.0.1)
     - BDModules/HarnessModules/Model (= 0.0.1)
+    - BDModules/HarnessModules/NavigationController (= 0.0.1)
     - BDModules/HarnessModules/RootViewController (= 0.0.1)
     - BDModules/Model
   - BDModules/HarnessModules/AccountUser (0.0.1):
@@ -49,6 +53,8 @@ PODS:
     - BDModules/HarnessModules/RootViewController
     - BDModules/Model
     - FXKeychain
+  - BDModules/HarnessModules/Color (0.0.1):
+    - BDModules/Model
   - BDModules/HarnessModules/EntryViewController (0.0.1):
     - BDModules/Button
     - BDModules/HarnessModules/API
@@ -64,8 +70,15 @@ PODS:
     - BDModules/HarnessModules/Model
     - BDModules/Model
     - Snap
+  - BDModules/HarnessModules/MenuViewController (0.0.1):
+    - BDModules/HarnessModules/Color
+    - BDModules/Model
+    - Snap
   - BDModules/HarnessModules/Model (0.0.1):
     - BDModules/Logging
+    - BDModules/Model
+  - BDModules/HarnessModules/NavigationController (0.0.1):
+    - BDModules/HarnessModules/Color
     - BDModules/Model
   - BDModules/HarnessModules/RootViewController (0.0.1):
     - BDModules/HarnessModules/API
@@ -78,6 +91,8 @@ PODS:
   - BDModules/Logging (0.0.1)
   - BDModules/Model (0.0.1):
     - BDModules/JSON
+  - BDModules/NavigationDrawerViewController (0.0.1):
+    - Snap
   - BDModules/Networking (0.0.1):
     - AFNetworking/NSURLSession
     - BDModules/JSON
@@ -128,7 +143,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDModules: 9b2e04da3e1c61e4b1512cc0c2742cc311647bd8
+  BDModules: 678b763c6a74554fdb4e1929f148e0b6d2afe89b
   FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
   Snap: c691705e45df9cae55cebedde52013683588db52
 

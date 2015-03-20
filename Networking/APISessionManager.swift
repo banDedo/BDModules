@@ -49,7 +49,7 @@ public class APISessionManager: AFHTTPSessionManager {
         fatalError("init() has not been implemented")
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         dynamicBaseURL = aDecoder.decodeObjectForKey(kAPISessionManagerDynamicBaseURLKey) as! NSURL
         super.init(coder: aDecoder)
     }

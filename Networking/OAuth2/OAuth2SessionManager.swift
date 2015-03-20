@@ -39,7 +39,7 @@ public class OAuth2SessionManager: APISessionManager {
             super.init(dynamicBaseURL: dynamicBaseURL, sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration())
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

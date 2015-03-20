@@ -32,11 +32,20 @@ public extension UIViewController {
         completion: (Bool -> Void)? = nil) {
         
         let currentRootViewController: UIViewController? = self.rootViewController
-        
         self.rootViewController = rootViewController
         
         if (animated && currentRootViewController != nil) {
-            self.transitionFromViewController(currentRootViewController!, toViewController: rootViewController, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: nil, completion: completion)
+            transitionFromViewController(
+                currentRootViewController!,
+                toViewController: rootViewController,
+                duration: 0.2,
+                options: UIViewAnimationOptions.TransitionCrossDissolve,
+                animations: nil) { [weak self] finished in
+                    if let strongSelf = self {
+                        strongSelf.setNeedsStatusBarAppearanceUpdate()
+                        completion?(finished)
+                    }
+            }
         } else {
             if currentRootViewController != nil {
                 currentRootViewController!.willMoveToParentViewController(nil)
@@ -56,8 +65,11 @@ public extension UIViewController {
             rootViewController.didMoveToParentViewController(self)
             
             if currentRootViewController != nil {
+                currentRootViewController!.removeFromParentViewController()
                 currentRootViewController!.didMoveToParentViewController(nil)
             }
+            
+            setNeedsStatusBarAppearanceUpdate()
         }
         
     }

@@ -50,6 +50,10 @@ Pod::Spec.new do |s|
       sss.dependency 'BDModules/HarnessModules/RootViewController'
     end
 
+    ss.subspec 'Color' do |sss|
+      sss.source_files = 'HarnessModules/Color/*.swift'
+    end
+
     ss.subspec 'EntryViewController' do |sss|
       sss.source_files = 'HarnessModules/EntryViewController/*.swift'
       sss.dependency 'BDModules/HarnessModules/API'
@@ -71,6 +75,17 @@ Pod::Spec.new do |s|
       sss.dependency 'BDModules/HarnessModules/Model'
       sss.dependency 'BDModules/Button'
       sss.dependency 'Snap'
+    end
+
+    ss.subspec 'MenuViewController' do |sss|
+      sss.source_files = 'HarnessModules/MenuViewController/*.swift'
+      sss.dependency 'BDModules/HarnessModules/Color'
+      sss.dependency 'Snap'
+    end
+
+    ss.subspec 'NavigationController' do |sss|
+      sss.source_files = 'HarnessModules/NavigationController/*.swift'
+      sss.dependency 'BDModules/HarnessModules/Color'
     end
 
     ss.subspec 'Model' do |sss|
@@ -109,6 +124,11 @@ Pod::Spec.new do |s|
     ss.dependency 'BDModules/JSON'
   end
   
+  s.subspec 'NavigationDrawerViewController' do |ss|
+    ss.source_files = 'NavigationDrawerViewController/*.swift'
+    ss.dependency 'Snap'
+  end
+
   s.subspec 'Networking' do |ss|
     ss.source_files = 'Networking/*.swift', 'Networking/URLProtocol/*.swift'
     ss.dependency 'AFNetworking/NSURLSession'
