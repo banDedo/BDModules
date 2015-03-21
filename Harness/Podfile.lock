@@ -20,6 +20,8 @@ PODS:
     - BDModules/NavigationDrawerViewController (= 0.0.1)
     - BDModules/Networking (= 0.0.1)
     - BDModules/Pointers (= 0.0.1)
+    - BDModules/ViewAnimations (= 0.0.1)
+    - BDModules/ViewGeometry (= 0.0.1)
   - BDModules/Button (0.0.1):
     - BDModules/Color
   - BDModules/Collection (0.0.1)
@@ -32,6 +34,7 @@ PODS:
     - BDModules/HarnessModules/Application (= 0.0.1)
     - BDModules/HarnessModules/Color (= 0.0.1)
     - BDModules/HarnessModules/EntryViewController (= 0.0.1)
+    - BDModules/HarnessModules/Font (= 0.0.1)
     - BDModules/HarnessModules/JSON (= 0.0.1)
     - BDModules/HarnessModules/MainViewController (= 0.0.1)
     - BDModules/HarnessModules/MenuViewController (= 0.0.1)
@@ -61,6 +64,8 @@ PODS:
     - BDModules/HarnessModules/Model
     - BDModules/Model
     - Snap
+  - BDModules/HarnessModules/Font (0.0.1):
+    - BDModules/Model
   - BDModules/HarnessModules/JSON (0.0.1):
     - BDModules/JSON
     - BDModules/Model
@@ -120,6 +125,8 @@ PODS:
     - BDModules/Logging
     - BDModules/Pointers
   - BDModules/Pointers (0.0.1)
+  - BDModules/ViewAnimations (0.0.1)
+  - BDModules/ViewGeometry (0.0.1)
   - FXKeychain (1.5.2)
   - Snap (0.0.6)
 
@@ -143,7 +150,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDModules: 678b763c6a74554fdb4e1929f148e0b6d2afe89b
+  BDModules: d7fb2bfff54d8279b665fcb566bcafad17ecb9d9
   FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
   Snap: c691705e45df9cae55cebedde52013683588db52
 

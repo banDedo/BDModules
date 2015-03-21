@@ -33,7 +33,7 @@ class LocationsAPIMapperTests: XCTestCase {
 
     func testParseLocation() {
         let dictionary = jsonSerializer.object(
-            resourceName: "favorite_locations_stub",
+            resourceName: "locations_stub",
             bundle: NSBundle(forClass: Location.self)) as! NSDictionary
         
         let locationDictionary = (dictionary["data"] as! NSArray)[1] as! NSDictionary

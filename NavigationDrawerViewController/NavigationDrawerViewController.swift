@@ -22,7 +22,12 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
     private enum ViewControllerIndex: Int {
         case Left = 0
         case Center = 1
-        case Count = 2
+
+        static var count: Int {
+            var max: Int = 0
+            while let _ = self(rawValue: ++max) {}
+            return max
+        }
     }
 
     // MARK:- Properties
@@ -49,6 +54,12 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
         statusBarBlockerView.backgroundColor = UIColor.blackColor()
         return statusBarBlockerView
         }()
+    
+    public var animationDuration = NSTimeInterval(0.25)
+    public var minimumAnchorDelay = NSTimeInterval(0.3)
+    public var partialAnimationDuration = NSTimeInterval(0.15)
+    
+    public var minimumLeftContainerOffset = CGFloat(-50.0)
     
     private(set) public var orientation = Orientation.Default
     
@@ -115,18 +126,17 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
             }()
         }
         
-        let minimumLeftContainerOffset = CGFloat(-50.0)
         leftContainerView.snp_makeConstraints() { make in
             self.leftContainerViewHorizontalOffsetConstraint = {
                 if self.isDragging {
-                    var currentLeftContainerOffset = (1.0 - self.normalizedCenterViewOffset) * minimumLeftContainerOffset
-                    currentLeftContainerOffset = max(currentLeftContainerOffset, minimumLeftContainerOffset)
+                    var currentLeftContainerOffset = (1.0 - self.normalizedCenterViewOffset) * self.minimumLeftContainerOffset
+                    currentLeftContainerOffset = max(currentLeftContainerOffset, self.minimumLeftContainerOffset)
                     currentLeftContainerOffset = min(currentLeftContainerOffset, 0.0)
                     return make.left.equalTo(self.view.snp_left).with.offset(currentLeftContainerOffset)
                 } else {
                     switch self.orientation {
                     case .Default:
-                        return make.left.equalTo(minimumLeftContainerOffset)
+                        return make.left.equalTo(self.minimumLeftContainerOffset)
                     case .PartialRevealLeft, .RevealLeft:
                         return make.left.equalTo(0.0)
                     }
@@ -144,6 +154,7 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
     
     func updateStatusBarBlockerView() {
         statusBarBlockerView.alpha = min(normalizedCenterViewOffset, 1.0)
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     // MARK: Blocking View
@@ -205,7 +216,7 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
                     }
                 }
             }
-            
+                        
             if !animated {
                 replacementHandler()
                 child?.view.removeFromSuperview()
@@ -215,29 +226,25 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
                 updateStatusBarBlockerView()
             } else {
                 view.layoutIfNeeded()
-                UIView.animateWithDuration(
-                    0.15,
-                    delay: 0.0,
-                    options: UIViewAnimationOptions.CurveEaseOut,
-                    animations: { [weak self] in
-                        if let strongSelf = self {
-                            strongSelf.orientation = .RevealLeft
-                            strongSelf.updateViewConstraints()
-                            strongSelf.view.layoutIfNeeded()
-                        }
+                UIView.animate(
+                    true,
+                    duration: partialAnimationDuration,
+                    animations: {
+                        self.orientation = .RevealLeft
+                        self.updateViewConstraints()
+                        self.view.layoutIfNeeded()
                     }) { [weak self] finished in
                         if let strongSelf = self {
-                            let minimumDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
+                            let minimumDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.minimumAnchorDelay * Double(NSEC_PER_SEC)))
                             
                             replacementHandler()
                             child?.view.removeFromSuperview()
                             
                             dispatch_after(minimumDelay, dispatch_get_main_queue()) { [weak self] in
                                 if let strongSelf = self {
-                                    UIView.animateWithDuration(
-                                        0.25,
-                                        delay: 0.0,
-                                        options: UIViewAnimationOptions.CurveEaseOut,
+                                    UIView.animate(
+                                        true,
+                                        duration: strongSelf.animationDuration,
                                         animations: { [weak self] in
                                             strongSelf.orientation = .Default
                                             strongSelf.updateViewConstraints()
@@ -296,18 +303,12 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
                 }
             }
             
-            if !animated {
-                animations()
-                completionHandler(true)
-            } else {
-                UIView.animateWithDuration(
-                    0.25,
-                    delay: 0.0,
-                    options: UIViewAnimationOptions.CurveEaseOut,
-                    animations: animations,
-                    completion: completionHandler
-                )
-            }
+            UIView.animate(
+                animated,
+                duration: animationDuration,
+                animations: animations,
+                completion: completionHandler
+            )
     }
     
     // MARK:- Action Handlers
@@ -400,7 +401,7 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
     
     private lazy var containerViews: [ UIView ] = {
         var containerViews = [ UIView ]()
-        for i in 0..<ViewControllerIndex.Count.rawValue {
+        for i in 0..<ViewControllerIndex.count {
             let view = UIView(frame: CGRectZero)
             view.backgroundColor = UIColor.blackColor()
             view.opaque = true
@@ -412,8 +413,6 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
             case .Center:
                 view.addGestureRecognizer(self.panGestureRecognizer)
                 view.addSubview(self.blockingView)
-                break
-            case .Count:
                 break
             }
             

@@ -52,7 +52,7 @@ public class APIFactory {
 
     // MARK: - Location
     
-    public func locationRepository(userUuid: String) -> Repository<Location> {
+    public func mapLocationRepository(userUuid: String) -> Repository<Location> {
         let sessionManager = self.sessionManager()
         sessionManager.session.configuration.protocolClasses = [ LocationURLProtocol.self ]
 
@@ -64,7 +64,22 @@ public class APIFactory {
             oAuth2Authorization: oAuth2Authorization
         )
     }
-    
+
+    public func favoriteLocationRepository(userUuid: String) -> Repository<Location> {
+        let sessionManager = self.sessionManager()
+        
+        FavoriteLocationURLProtocol.counter = 0
+        sessionManager.session.configuration.protocolClasses = [ FavoriteLocationURLProtocol.self ]
+        
+        return Repository<Location>(
+            path: APIResource.userLocationsPath(userUuid: userUuid),
+            accountUserProvider: accountUserProvider,
+            collectionParser: modelFactory.defaultCollectionParser,
+            sessionManager: sessionManager,
+            oAuth2Authorization: oAuth2Authorization
+        )
+    }
+
     // MARK:- Persistence
     
     public var keychain: FXKeychain {
@@ -127,7 +142,7 @@ public class APIFactory {
     
     public lazy var logger: Logger = {
         let logger = Logger(tag: "API", applicationName: "BDModules")
-        logger.enabled = true
+        logger.enabled = false
         logger.synchronous = true
         logger.thresholdLevel = .Info
         return logger

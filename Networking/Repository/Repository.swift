@@ -38,7 +38,7 @@ public class Repository<T: ModelObject>: Hashable {
     private(set) public var atEnd = false
     
     public let path: String
-    public let limit = Int(20)
+    public var limit: Int?
     private(set) public var total = Int(0)
     public let options: NSDictionary
     
@@ -91,7 +91,7 @@ public class Repository<T: ModelObject>: Hashable {
 
     // MARK:- Fetch
 
-    public func fetchNextPage(
+    public func fetch(
         parameters: NSDictionary? = nil,
         handler: ([ T ]?, NSError?) -> Void) -> Bool {
             
@@ -118,6 +118,7 @@ public class Repository<T: ModelObject>: Hashable {
                             strongSelf.append(newElements!)
                             strongSelf.fetchState = .Fetched
                         }
+                        strongSelf.atEnd = (strongSelf.total == strongSelf.elements.count)
                         handler(newElements, error)
                     }
             })
@@ -145,7 +146,6 @@ public class Repository<T: ModelObject>: Hashable {
                                 if error == nil {
                                     let newElements = strongSelf.collectionParser(responseObject!) as! [ T ]
                                     strongSelf.updatePagingParameters(newElements, responseObject: responseObject!)
-                                    strongSelf.atEnd = strongSelf.total == strongSelf.elements.count
                                     handler(newElements, nil)
                                 } else {
                                     handler(nil, error)
@@ -216,7 +216,9 @@ public class Repository<T: ModelObject>: Hashable {
             break
         }
         
-        updatedParameters["limit"] = limit
+        if let limit = self.limit {
+            updatedParameters["limit"] = limit
+        }
         
         return updatedParameters.copy() as! NSDictionary
     }

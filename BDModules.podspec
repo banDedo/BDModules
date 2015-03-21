@@ -62,6 +62,10 @@ Pod::Spec.new do |s|
       sss.dependency 'Snap'
     end
 
+    ss.subspec 'Font' do |sss|
+      sss.source_files = 'HarnessModules/Font/*.swift'
+    end
+
     ss.subspec 'JSON' do |sss|
       sss.source_files = 'HarnessModules/JSON/*.swift'
       sss.dependency 'BDModules/JSON'
@@ -69,6 +73,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'MainViewController' do |sss|
       sss.source_files = 'HarnessModules/MainViewController/*.swift'
+      sss.resources = 'HarnessModules/MainViewController/Menu.xcassets'
       sss.framework    = 'CoreLocation'
       sss.framework    = 'MapKit'
       sss.dependency 'BDModules/HarnessModules/API'
@@ -154,5 +159,13 @@ Pod::Spec.new do |s|
   
   s.subspec 'Pointers' do |ss|
     ss.source_files = 'Pointers/*.swift'
+  end
+
+  s.subspec 'ViewAnimations' do |ss|
+    ss.source_files = 'ViewAnimations/*.swift'
+  end
+
+  s.subspec 'ViewGeometry' do |ss|
+    ss.source_files = 'ViewGeometry/*.swift'
   end
 end
