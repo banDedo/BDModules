@@ -27,7 +27,7 @@ public class LandingViewController: LifecycleViewController {
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton(frame: CGRectZero)
         loginButton.setTitle("Login", forState: UIControlState.Normal)
-        loginButton.setBackgroundColor(Color.a6(), forControlState: UIControlState.Normal)
+        loginButton.setBackgroundColor(Color.darkBlueColor(), forControlState: UIControlState.Normal)
         loginButton.addTarget(self, action: "handleButtonTap:", forControlEvents: UIControlEvents.TouchUpInside)
         return loginButton
         }()

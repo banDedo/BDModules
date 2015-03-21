@@ -10,22 +10,31 @@ import Snap
 import UIKit
 
 public protocol MenuViewControllerDelegate: class {
-    func menuViewController(menuViewController: MenuViewController, didTapLogoutCell: MenuCell)
+    func menuViewController(menuViewController: MenuViewController, didSelectRow: MenuViewController.Row)
 }
 
 public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITableViewDataSource, UITableViewDelegate {
     
     // MARK:- Enumerate type
     
-    private enum Row: Int {
-        case Logout = 0
+    public enum Row: Int {
+        case Map = 0
+        case Favorites = 1
+        case Logout = 2
+        
+        static var count: Int {
+            var max: Int = 0
+            while let _ = self(rawValue: ++max) {}
+            return max
+        }
     }
     
     // MARK:- Properties
     
     private(set) public lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRectZero)
-        tableView.backgroundColor = Color.a7()
+        tableView.delaysContentTouches = true
+        tableView.backgroundColor = Color.darkBlueColor()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.dataSource = self
         tableView.delegate = self
@@ -63,25 +72,33 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     // MARK:- MenuCellDelegate
     
     public func menuCell(menuCell: MenuCell, didTapButton sender: UIButton) {
-        delegate?.menuViewController(self, didTapLogoutCell: menuCell)
+        delegate?.menuViewController(self, didSelectRow: row(menuCell))
     }
     
     // MARK: UITableViewDataSource/UITableViewDelegate
     
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return Row.count
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(MenuCell.identifier, forIndexPath: indexPath) as! MenuCell
         
         switch Row(rawValue: indexPath.row)! {
+        case .Map:
+            cell.configure("menu_feed", title: "Map")
+            break
+        case .Favorites:
+            cell.configure("menu_explore", title: "Favorites")
+            break
         case .Logout:
-            cell.button.setTitle("Logout", forState: UIControlState.Normal)
+            cell.configure("menu_logout", title: "Logout")
             break
         }
         
+        cell.tag = indexPath.row
         cell.delegate = self
+        
         return cell
     }
     
@@ -102,6 +119,12 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         return footerView
     }
     
+    // MARK:- Accessors
+    
+    private func row(cell: MenuCell) -> Row {
+        return Row(rawValue: cell.tag)!
+    }
+    
 }
 
 public protocol MenuCellDelegate: class {
@@ -113,34 +136,61 @@ public class MenuCell: UITableViewCell {
     // MARK:- Static Properties
 
     public static var identifier: String = "MenuCell"
+    private static var imageWidth = CGFloat(30.0)
 
     // MARK:- Properties
     
-    private(set) public lazy var button: UIButton = {
+    private lazy var button: UIButton = {
         let button = UIButton(frame: CGRectZero)
-        button.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
-        button.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
-        button.setTitleColor(Color.a2(), forState: UIControlState.Normal)
-        button.setBackgroundColor(Color.a7(), forControlState: UIControlState.Normal)
-        button.setBackgroundColor(Color.a6(), forControlState: UIControlState.Highlighted)
+        button.titleLabel?.font = Font.headline()
+        button.setTitleColor(Color.whiteColor(), forState: UIControlState.Normal)
+        button.setBackgroundColor(Color.darkBlueColor(), forControlState: UIControlState.Normal)
+        button.setBackgroundColor(Color.blackColor(), forControlState: UIControlState.Highlighted)
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         button.addTarget(self, action: "handleTap:", forControlEvents: UIControlEvents.TouchUpInside)
         button.exclusiveTouch = true
         return button
         }()
     
+    private(set) public lazy var separator: UIView = {
+        let separator = UIView(frame: CGRectZero)
+        separator.backgroundColor = Color.separatorColor()
+        return separator
+        }()
+    
     public weak var delegate: MenuCellDelegate?
+    
+    // MARK:- Image/Title
+    
+    public func configure(imageName: String, title: String) {
+        let image = UIImage(named: imageName)!
+        let imageWidthOffset = (self.dynamicType.imageWidth - image.size.width)/2.0
+        let contentPadding = CGFloat(10.0)
+        let imagePadding = CGFloat(5.0)
+        
+        button.setImage(image, forState: UIControlState.Normal)
+        button.setTitle(title, forState: UIControlState.Normal)
+        
+        button.contentEdgeInsets = UIEdgeInsetsMake(0.0, imageWidthOffset + imagePadding, 0.0, contentPadding)
+        button.titleEdgeInsets = UIEdgeInsetsMake(0.0, imageWidthOffset + imagePadding, 0.0, 0.0)
+    }
     
     // MARK:- Constructors
     
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = Color.a6()
+        contentView.backgroundColor = Color.blackColor()
         contentView.addSubview(button)
+        contentView.addSubview(separator)
         
         button.snp_makeConstraints() { make in
             make.edges.equalTo(UIEdgeInsetsZero)
+        }
+        
+        separator.snp_makeConstraints() { make in
+            make.top.left.and.right.equalTo(UIEdgeInsetsZero)
+            make.height.equalTo(1.0/UIScreen.mainScreen().scale)
         }
     }
     

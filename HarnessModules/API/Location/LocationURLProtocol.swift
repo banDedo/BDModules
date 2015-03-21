@@ -11,7 +11,7 @@ import UIKit
 public class LocationURLProtocol: StubURLProtocol {
 
     public override var resourceName: String {
-        return "favorite_locations_stub"
+        return "locations_stub"
     }
     
 }

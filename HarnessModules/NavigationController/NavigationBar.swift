@@ -12,14 +12,14 @@ public class NavigationBar {
     
     public class func configure() {
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.barTintColor = Color.a6()
-        navigationBarAppearance.translucent = false
+        navigationBarAppearance.setBackgroundImage(Color.whiteColor().image(), forBarMetrics: UIBarMetrics.Default)
+        navigationBarAppearance.shadowImage = UIImage()
+        navigationBarAppearance.translucent = true
         
-        let barButtonItemAppearance = UIBarButtonItem.appearance()
-        barButtonItemAppearance.setTitleTextAttributes(
-            [ NSForegroundColorAttributeName: Color.a2(), NSFontAttributeName: UIFont.boldSystemFontOfSize(14) ],
-            forState: UIControlState.Normal
-        )
+        navigationBarAppearance.titleTextAttributes = [
+            NSForegroundColorAttributeName: Color.blackColor(),
+            NSFontAttributeName: Font.headline()
+        ]
     }
     
 }

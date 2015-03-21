@@ -1,0 +1,50 @@
+{
+    "data": [
+        {
+            "type": "Location",
+            "id": "ab476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Polk Street",
+            "subtitle": "San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "ba476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Polk Gulch",
+            "subtitle": "San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "cd476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Polk Street Boxing Gym",
+            "subtitle": "Polk Street, San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "ca476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Polk Street Produce",
+            "subtitle": "Polk Street, San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "fa476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Polk Street Building",
+            "subtitle": "Polk Street, San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        }
+    ],
+    "info": {
+        "offset": 0,
+        "count": 5,
+        "total": 10
+    },
+    "code": "OK"
+}

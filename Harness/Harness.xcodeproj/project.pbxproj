@@ -10,6 +10,7 @@
 		348C72D843D627CD9830DD7F /* Pods_HarnessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D133AD3B00CE24F1C3B5587 /* Pods_HarnessTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7133902A1AB5E17400607562 /* APIMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713390291AB5E17400607562 /* APIMapperTests.swift */; };
 		713763E61AB67E51005E9260 /* MockAccountUserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713763E51AB67E51005E9260 /* MockAccountUserProvider.swift */; };
+		713D717F1ABE164E00DF53C1 /* trip.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 713D717E1ABE164E00DF53C1 /* trip.gpx */; };
 		718966791AB27E2F00919AEF /* APIServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718966781AB27E2F00919AEF /* APIServiceClientTests.swift */; };
 		7189667B1AB27E4700919AEF /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189667A1AB27E4700919AEF /* RepositoryTests.swift */; };
 		71CE6BB11AB20E6300C7ABD9 /* HarnessModelFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CE6BAE1AB20E6300C7ABD9 /* HarnessModelFactoryTests.swift */; };
@@ -43,6 +44,7 @@
 		4D133AD3B00CE24F1C3B5587 /* Pods_HarnessTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HarnessTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		713390291AB5E17400607562 /* APIMapperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMapperTests.swift; sourceTree = "<group>"; };
 		713763E51AB67E51005E9260 /* MockAccountUserProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAccountUserProvider.swift; sourceTree = "<group>"; };
+		713D717E1ABE164E00DF53C1 /* trip.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = trip.gpx; path = ../trip.gpx; sourceTree = "<group>"; };
 		7182BD301AA03E9D000D35BA /* Harness-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Harness-Bridging-Header.h"; sourceTree = "<group>"; };
 		718966781AB27E2F00919AEF /* APIServiceClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServiceClientTests.swift; sourceTree = "<group>"; };
 		7189667A1AB27E4700919AEF /* RepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		713D717D1ABE164100DF53C1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				713D717E1ABE164E00DF53C1 /* trip.gpx */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		71CE6BAD1AB20E6300C7ABD9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +174,7 @@
 			children = (
 				71FF14281AA60C1A0032B20E /* HarnessAppDelegate.swift */,
 				71FB58A71A985CE000DE27AD /* Images.xcassets */,
+				713D717D1ABE164100DF53C1 /* Resources */,
 				71FB589E1A985CE000DE27AD /* Supporting Files */,
 			);
 			path = Harness;
@@ -283,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				713D717F1ABE164E00DF53C1 /* trip.gpx in Resources */,
 				71FB58A81A985CE000DE27AD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

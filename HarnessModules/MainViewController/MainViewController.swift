@@ -12,12 +12,12 @@ import UIKit
     func mainViewControllerDidLogout(mainViewController: MainViewController)
 }
 
-public class MainViewController: LifecycleViewController, MapViewControllerDelegate, MenuViewControllerDelegate {
+public class MainViewController: LifecycleViewController, FavoritesViewControllerDelegate, MapViewControllerDelegate, MenuViewControllerDelegate {
 
     // MARK:- Injectable
     
     public lazy var menuViewController = MenuViewController()
-    public lazy var mapViewController = MapViewController()
+    public lazy var mainFactory = MainFactory()
 
     weak public var delegate: MainViewControllerDelegate?
     
@@ -25,6 +25,7 @@ public class MainViewController: LifecycleViewController, MapViewControllerDeleg
         
     public lazy var navigationDrawerViewController: NavigationDrawerViewController = {
         let navigationDrawerViewController = NavigationDrawerViewController()
+        navigationDrawerViewController.statusBarBlockerView.backgroundColor = Color.darkBlueColor()
         navigationDrawerViewController.replaceLeftViewController(self.menuNavigationController)
         navigationDrawerViewController.replaceCenterViewController(self.mainNavigationController)
         return navigationDrawerViewController
@@ -38,9 +39,7 @@ public class MainViewController: LifecycleViewController, MapViewControllerDeleg
         }()
 
     public lazy var mainNavigationController: NavigationController = {
-        let mainNavigationController = NavigationController()
-        mainNavigationController.viewControllers = [ self.mapViewController ]
-        return mainNavigationController
+        return self.mainNavigationController(self.mainFactory.mapViewController(delegate: self))
         }()
 
     // MARK:- View lifecycle
@@ -52,7 +51,7 @@ public class MainViewController: LifecycleViewController, MapViewControllerDeleg
 
     // MARK:- Status bar
     
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {        
         switch navigationDrawerViewController.orientation {
         case .Default:
             return mainNavigationController.preferredStatusBarStyle()
@@ -60,10 +59,18 @@ public class MainViewController: LifecycleViewController, MapViewControllerDeleg
             return menuViewController.preferredStatusBarStyle()
         }
     }
+    
+    // MARK:- Main Navigation Controller
+    
+    private func mainNavigationController(rootViewController: LifecycleViewController) -> NavigationController {
+        let mainNavigationController = NavigationController()
+        mainNavigationController.viewControllers = [ rootViewController ]
+        return mainNavigationController
+    }
 
-    // MARK:- MapViewControllerDelegate
-
-    public func mapViewController(mapViewController: MapViewController, didTapMenuButton sender: UIButton) {
+    // MARK:- Menu
+    
+    private func updateMenu() {
         let orientation: NavigationDrawerViewController.Orientation
         switch navigationDrawerViewController.orientation {
         case .Default:
@@ -79,9 +86,39 @@ public class MainViewController: LifecycleViewController, MapViewControllerDeleg
             animated: true
         )
     }
+    
+    // MARK:- FavoriteLocationsViewControllerDelegate
+    
+    public func favoritesViewController(favoritesViewController: FavoritesViewController, didTapMenuButton sender: UIButton) {
+        updateMenu()
+    }
 
-    public func menuViewController(menuViewController: MenuViewController, didTapLogoutCell: MenuCell) {
-        delegate?.mainViewControllerDidLogout(self)
+    // MARK:- MapViewControllerDelegate
+
+    public func mapViewController(mapViewController: MapViewController, didTapMenuButton sender: UIButton) {
+        updateMenu()
+    }
+
+    // MARK:- MenuViewControllerDelegate
+
+    public func menuViewController(menuViewController: MenuViewController, didSelectRow row: MenuViewController.Row) {
+        switch row {
+        case .Map:
+            navigationDrawerViewController.replaceCenterViewController({
+                return self.mainNavigationController(self.mainFactory.mapViewController(delegate: self))
+                },
+                animated: true)
+            break
+        case .Favorites:
+            navigationDrawerViewController.replaceCenterViewController({
+                return self.mainNavigationController(self.mainFactory.favoritesViewController(delegate: self))
+                },
+                animated: true)
+            break
+        case .Logout:
+            delegate?.mainViewControllerDidLogout(self)
+            break
+        }
     }
     
 }

@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "type": "Location",
+            "id": "a3476de8-be3c-11e4-a0c5-3b35f901588d",
+            "subtitle": "Pacifica, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526,
+            "title": "703 Bradford Way",
+            "nickname": null
+        },
+        {
+            "type": "Location",
+            "id": "c3476de8-be3c-11e4-a0c5-3b35f901588d",
+            "subtitle": "806 South Airport Boulevard, South San Francisco, CA",
+            "longitude": -122.400559,
+            "latitude": 37.63685,
+            "title": "SFO Long Term Parking",
+            "nickname": "SFO Long Term Parking"
+        }
+    ],
+    "info": {
+        "offset": 0,
+        "count": 2,
+        "total": 2
+    },
+    "code": "OK"
+}

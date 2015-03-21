@@ -35,16 +35,17 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
         }()
     
     private lazy var menuButton: UIBarButtonItem = {
-        return UIBarButtonItem(
-            title: "Menu",
-            style: UIBarButtonItemStyle.Plain,
-            target: self,
-            action: "handleButtonTap:")
+        let image = UIImage(named: "menu.png")!
+        let button = UIButton(frame: CGRectMake(0, 0, image.size.width, image.size.height))
+        button.setImage(image, forState: UIControlState.Normal)
+        button.addTarget(self, action: "handleButtonTap:", forControlEvents: UIControlEvents.TouchUpInside)
+        return UIBarButtonItem(customView: button)
         }()
 
     // MARK:- Cleanup
     
     deinit {
+        locationManager.delegate = nil
         mapView.delegate = nil
     }
 
@@ -53,15 +54,15 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        title = "Map"
         
         view.addSubview(mapView)
-        
+                
         mapView.snp_makeConstraints { make in
             make.edges.equalTo(UIEdgeInsetsZero)
         }
         
-        locationRepository.fetchNextPage() { [weak self] locations, error in
+        locationRepository.fetch() { [weak self] locations, error in
             if let strongSelf = self {
                 if error != nil {
                     let alertController = UIAlertController(
@@ -122,7 +123,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- Status Bar
     
     public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+        return UIStatusBarStyle.Default
     }
 
     // MARK:- CLLocationManagerDelegate
@@ -158,7 +159,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- MKMapViewDelegate
     
     public func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 25000.0, 25000.0)
+        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 5000.0, 5000.0)
         mapView.setRegion(region, animated: true)
     }
     

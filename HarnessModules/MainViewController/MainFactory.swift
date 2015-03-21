@@ -20,17 +20,27 @@ public class MainFactory: NSObject {
     public func mainViewController(#delegate: MainViewControllerDelegate) -> MainViewController {
         let mainViewController = MainViewController()
         mainViewController.menuViewController = menuViewController(mainViewController)
-        mainViewController.mapViewController = mapViewController(delegate: mainViewController)
+        mainViewController.mainFactory = self
         mainViewController.delegate = delegate
         return mainViewController
     }
     
+    public func favoritesViewController(#delegate: FavoritesViewControllerDelegate) -> FavoritesViewController {
+        let mapViewController = FavoritesViewController()
+        mapViewController.mainFactory = self
+        mapViewController.accountUserProvider = apiFactory.accountUserProvider
+        mapViewController.favoriteLocationRepository = apiFactory.favoriteLocationRepository(apiFactory.accountUserProvider.user.uuid)
+        mapViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
+        mapViewController.delegate = delegate
+        return mapViewController
+    }
+
     public func mapViewController(#delegate: MapViewControllerDelegate) -> MapViewController {
         let mapViewController = MapViewController()
         mapViewController.mainFactory = self
         mapViewController.accountUserProvider = apiFactory.accountUserProvider
         mapViewController.locationManager = locationManager(delegate: mapViewController)
-        mapViewController.locationRepository = apiFactory.locationRepository(apiFactory.accountUserProvider.user.uuid)
+        mapViewController.locationRepository = apiFactory.mapLocationRepository(apiFactory.accountUserProvider.user.uuid)
         mapViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
         mapViewController.delegate = delegate
         return mapViewController
