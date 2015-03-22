@@ -7,9 +7,18 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.requires_arc = true
 
+  s.subspec 'AnimatedImageView' do |ss|
+    ss.source_files = 'AnimatedImageView/*.swift'
+    ss.dependency 'SDWebImage'
+  end
+
   s.subspec 'Button' do |ss|
     ss.source_files = 'Button/*.swift'
     ss.dependency 'BDModules/Color'
+  end
+
+  s.subspec 'BlurView' do |ss|
+    ss.source_files = 'BlurView/*.swift'
   end
 
   s.subspec 'Collection' do |ss|
@@ -64,6 +73,10 @@ Pod::Spec.new do |s|
 
     ss.subspec 'Font' do |sss|
       sss.source_files = 'HarnessModules/Font/*.swift'
+    end
+
+    ss.subspec 'Layout' do |sss|
+      sss.source_files = 'HarnessModules/Layout/*.swift'
     end
 
     ss.subspec 'JSON' do |sss|
@@ -122,6 +135,11 @@ Pod::Spec.new do |s|
   
   s.subspec 'LifecycleViewController' do |ss|
     ss.source_files = 'LifecycleViewController/*.swift'
+  end
+
+  s.subspec 'Loading' do |ss|
+    ss.source_files = 'Loading/*.swift'
+    ss.dependency 'Snap'
   end
   
   s.subspec 'Logging' do |ss|

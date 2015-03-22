@@ -27,7 +27,7 @@ public class LandingViewController: LifecycleViewController {
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton(frame: CGRectZero)
         loginButton.setTitle("Login", forState: UIControlState.Normal)
-        loginButton.setBackgroundColor(Color.darkBlueColor(), forControlState: UIControlState.Normal)
+        loginButton.setBackgroundColor(Color.darkBlueColor, forControlState: UIControlState.Normal)
         loginButton.addTarget(self, action: "handleButtonTap:", forControlEvents: UIControlEvents.TouchUpInside)
         return loginButton
         }()
@@ -42,7 +42,8 @@ public class LandingViewController: LifecycleViewController {
         view.addSubview(loginButton)
         
         loginButton.snp_makeConstraints { make in
-            make.left.and.right.equalTo(UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0))
+            let padding = Layout.defaultAnchorPadding
+            make.left.and.right.equalTo(UIEdgeInsetsMake(0.0, padding, 0.0, padding))
             make.height.equalTo(100.0)
             make.centerY.equalTo(0.0)
         }

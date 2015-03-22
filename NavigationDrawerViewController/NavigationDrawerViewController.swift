@@ -9,6 +9,8 @@
 import Snap
 import UIKit
 
+public let kNavigationDrawerDefaultRevealOffset = CGFloat(50.0)
+
 public class NavigationDrawerViewController: LifecycleViewController, UIGestureRecognizerDelegate {
 
     // MARK:- Enumerated Types
@@ -32,7 +34,7 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
 
     // MARK:- Properties
     
-    public var leftDrawerPartialRevealHorizontalOffset = CGFloat(50.0) {
+    public var leftDrawerPartialRevealHorizontalOffset = CGFloat(kNavigationDrawerDefaultRevealOffset) {
         didSet {
             if !isDragging {
                 switch orientation {
@@ -56,10 +58,9 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
         }()
     
     public var animationDuration = NSTimeInterval(0.25)
-    public var minimumAnchorDelay = NSTimeInterval(0.3)
-    public var partialAnimationDuration = NSTimeInterval(0.15)
+    public var shortAnimationDuration = NSTimeInterval(0.15)
     
-    public var minimumLeftContainerOffset = CGFloat(-50.0)
+    public var minimumLeftContainerOffset = CGFloat(-kNavigationDrawerDefaultRevealOffset)
     
     private(set) public var orientation = Orientation.Default
     
@@ -228,14 +229,14 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
                 view.layoutIfNeeded()
                 UIView.animate(
                     true,
-                    duration: partialAnimationDuration,
+                    duration: shortAnimationDuration,
                     animations: {
                         self.orientation = .RevealLeft
                         self.updateViewConstraints()
                         self.view.layoutIfNeeded()
                     }) { [weak self] finished in
                         if let strongSelf = self {
-                            let minimumDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.minimumAnchorDelay * Double(NSEC_PER_SEC)))
+                            let minimumDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.shortAnimationDuration * Double(NSEC_PER_SEC)))
                             
                             replacementHandler()
                             child?.view.removeFromSuperview()

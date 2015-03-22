@@ -12,11 +12,12 @@
         {
             "type": "Location",
             "id": "c3476de8-be3c-11e4-a0c5-3b35f901588d",
-            "subtitle": "806 South Airport Boulevard, South San Francisco, CA",
-            "longitude": -122.400559,
-            "latitude": 37.63685,
-            "title": "SFO Long Term Parking",
-            "nickname": "SFO Long Term Parking"
+            "subtitle": "San Francisco International Airport (SFO), San Francisco, CA 94128, USA",
+            "longitude": -122.399322,
+            "latitude": 37.617644,
+            "title": "San Francisco International Airport (SFO)",
+            "nickname": "San Francisco International Airport (SFO)"
+
         }
     ],
     "info": {

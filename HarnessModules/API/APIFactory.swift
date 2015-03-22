@@ -147,7 +147,7 @@ public class APIFactory {
     
     public lazy var logger: Logger = {
         let logger = Logger(tag: "API", applicationName: "BDModules")
-        logger.enabled = false
+        logger.enabled = true
         logger.synchronous = true
         logger.thresholdLevel = .Info
         return logger

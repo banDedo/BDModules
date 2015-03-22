@@ -12,19 +12,19 @@ public class Font {
     
     // MARK:- Greyscale
     
-    public class func headline() -> UIFont {
+    public static var headline: UIFont {
         return UIFont(name: "Avenir-Book", size: 16)!
     }
 
-    public class func paragraph() -> UIFont {
-        return UIFont(name: "AvenirNext-UltraLight", size: 12)!
+    public static var paragraph: UIFont {
+        return UIFont(name: "AvenirNext-Regular", size: 12)!
     }
 
-    public class func roundedButtonTitle() -> UIFont {
+    public static var roundedButtonTitle: UIFont {
         return UIFont(name: "Avenir-Book", size: 13)!
     }
 
-    public class func formField() -> UIFont {
+    public static var formField: UIFont {
         return UIFont(name: "AvenirNext-Regular", size: 13)!
     }
 

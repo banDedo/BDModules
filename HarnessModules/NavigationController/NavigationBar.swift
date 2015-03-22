@@ -12,13 +12,13 @@ public class NavigationBar {
     
     public class func configure() {
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.setBackgroundImage(Color.whiteColor().image(), forBarMetrics: UIBarMetrics.Default)
+        navigationBarAppearance.setBackgroundImage(Color.whiteColor.image(), forBarMetrics: UIBarMetrics.Default)
         navigationBarAppearance.shadowImage = UIImage()
         navigationBarAppearance.translucent = true
         
         navigationBarAppearance.titleTextAttributes = [
-            NSForegroundColorAttributeName: Color.blackColor(),
-            NSFontAttributeName: Font.headline()
+            NSForegroundColorAttributeName: Color.blackColor,
+            NSFontAttributeName: Font.headline
         ]
     }
     

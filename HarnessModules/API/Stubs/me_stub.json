@@ -5,8 +5,8 @@
         "phone_number": "5555551212",
         "type": "User",
         "profile_image_url": "http://test.com/users/profile.png",
-        "first_name": "John",
-        "last_name": "Smith",
+        "first_name": "Patrick",
+        "last_name": "Hogan",
         "email": "abc@cba.com",
     },
     "code": "OK"

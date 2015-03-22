@@ -41,7 +41,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRectZero)
         tableView.delaysContentTouches = true
-        tableView.backgroundColor = Color.whiteColor()
+        tableView.backgroundColor = Color.whiteColor
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerClass(FavoriteLocationCell.self, forCellReuseIdentifier: FavoriteLocationCell.identifier)
@@ -60,6 +60,8 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     // MARK:- Cleanup
     
     deinit {
+        tableView.dataSource = nil
+        tableView.delegate = nil
     }
 
     // MARK:- View lifecycle
@@ -68,8 +70,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
         super.viewDidLoad()
         
         title = "Favorites"
-        view.backgroundColor = Color.whiteColor()
-
+        view.backgroundColor = Color.whiteColor
         view.addSubview(tableView)
                 
         tableView.snp_makeConstraints { make in
@@ -162,9 +163,8 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
         case .Collection:
             let cell = tableView.dequeueReusableCellWithIdentifier(FavoriteLocationCell.identifier, forIndexPath: indexPath) as! FavoriteLocationCell
             
-            cell.textLabel?.font = Font.headline()
-            cell.detailTextLabel?.font = Font.paragraph()
-            
+            cell.textLabel?.font = Font.headline
+            cell.detailTextLabel?.font = Font.paragraph
             let location = favoriteLocationRepository.elements[indexPath.row]
             cell.textLabel?.text = location.title
             cell.detailTextLabel?.text = location.subtitle
@@ -179,7 +179,12 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     }
     
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44.0
+        switch Section(rawValue: indexPath.section)! {
+        case .Collection:
+            return Layout.mediumCellHeight
+        case .Loading:
+            return Layout.shortCellHeight
+        }
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -196,52 +201,3 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     }
 
 }
-
-public class FavoriteLocationCell: UITableViewCell {
-    
-    // MARK:- Static Properties
-    
-    public static var identifier: String = "FavoriteLocationCell"
-    
-    // MARK:- Constructors
-    
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = Color.whiteColor()
-    }
-    
-    required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-        
-}
-
-public class LoadingCell: UITableViewCell {
-    
-    // MARK:- Static Properties
-    
-    public static var identifier: String = "LoadingCell"
-    
-    // MARK:- Properties
-    
-    private(set) public lazy var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-    
-    // MARK:- Constructors
-    
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.backgroundColor = Color.whiteColor()
-        contentView.addSubview(activityIndicatorView)
-        
-        activityIndicatorView.snp_makeConstraints() { make in
-            make.center.equalTo(CGPointZero)
-        }
-    }
-    
-    required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-

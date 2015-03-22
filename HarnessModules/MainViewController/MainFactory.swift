@@ -49,6 +49,8 @@ public class MainFactory: NSObject {
 
     public func menuViewController(delegate: MenuViewControllerDelegate) -> MenuViewController {
         let menuViewController = MenuViewController()
+        menuViewController.accountUserProvider = apiFactory.accountUserProvider
+        menuViewController.profilePlaceholderImage = UIImage(named: "profile_image.png")!
         menuViewController.delegate = delegate
         return menuViewController
     }
