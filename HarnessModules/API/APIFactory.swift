@@ -16,9 +16,6 @@ public class APIFactory {
     public lazy var jsonSerializer: JSONSerializer = JSONSerializer()
     public lazy var modelFactory = ModelFactory()
     
-    public func configureOAuth2Properties() {
-    }
-    
     // MARK:- Account User
     
     public lazy var accountUserProvider: AccountUserProvider = {
@@ -28,6 +25,14 @@ public class APIFactory {
         return accountUserProvider
         }()
     
+    // MARK: - User Defaults
+    
+    public lazy var userDefaults: UserDefaults = {
+        let userDefaults = UserDefaults()
+        userDefaults.suiteName = "com.bandedo.harness"
+        return userDefaults
+        }()
+
     // MARK:- User
     
     public func userAPI() -> UserAPI {

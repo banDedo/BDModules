@@ -41,6 +41,7 @@ PODS:
     - BDModules/HarnessModules/Model (= 0.0.1)
     - BDModules/HarnessModules/NavigationController (= 0.0.1)
     - BDModules/HarnessModules/RootViewController (= 0.0.1)
+    - BDModules/HarnessModules/UserDefaults (= 0.0.1)
     - BDModules/Model
   - BDModules/HarnessModules/AccountUser (0.0.1):
     - BDModules/JSON
@@ -90,6 +91,8 @@ PODS:
     - BDModules/HarnessModules/Model
     - BDModules/Model
     - Snap
+  - BDModules/HarnessModules/UserDefaults (0.0.1):
+    - BDModules/Model
   - BDModules/JSON (0.0.1)
   - BDModules/Keyboard (0.0.1)
   - BDModules/LifecycleViewController (0.0.1)
@@ -150,7 +153,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDModules: d7fb2bfff54d8279b665fcb566bcafad17ecb9d9
+  BDModules: 9ab75daa9743ae5457cf56e720dd7d979fd22b26
   FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
   Snap: c691705e45df9cae55cebedde52013683588db52
 
