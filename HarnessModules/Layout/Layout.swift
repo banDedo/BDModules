@@ -16,8 +16,16 @@ public class Layout {
         return 2.0
     }
     
-    public static var defaultAnchorPadding: CGFloat {
+    public static var shortAnchorPadding: CGFloat {
         return 10.0
+    }
+
+    public static var mediumAnchorPadding: CGFloat {
+        return 15.0
+    }
+
+    public static var longAnchorPadding: CGFloat {
+        return 20.0
     }
 
     public static var navigationDrawerRevealOffset: CGFloat {

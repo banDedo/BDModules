@@ -42,7 +42,7 @@ public class LandingViewController: LifecycleViewController {
         view.addSubview(loginButton)
         
         loginButton.snp_makeConstraints { make in
-            let padding = Layout.defaultAnchorPadding
+            let padding = Layout.shortAnchorPadding
             make.left.and.right.equalTo(UIEdgeInsetsMake(0.0, padding, 0.0, padding))
             make.height.equalTo(100.0)
             make.centerY.equalTo(0.0)

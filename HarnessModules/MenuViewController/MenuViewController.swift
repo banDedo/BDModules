@@ -20,8 +20,9 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     public enum Row: Int {
         case Map = 0
         case Favorites = 1
-        case Logout = 2
-        case Footer = 3
+        case Settings = 2
+        case Logout = 3
+        case Footer = 4
         
         static var count: Int {
             var max: Int = 0
@@ -48,11 +49,13 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         return profileView
         }()
     
-    private(set) public lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRectZero)
+    private(set) public lazy var tableView: TouchCancelTableView = {
+        let tableView = TouchCancelTableView(frame: CGRectZero)
         tableView.contentInset = UIEdgeInsetsMake(self.defaultTopInset, 0.0, 0.0, 0.0)
         tableView.backgroundColor = Color.clearColor
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.canCancelContentTouches = true
+        tableView.panGestureRecognizer.cancelsTouchesInView = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerClass(MenuCell.self, forCellReuseIdentifier: MenuCell.identifier)
@@ -154,6 +157,9 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         case .Favorites:
             cell.configure("menu_explore", title: "Favorites")
             break
+        case .Settings:
+            cell.configure("menu_settings", title: "Settings")
+            break
         case .Logout:
             cell.configure("menu_logout", title: "Logout")
             break
@@ -169,7 +175,7 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch Row(rawValue: indexPath.row)! {
-        case .Map, .Favorites, .Logout:
+        case .Map, .Favorites, .Settings, .Logout:
             return Layout.shortCellHeight
         case .Footer:
             return footerHeight
@@ -196,6 +202,14 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     
     private var scrollOffset: CGFloat {
         return defaultTopInset + tableView.contentOffset.y
+    }
+    
+}
+
+public class TouchCancelTableView: UITableView {
+    
+    public override func touchesShouldCancelInContentView(view: UIView!) -> Bool {
+        return true
     }
     
 }

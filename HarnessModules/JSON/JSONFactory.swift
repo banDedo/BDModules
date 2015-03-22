@@ -10,6 +10,10 @@ import Foundation
 
 public class JSONFactory {
     
+    // MARK:- Injectable
+    
+    public lazy var apiFactory = APIFactory()
+    
     // MARK:- Intialization
     
     public init() { }
@@ -17,9 +21,10 @@ public class JSONFactory {
     // MARK:- Logging
     public lazy var logger: Logger = {
         let logger = Logger(tag: "JSON", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.apiFactory.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
-        logger.thresholdLevel = .Warning
         return logger
         }()
     

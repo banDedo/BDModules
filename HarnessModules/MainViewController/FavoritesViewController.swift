@@ -8,10 +8,6 @@
 
 import UIKit
 
-@objc public protocol FavoritesViewControllerDelegate {
-    func favoritesViewController(favoritesViewController: FavoritesViewController, didTapMenuButton sender: UIButton)
-}
-
 public class FavoritesViewController: LifecycleViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK:- Enumerate type
@@ -34,7 +30,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     public lazy var oAuth2SessionManager = OAuth2SessionManager()
     public lazy var mainFactory = MainFactory()
     
-    weak public var delegate: FavoritesViewControllerDelegate?
+    weak public var delegate: MenuNavigationControllerDelegate?
     
     // MARK:- Properties
     
@@ -49,14 +45,6 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
         return tableView
         }()
     
-    private lazy var menuButton: UIBarButtonItem = {
-        let image = UIImage(named: "menu.png")!
-        let button = UIButton(frame: CGRectMake(0, 0, image.size.width, image.size.height))
-        button.setImage(image, forState: UIControlState.Normal)
-        button.addTarget(self, action: "handleButtonTap:", forControlEvents: UIControlEvents.TouchUpInside)
-        return UIBarButtonItem(customView: button)
-        }()
-
     // MARK:- Cleanup
     
     deinit {
@@ -80,7 +68,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.leftBarButtonItem = menuButton
+        NavigationBar.addMenuButton(target: self, action: "handleButtonTap:")
     }
     
     // MARK:- UI Update
@@ -134,7 +122,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     // MARK:- Action Handlers
     
     public func handleButtonTap(sender: UIButton) {
-        delegate?.favoritesViewController(self, didTapMenuButton: sender)
+        delegate?.viewController(self, didTapMenuButton: sender)
     }
     
     // MARK:- Status Bar

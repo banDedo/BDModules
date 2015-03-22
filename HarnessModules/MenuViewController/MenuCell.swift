@@ -55,7 +55,7 @@ public class MenuCell: UITableViewCell {
         
         let image = UIImage(named: imageName)!
         let imageWidthOffset = (self.dynamicType.imageWidth - image.size.width)/2.0
-        let contentPadding = CGFloat(Layout.defaultAnchorPadding)
+        let contentPadding = CGFloat(Layout.shortAnchorPadding)
         let imagePadding = CGFloat(Layout.shortCellImagePadding)
         
         button.setImage(image, forState: UIControlState.Normal)

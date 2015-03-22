@@ -20,7 +20,7 @@ public class Font {
         return UIFont(name: "AvenirNext-Regular", size: 12)!
     }
 
-    public static var roundedButtonTitle: UIFont {
+    public static var controlTitle: UIFont {
         return UIFont(name: "Avenir-Book", size: 13)!
     }
 
