@@ -42,7 +42,6 @@ public class ApplicationFactory {
         
         apiFactory.jsonSerializer = jsonFactory.jsonSerializer
         apiFactory.modelFactory = modelFactory
-        apiFactory.configureOAuth2Properties()
 
         // EntryFactory
         

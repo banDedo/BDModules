@@ -22,6 +22,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     public lazy var oAuth2SessionManager = OAuth2SessionManager()
     public lazy var mainFactory = MainFactory()
     public lazy var locationManager = CLLocationManager()
+    public lazy var userDefaults = UserDefaults()
     
     weak public var delegate: MapViewControllerDelegate?
     
@@ -60,6 +61,16 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
                 
         mapView.snp_makeConstraints { make in
             make.edges.equalTo(UIEdgeInsetsZero)
+        }
+        
+        if let location = userDefaults.lastUserLocation {
+            zoomToCoordinate(
+                CLLocationCoordinate2DMake(
+                    location[kUserDefaultsLastUserLocationLatitudeKey] as! CLLocationDegrees,
+                    location[kUserDefaultsLastUserLocationLongitudeKey] as! CLLocationDegrees
+                ),
+                animated: false
+            )
         }
         
         locationRepository.fetch() { [weak self] locations, error in
@@ -125,6 +136,11 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     public override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.Default
     }
+    
+    private func zoomToCoordinate(coordinate: CLLocationCoordinate2D, animated: Bool = false) {
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 5000.0, 5000.0)
+        mapView.setRegion(region, animated: animated)
+    }
 
     // MARK:- CLLocationManagerDelegate
     
@@ -159,8 +175,11 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- MKMapViewDelegate
     
     public func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 5000.0, 5000.0)
-        mapView.setRegion(region, animated: true)
+        zoomToCoordinate(userLocation.coordinate, animated: true)
+        userDefaults.lastUserLocation = [
+            kUserDefaultsLastUserLocationLatitudeKey: userLocation.coordinate.latitude,
+            kUserDefaultsLastUserLocationLongitudeKey: userLocation.coordinate.longitude
+        ]
     }
     
 }

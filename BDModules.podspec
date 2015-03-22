@@ -106,6 +106,10 @@ Pod::Spec.new do |s|
       sss.dependency 'BDModules/HarnessModules/Model'
       sss.dependency 'Snap'
     end
+
+    ss.subspec 'UserDefaults' do |sss|
+      sss.source_files = 'HarnessModules/UserDefaults/*.swift'
+    end
   end
   
   s.subspec 'JSON' do |ss|
