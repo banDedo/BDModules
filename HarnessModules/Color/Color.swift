@@ -12,15 +12,15 @@ public class Color {
     
     // MARK:- Grayscale
     
-    public class func whiteColor() -> UIColor {
+    public static var whiteColor: UIColor {
         return grayScale(1.0, alpha: 1.0)
     }
 
-    public class func blackColor() -> UIColor {
+    public static var blackColor: UIColor {
         return grayScale(0.0, alpha: 1.0)
     }
 
-    public class func clearColor() -> UIColor {
+    public static var clearColor: UIColor {
         return grayScale(1.0, alpha: 0.0)
     }
     
@@ -30,13 +30,17 @@ public class Color {
 
     // MARK:- Accent
 
-    public class func darkBlueColor() -> UIColor {
+    public static var deepBlueColor: UIColor {
+        return UIColor(red:20.0/255.0, green:45.0/255.0, blue:70.0/255.0, alpha:1.0)
+    }
+
+    public static var darkBlueColor: UIColor {
         return UIColor(red:21.0/255.0, green:27.0/255.0, blue:32.0/255.0, alpha:1.0)
     }
 
     // MARK:- Domain specific
     
-    public class func separatorColor() -> UIColor {
+    public static var separatorColor: UIColor {
         return UIColor(red:45.0/255.0, green:50.0/255.0, blue:55.0/255.0, alpha:1.0)
     }
 

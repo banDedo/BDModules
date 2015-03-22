@@ -55,7 +55,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Map"
+        title = "On Trip"
         
         view.addSubview(mapView)
                 

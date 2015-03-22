@@ -7,6 +7,7 @@ target 'Harness' do
     pod 'AFNetworking/NSURLSession', '~> 2.5.0'
     pod 'BDModules', :path => '../'
     pod 'FXKeychain', '~> 1.5.2'
+    pod 'SDWebImage', '~>3.7.2'
     pod 'Snap', :git=> 'https://github.com/Masonry/Snap.git', :commit=> '4158cf0d9980d6b666f7736242423ac473c96800'
 end
 

@@ -7,6 +7,8 @@ PODS:
   - AFNetworking/Security (2.5.1)
   - AFNetworking/Serialization (2.5.1)
   - BDModules (0.0.1):
+    - BDModules/AnimatedImageView (= 0.0.1)
+    - BDModules/BlurView (= 0.0.1)
     - BDModules/Button (= 0.0.1)
     - BDModules/Collection (= 0.0.1)
     - BDModules/Color (= 0.0.1)
@@ -15,6 +17,7 @@ PODS:
     - BDModules/JSON (= 0.0.1)
     - BDModules/Keyboard (= 0.0.1)
     - BDModules/LifecycleViewController (= 0.0.1)
+    - BDModules/Loading (= 0.0.1)
     - BDModules/Logging (= 0.0.1)
     - BDModules/Model (= 0.0.1)
     - BDModules/NavigationDrawerViewController (= 0.0.1)
@@ -22,6 +25,9 @@ PODS:
     - BDModules/Pointers (= 0.0.1)
     - BDModules/ViewAnimations (= 0.0.1)
     - BDModules/ViewGeometry (= 0.0.1)
+  - BDModules/AnimatedImageView (0.0.1):
+    - SDWebImage
+  - BDModules/BlurView (0.0.1)
   - BDModules/Button (0.0.1):
     - BDModules/Color
   - BDModules/Collection (0.0.1)
@@ -36,6 +42,7 @@ PODS:
     - BDModules/HarnessModules/EntryViewController (= 0.0.1)
     - BDModules/HarnessModules/Font (= 0.0.1)
     - BDModules/HarnessModules/JSON (= 0.0.1)
+    - BDModules/HarnessModules/Layout (= 0.0.1)
     - BDModules/HarnessModules/MainViewController (= 0.0.1)
     - BDModules/HarnessModules/MenuViewController (= 0.0.1)
     - BDModules/HarnessModules/Model (= 0.0.1)
@@ -70,6 +77,8 @@ PODS:
   - BDModules/HarnessModules/JSON (0.0.1):
     - BDModules/JSON
     - BDModules/Model
+  - BDModules/HarnessModules/Layout (0.0.1):
+    - BDModules/Model
   - BDModules/HarnessModules/MainViewController (0.0.1):
     - BDModules/Button
     - BDModules/HarnessModules/API
@@ -96,6 +105,8 @@ PODS:
   - BDModules/JSON (0.0.1)
   - BDModules/Keyboard (0.0.1)
   - BDModules/LifecycleViewController (0.0.1)
+  - BDModules/Loading (0.0.1):
+    - Snap
   - BDModules/Logging (0.0.1)
   - BDModules/Model (0.0.1):
     - BDModules/JSON
@@ -131,12 +142,16 @@ PODS:
   - BDModules/ViewAnimations (0.0.1)
   - BDModules/ViewGeometry (0.0.1)
   - FXKeychain (1.5.2)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
   - Snap (0.0.6)
 
 DEPENDENCIES:
   - AFNetworking/NSURLSession (~> 2.5.0)
   - BDModules (from `../`)
   - FXKeychain (~> 1.5.2)
+  - SDWebImage (~> 3.7.2)
   - Snap (from `https://github.com/Masonry/Snap.git`, commit `4158cf0d9980d6b666f7736242423ac473c96800`)
 
 EXTERNAL SOURCES:
@@ -153,8 +168,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDModules: 9ab75daa9743ae5457cf56e720dd7d979fd22b26
+  BDModules: 0d7415f50346f14db4f9914c658328ebf4888f78
   FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   Snap: c691705e45df9cae55cebedde52013683588db52
 
 COCOAPODS: 0.36.0

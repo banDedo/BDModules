@@ -25,7 +25,7 @@ public class MainViewController: LifecycleViewController, FavoritesViewControlle
         
     public lazy var navigationDrawerViewController: NavigationDrawerViewController = {
         let navigationDrawerViewController = NavigationDrawerViewController()
-        navigationDrawerViewController.statusBarBlockerView.backgroundColor = Color.darkBlueColor()
+        navigationDrawerViewController.statusBarBlockerView.backgroundColor = Color.deepBlueColor
         navigationDrawerViewController.replaceLeftViewController(self.menuNavigationController)
         navigationDrawerViewController.replaceCenterViewController(self.mainNavigationController)
         return navigationDrawerViewController
@@ -117,6 +117,8 @@ public class MainViewController: LifecycleViewController, FavoritesViewControlle
             break
         case .Logout:
             delegate?.mainViewControllerDidLogout(self)
+            break
+        case .Footer:
             break
         }
     }
