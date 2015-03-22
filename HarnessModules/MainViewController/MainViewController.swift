@@ -104,14 +104,24 @@ public class MainViewController: LifecycleViewController, FavoritesViewControlle
     public func menuViewController(menuViewController: MenuViewController, didSelectRow row: MenuViewController.Row) {
         switch row {
         case .Map:
-            navigationDrawerViewController.replaceCenterViewController({
-                return self.mainNavigationController(self.mainFactory.mapViewController(delegate: self))
+            navigationDrawerViewController.replaceCenterViewController({ [weak self] in
+                if let strongSelf = self {
+                    strongSelf.mainNavigationController = strongSelf.mainNavigationController(strongSelf.mainFactory.mapViewController(delegate: strongSelf))
+                    return strongSelf.mainNavigationController
+                } else {
+                    return UIViewController()
+                }
                 },
                 animated: true)
             break
         case .Favorites:
-            navigationDrawerViewController.replaceCenterViewController({
-                return self.mainNavigationController(self.mainFactory.favoritesViewController(delegate: self))
+            navigationDrawerViewController.replaceCenterViewController({ [weak self] in
+                if let strongSelf = self {
+                    strongSelf.mainNavigationController = strongSelf.mainNavigationController(strongSelf.mainFactory.favoritesViewController(delegate: strongSelf))
+                    return strongSelf.mainNavigationController
+                } else {
+                    return UIViewController()
+                }
                 },
                 animated: true)
             break
