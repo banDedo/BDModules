@@ -7,7 +7,8 @@
             "longitude": -122.48551,
             "latitude": 37.621526,
             "title": "703 Bradford Way",
-            "nickname": null
+            "nickname": null,
+            "image_url": "https://www.test.com/image1.jpg"
         },
         {
             "type": "Location",
@@ -16,8 +17,8 @@
             "longitude": -122.399322,
             "latitude": 37.617644,
             "title": "San Francisco International Airport (SFO)",
-            "nickname": "San Francisco International Airport (SFO)"
-
+            "nickname": "San Francisco International Airport (SFO)",
+            "image_url": "https://www.test.com/image2.jpg"
         }
     ],
     "info": {

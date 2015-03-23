@@ -170,7 +170,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
             
             let location = favoriteLocationRepository.elements[indexPath.row]
             animatedImageView.setImage(
-                URLString: "",
+                URLString: location.imageUrl,
                 imageView: cell.backgroundImageView,
                 animated: true
             )

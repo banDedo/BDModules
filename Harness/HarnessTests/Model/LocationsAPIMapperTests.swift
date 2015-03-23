@@ -46,6 +46,7 @@ class LocationsAPIMapperTests: XCTestCase {
         XCTAssertEqual(location.nickname!, locationDictionary[kLocationNicknameApiKeyPath] as! String)
         XCTAssertEqual(location.latitude, locationDictionary[kLocationLatitudeApiKeyPath] as! CLLocationDegrees)
         XCTAssertEqual(location.longitude, locationDictionary[kLocationLongitudeApiKeyPath] as! CLLocationDegrees)
+        XCTAssertEqual(location.imageUrl!, locationDictionary[kLocationImageUrlApiKeyPath] as! String)
     }
     
 }
