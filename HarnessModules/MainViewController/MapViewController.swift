@@ -24,6 +24,8 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     
     // MARK:- Properties
     
+    private var lastUpdate = CFTimeInterval(0.0)
+    
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView(frame: CGRectZero)
         mapView.delegate = self
@@ -163,11 +165,16 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- MKMapViewDelegate
     
     public func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        zoomToCoordinate(userLocation.coordinate, animated: true)
-        userDefaults.lastUserLocation = [
-            kUserDefaultsLastUserLocationLatitudeKey: userLocation.coordinate.latitude,
-            kUserDefaultsLastUserLocationLongitudeKey: userLocation.coordinate.longitude
-        ]
+        let currentTime = CACurrentMediaTime()
+        let lastFire = currentTime - lastUpdate
+        if lastFire > 5 {
+            lastUpdate = currentTime
+            zoomToCoordinate(userLocation.coordinate, animated: true)
+            userDefaults.lastUserLocation = [
+                kUserDefaultsLastUserLocationLatitudeKey: userLocation.coordinate.latitude,
+                kUserDefaultsLastUserLocationLongitudeKey: userLocation.coordinate.longitude
+            ]
+        }
     }
     
 }

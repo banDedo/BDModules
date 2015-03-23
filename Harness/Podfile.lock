@@ -7,13 +7,14 @@ PODS:
   - AFNetworking/Security (2.5.1)
   - AFNetworking/Serialization (2.5.1)
   - BDModules (0.0.1):
-    - BDModules/AnimatedImageView (= 0.0.1)
     - BDModules/BlurView (= 0.0.1)
     - BDModules/Button (= 0.0.1)
     - BDModules/Collection (= 0.0.1)
     - BDModules/Color (= 0.0.1)
     - BDModules/ContainerViewController (= 0.0.1)
     - BDModules/HarnessModules (= 0.0.1)
+    - BDModules/ImageBlender (= 0.0.1)
+    - BDModules/ImageViewLazyLoader (= 0.0.1)
     - BDModules/JSON (= 0.0.1)
     - BDModules/Keyboard (= 0.0.1)
     - BDModules/LifecycleViewController (= 0.0.1)
@@ -25,8 +26,6 @@ PODS:
     - BDModules/Pointers (= 0.0.1)
     - BDModules/ViewAnimations (= 0.0.1)
     - BDModules/ViewGeometry (= 0.0.1)
-  - BDModules/AnimatedImageView (0.0.1):
-    - SDWebImage
   - BDModules/BlurView (0.0.1)
   - BDModules/Button (0.0.1):
     - BDModules/Color
@@ -102,6 +101,9 @@ PODS:
     - Snap
   - BDModules/HarnessModules/UserDefaults (0.0.1):
     - BDModules/Model
+  - BDModules/ImageBlender (0.0.1)
+  - BDModules/ImageViewLazyLoader (0.0.1):
+    - SDWebImage
   - BDModules/JSON (0.0.1)
   - BDModules/Keyboard (0.0.1)
   - BDModules/LifecycleViewController (0.0.1)
@@ -168,7 +170,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDModules: 0d7415f50346f14db4f9914c658328ebf4888f78
+  BDModules: 83350301e33312fa060b8391fb260b589080e10f
   FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   Snap: c691705e45df9cae55cebedde52013683588db52

@@ -17,10 +17,10 @@ public class ProfileView: UIView {
     
     // MARK: - Properties
     
-    private(set) public lazy var backgroundView: UIView = {
-        let backgroundView = UIView(frame: CGRectZero)
-        backgroundView.backgroundColor = Color.deepBlueColor
-        return backgroundView
+    private(set) public lazy var coverImageView: UIImageView = {
+        let coverImageView = UIImageView(frame: CGRectZero)
+        coverImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        return coverImageView
         }()
     
     private(set) public lazy var profileImageView: UIImageView = {
@@ -57,13 +57,13 @@ public class ProfileView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(backgroundView)
+        addSubview(coverImageView)
         addSubview(containerView)
         
         containerView.addSubview(profileImageView)
         containerView.addSubview(nameLabel)
         
-        backgroundView.snp_makeConstraints() { make in
+        coverImageView.snp_makeConstraints() { make in
             make.top.left.and.right.equalTo(UIEdgeInsetsZero)
         }
         
@@ -97,7 +97,7 @@ public class ProfileView: UIView {
     public override func updateConstraints() {
         backgroundViewToBottomContraint?.uninstall()
         if let boundView = self.boundView, boundViewOffset = self.boundViewOffset {
-            backgroundView.snp_makeConstraints() { make in
+            coverImageView.snp_makeConstraints() { make in
                 self.backgroundViewToBottomContraint = make.bottom.equalTo(boundView).with.offset(boundViewOffset)
             }
         }

@@ -1,5 +1,5 @@
 //
-//  MockAnimatedImageView.swift
+//  MockImageViewLazyLoader.swift
 //  Harness
 //
 //  Created by Patrick Hogan on 3/22/15.
@@ -9,7 +9,7 @@
 import SDWebImage
 import UIKit
 
-public class MockAnimatedImageView: AnimatedImageView {
+public class MockImageViewLazyLoader: ImageViewLazyLoader {
 
     // MARK:- Injectable
 
