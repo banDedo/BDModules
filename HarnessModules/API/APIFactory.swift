@@ -25,14 +25,14 @@ public class APIFactory {
         return accountUserProvider
         }()
     
-    // MARK: - User Defaults
+    // MARK:- User Defaults
     
     public lazy var userDefaults: UserDefaults = {
         let userDefaults = UserDefaults()
         userDefaults.suiteName = "com.bandedo.harness"
         return userDefaults
         }()
-
+    
     // MARK:- User
     
     public func userAPI() -> UserAPI {

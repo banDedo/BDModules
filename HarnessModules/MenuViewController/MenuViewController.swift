@@ -34,8 +34,7 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     // MARK: Injectable
     
     public lazy var accountUserProvider = AccountUserProvider()
-    
-    public var profilePlaceholderImage: UIImage?
+    public lazy var animatedImageView = AnimatedImageView()
     
     private let rightInset = CGFloat(Layout.navigationDrawerRevealOffset)
     private lazy var defaultTopInset: CGFloat = {
@@ -96,9 +95,10 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         
         profileView.nameLabel.text = accountUserProvider.user.displayName
 
-        profileView.profileImageView.setImage(
+        animatedImageView.setImage(
             URLString: accountUserProvider.user.profileImageURL,
-            placeholderImage: profilePlaceholderImage,
+            imageView: profileView.profileImageView,
+            placeholderImage: nil,
             animated: true
         )
         
