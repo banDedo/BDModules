@@ -20,8 +20,16 @@ public class MainFactory: NSObject {
     // MARK:- View Controllers
 
     public func favoritesViewController(#delegate: MenuNavigationControllerDelegate) -> FavoritesViewController {
+        let animatedImageView = MockAnimatedImageView()
+        var backgroundImages = [ UIImage ]()
+        for i in 0..<10 {
+            backgroundImages.append(UIImage(named: "\(i).png")!)
+        }
+        animatedImageView.images = backgroundImages
+
         let favoritesViewController = FavoritesViewController()
         favoritesViewController.accountUserProvider = apiFactory.accountUserProvider
+        favoritesViewController.animatedImageView = animatedImageView
         favoritesViewController.favoriteLocationRepository = apiFactory.favoriteLocationRepository(apiFactory.accountUserProvider.user.uuid)
         favoritesViewController.mainFactory = self
         favoritesViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
@@ -50,9 +58,12 @@ public class MainFactory: NSObject {
     }
 
     public func menuViewController(delegate: MenuViewControllerDelegate) -> MenuViewController {
+        let animatedImageView = MockAnimatedImageView()
+        animatedImageView.images = [ UIImage(named: "profile_image.png")! ]
+        
         let menuViewController = MenuViewController()
         menuViewController.accountUserProvider = apiFactory.accountUserProvider
-        menuViewController.profilePlaceholderImage = UIImage(named: "profile_image.png")!
+        menuViewController.animatedImageView = animatedImageView
         menuViewController.delegate = delegate
         return menuViewController
     }

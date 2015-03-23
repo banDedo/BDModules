@@ -9,27 +9,28 @@
 import SDWebImage
 import UIKit
 
-public extension UIImageView {
+public class AnimatedImageView {
     
     public func setImage(
         #URLString: String?,
+        imageView: UIImageView,
         placeholderImage: UIImage? = nil,
         animated: Bool = false,
         completion: SDWebImageCompletionBlock = { $0 }) {
             if URLString == nil || count(URLString!) == 0 {
-                image = placeholderImage
+                imageView.image = placeholderImage
             } else {
-                sd_setImageWithURL(NSURL(string: URLString!), placeholderImage: placeholderImage) { [weak self] image, error, cacheType, url in
-                    if let strongSelf = self where animated {
+                imageView.sd_setImageWithURL(NSURL(string: URLString!), placeholderImage: placeholderImage) { [weak imageView] image, error, cacheType, url in
+                    if let strongImageView = imageView where animated {
                         UIView.transitionWithView(
-                            strongSelf,
+                            strongImageView,
                             duration: UIView.defaultAnimationDuration(),
                             options: UIViewAnimationOptions.TransitionCrossDissolve,
                             animations: {
-                                strongSelf.image = ((image != nil && image!.data.length != 0) ? image : placeholderImage)
+                                strongImageView.image = ((image != nil && image!.data.length != 0) ? image : placeholderImage)
                                 return
-                            }) { [weak self] finished in
-                                if let strongSelf = self {
+                            }) { [weak imageView] finished in
+                                if let strongImageView = imageView {
                                     completion(image, error, cacheType, url)
                                 }
                         }

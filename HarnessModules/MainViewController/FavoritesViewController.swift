@@ -26,6 +26,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     // MARK:- Injectable
     
     public lazy var accountUserProvider = AccountUserProvider()
+    public lazy var animatedImageView = AnimatedImageView()
     public lazy var favoriteLocationRepository = Repository<Location>()
     public lazy var oAuth2SessionManager = OAuth2SessionManager()
     public lazy var mainFactory = MainFactory()
@@ -36,6 +37,8 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRectZero)
+        tableView.allowsSelection = false
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.delaysContentTouches = true
         tableView.backgroundColor = Color.whiteColor
         tableView.dataSource = self
@@ -73,18 +76,31 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     
     // MARK:- UI Update
     
-    public func updateUI() {
-        switch favoriteLocationRepository.fetchState {
-        case .NotFetched:
-            break
-        case .Fetching:
-            break
-        case .Fetched:
-            break
-        case .Error:
-            break
+    public func updateUI(newElements: [ Location ]? = nil) {
+        if newElements != nil && count(newElements!) > 0 {
+            switch favoriteLocationRepository.fetchState {
+            case .NotFetched:
+                break
+            case .Fetching:
+                break
+            case .Fetched:
+                tableView.beginUpdates()
+                var currentIndex = favoriteLocationRepository.elementCount - count(newElements!)
+                for newElement in newElements! {
+                    tableView.insertRowsAtIndexPaths(
+                        [ NSIndexPath(forRow: currentIndex, inSection: 0) ],
+                        withRowAnimation: UITableViewRowAnimation.Bottom
+                    )
+                    currentIndex++
+                }
+                tableView.endUpdates()
+                break
+            case .Error:
+                break
+            }
+        } else {
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
     // MARK:- Favorite Locations
@@ -150,12 +166,17 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
         switch Section(rawValue: indexPath.section)! {
         case .Collection:
             let cell = tableView.dequeueReusableCellWithIdentifier(FavoriteLocationCell.identifier, forIndexPath: indexPath) as! FavoriteLocationCell
+            cell.tag = indexPath.row
             
-            cell.textLabel?.font = Font.headline
-            cell.detailTextLabel?.font = Font.paragraph
             let location = favoriteLocationRepository.elements[indexPath.row]
-            cell.textLabel?.text = location.title
-            cell.detailTextLabel?.text = location.subtitle
+            animatedImageView.setImage(
+                URLString: "",
+                imageView: cell.backgroundImageView,
+                animated: true
+            )
+            
+            cell.primaryLabel.text = location.title
+            cell.secondaryLabel.text = location.subtitle
             
             return cell
         case .Loading:
@@ -169,9 +190,9 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch Section(rawValue: indexPath.section)! {
         case .Collection:
-            return Layout.mediumCellHeight
+            return Layout.largeCellHeight
         case .Loading:
-            return Layout.shortCellHeight
+            return Layout.mediumCellHeight
         }
     }
     
@@ -179,13 +200,4 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1.0
-    }
-    
-    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRectMake(0.0, 0.0, tableView.frame.size.width, 1.0))
-        return footerView
-    }
-
 }

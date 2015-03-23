@@ -13,7 +13,7 @@ public class Layout {
     // MARK:- Anchored Elements
     
     public static var stackedTextPadding: CGFloat {
-        return 2.0
+        return 0.0
     }
     
     public static var shortAnchorPadding: CGFloat {
@@ -51,7 +51,13 @@ public class Layout {
     public static var mediumCellHeight: CGFloat {
         return 54.0
     }
+
+    // MARK:- Large Cells
     
+    public static var largeCellHeight: CGFloat {
+        return 224.0
+    }
+
     // MARK:- Smallest Dimension
     
     public static var onePixel: CGFloat {
