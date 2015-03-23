@@ -22,8 +22,11 @@ public class FavoriteLocationURLProtocol: StubURLProtocol {
     }
     
     public override func startLoading() {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(self.dynamicType.delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-            super.startLoading()
+        let delay = self.dynamicType.delay * Double(NSEC_PER_SEC) * Double(self.dynamicType.counter)
+        dispatch_after(
+            dispatch_time(DISPATCH_TIME_NOW, Int64(delay)),
+            dispatch_get_main_queue()) {
+                super.startLoading()
         }
     }
     

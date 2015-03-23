@@ -12,7 +12,7 @@ import UIKit
     func mainViewControllerDidLogout(mainViewController: MainViewController)
 }
 
-public class MainViewController: LifecycleViewController, FavoritesViewControllerDelegate, MapViewControllerDelegate, MenuViewControllerDelegate {
+public class MainViewController: LifecycleViewController, MenuNavigationControllerDelegate, MenuViewControllerDelegate {
 
     // MARK:- Injectable
     
@@ -87,43 +87,36 @@ public class MainViewController: LifecycleViewController, FavoritesViewControlle
         )
     }
     
-    // MARK:- FavoriteLocationsViewControllerDelegate
+    private func replaceMainNavigationViewController(viewController: LifecycleViewController, animated: Bool) {
+        navigationDrawerViewController.replaceCenterViewController({ [weak self] in
+            if let strongSelf = self {
+                strongSelf.mainNavigationController = strongSelf.mainNavigationController(viewController)
+                return strongSelf.mainNavigationController
+            } else {
+                return UIViewController()
+            }
+            },
+            animated: animated)
+    }
+
+    // MARK:- MenuNavigationControllerDelegate
+
+    public func viewController(viewController: UIViewController, didTapMenuButton sender: UIButton) {
+        updateMenu()
+    }
     
-    public func favoritesViewController(favoritesViewController: FavoritesViewController, didTapMenuButton sender: UIButton) {
-        updateMenu()
-    }
-
-    // MARK:- MapViewControllerDelegate
-
-    public func mapViewController(mapViewController: MapViewController, didTapMenuButton sender: UIButton) {
-        updateMenu()
-    }
-
     // MARK:- MenuViewControllerDelegate
 
     public func menuViewController(menuViewController: MenuViewController, didSelectRow row: MenuViewController.Row) {
         switch row {
         case .Map:
-            navigationDrawerViewController.replaceCenterViewController({ [weak self] in
-                if let strongSelf = self {
-                    strongSelf.mainNavigationController = strongSelf.mainNavigationController(strongSelf.mainFactory.mapViewController(delegate: strongSelf))
-                    return strongSelf.mainNavigationController
-                } else {
-                    return UIViewController()
-                }
-                },
-                animated: true)
+            replaceMainNavigationViewController(mainFactory.mapViewController(delegate: self), animated: true)
             break
         case .Favorites:
-            navigationDrawerViewController.replaceCenterViewController({ [weak self] in
-                if let strongSelf = self {
-                    strongSelf.mainNavigationController = strongSelf.mainNavigationController(strongSelf.mainFactory.favoritesViewController(delegate: strongSelf))
-                    return strongSelf.mainNavigationController
-                } else {
-                    return UIViewController()
-                }
-                },
-                animated: true)
+            replaceMainNavigationViewController(mainFactory.favoritesViewController(delegate: self), animated: true)
+            break
+        case .Settings:
+            replaceMainNavigationViewController(mainFactory.settingsViewController(delegate: self), animated: true)
             break
         case .Logout:
             delegate?.mainViewControllerDidLogout(self)

@@ -9,10 +9,6 @@
 import MapKit
 import UIKit
 
-@objc public protocol MapViewControllerDelegate {
-    func mapViewController(mapViewController: MapViewController, didTapMenuButton sender: UIButton)
-}
-
 public class MapViewController: LifecycleViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     // MARK:- Injectable
@@ -24,7 +20,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     public lazy var locationManager = CLLocationManager()
     public lazy var userDefaults = UserDefaults()
     
-    weak public var delegate: MapViewControllerDelegate?
+    weak public var delegate: MenuNavigationControllerDelegate?
     
     // MARK:- Properties
     
@@ -35,14 +31,6 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
         return mapView
         }()
     
-    private lazy var menuButton: UIBarButtonItem = {
-        let image = UIImage(named: "menu.png")!
-        let button = UIButton(frame: CGRectMake(0, 0, image.size.width, image.size.height))
-        button.setImage(image, forState: UIControlState.Normal)
-        button.addTarget(self, action: "handleButtonTap:", forControlEvents: UIControlEvents.TouchUpInside)
-        return UIBarButtonItem(customView: button)
-        }()
-
     // MARK:- Cleanup
     
     deinit {
@@ -100,7 +88,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.leftBarButtonItem = menuButton
+        NavigationBar.addMenuButton(target: self, action: "handleButtonTap:")
     }
     
     // MARK:- UI Update
@@ -128,7 +116,7 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- Action Handlers
     
     public func handleButtonTap(sender: UIButton) {
-        delegate?.mapViewController(self, didTapMenuButton: sender)
+        delegate?.viewController(self, didTapMenuButton: sender)
     }
     
     // MARK:- Status Bar

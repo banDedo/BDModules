@@ -430,6 +430,28 @@ public class NavigationDrawerViewController: LifecycleViewController, UIGestureR
         return self.containerViews[ViewControllerIndex.Center.rawValue]
     }
     
+    public func gestureRecognizer(
+        gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            if otherGestureRecognizer.isKindOfClass(UIPanGestureRecognizer.self) {
+                // Disable if vertical scrolling is desired.
+                let velocity = (otherGestureRecognizer as! UIPanGestureRecognizer).velocityInView(view)
+                if (fabs(velocity.y) > fabs(velocity.x)) {
+                    return false
+                }
+            }
+            
+            // If view is a horizontal scroller, don't allow panning unless at the far left of the scroll view.
+            if let view = otherGestureRecognizer.view where view.isKindOfClass(UIScrollView.self) {
+                let scrollView = otherGestureRecognizer.view as! UIScrollView
+                if (scrollView.contentOffset.x >= 1) {
+                    return false
+                }
+            }
+            
+            return true
+    }
+    
     // MARK:- Panning Properties
     
     private var isDragging = false

@@ -38,10 +38,14 @@ public class Color {
         return UIColor(red:21.0/255.0, green:27.0/255.0, blue:32.0/255.0, alpha:1.0)
     }
 
+    public static var darkTintedGrayColor: UIColor {
+        return UIColor(red:45.0/255.0, green:50.0/255.0, blue:55.0/255.0, alpha:1.0)
+    }
+
     // MARK:- Domain specific
     
     public static var separatorColor: UIColor {
-        return UIColor(red:45.0/255.0, green:50.0/255.0, blue:55.0/255.0, alpha:1.0)
+        return darkTintedGrayColor
     }
 
 }

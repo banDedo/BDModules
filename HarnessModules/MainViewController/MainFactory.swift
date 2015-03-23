@@ -14,8 +14,20 @@ public class MainFactory: NSObject {
     // MARK:- Injectable
     
     public lazy var apiFactory = APIFactory()
+    public lazy var applicationFactory = ApplicationFactory()
+    public lazy var jsonFactory = JSONFactory()
 
     // MARK:- View Controllers
+
+    public func favoritesViewController(#delegate: MenuNavigationControllerDelegate) -> FavoritesViewController {
+        let favoritesViewController = FavoritesViewController()
+        favoritesViewController.accountUserProvider = apiFactory.accountUserProvider
+        favoritesViewController.favoriteLocationRepository = apiFactory.favoriteLocationRepository(apiFactory.accountUserProvider.user.uuid)
+        favoritesViewController.mainFactory = self
+        favoritesViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
+        favoritesViewController.delegate = delegate
+        return favoritesViewController
+    }
 
     public func mainViewController(#delegate: MainViewControllerDelegate) -> MainViewController {
         let mainViewController = MainViewController()
@@ -25,17 +37,7 @@ public class MainFactory: NSObject {
         return mainViewController
     }
     
-    public func favoritesViewController(#delegate: FavoritesViewControllerDelegate) -> FavoritesViewController {
-        let mapViewController = FavoritesViewController()
-        mapViewController.mainFactory = self
-        mapViewController.accountUserProvider = apiFactory.accountUserProvider
-        mapViewController.favoriteLocationRepository = apiFactory.favoriteLocationRepository(apiFactory.accountUserProvider.user.uuid)
-        mapViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
-        mapViewController.delegate = delegate
-        return mapViewController
-    }
-
-    public func mapViewController(#delegate: MapViewControllerDelegate) -> MapViewController {
+    public func mapViewController(#delegate: MenuNavigationControllerDelegate) -> MapViewController {
         let mapViewController = MapViewController()
         mapViewController.mainFactory = self
         mapViewController.accountUserProvider = apiFactory.accountUserProvider
@@ -53,6 +55,18 @@ public class MainFactory: NSObject {
         menuViewController.profilePlaceholderImage = UIImage(named: "profile_image.png")!
         menuViewController.delegate = delegate
         return menuViewController
+    }
+
+    public func settingsViewController(#delegate: MenuNavigationControllerDelegate) -> SettingsViewController {
+        let settingsViewController = SettingsViewController()
+        settingsViewController.accountUserProvider = apiFactory.accountUserProvider
+        settingsViewController.applicationLifecycleLogger = applicationFactory.logger
+        settingsViewController.apiLogger = apiFactory.logger
+        settingsViewController.jsonLogger = jsonFactory.logger
+        settingsViewController.modelLogger = applicationFactory.modelLogger
+        settingsViewController.userDefaults = apiFactory.userDefaults
+        settingsViewController.delegate = delegate
+        return settingsViewController
     }
 
     // MARK: - Location

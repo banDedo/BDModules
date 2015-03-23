@@ -79,7 +79,7 @@ public class ProfileView: UIView {
         }
         
         nameLabel.snp_makeConstraints() { make in
-            make.top.equalTo(self.profileImageView.snp_bottom).with.offset(Layout.defaultAnchorPadding)
+            make.top.equalTo(self.profileImageView.snp_bottom).with.offset(Layout.shortAnchorPadding)
             make.left.greaterThanOrEqualTo(0.0)
             make.right.lessThanOrEqualTo(0.0)
             make.bottom.equalTo(0.0)

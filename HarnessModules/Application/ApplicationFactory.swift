@@ -43,6 +43,10 @@ public class ApplicationFactory {
         apiFactory.jsonSerializer = jsonFactory.jsonSerializer
         apiFactory.modelFactory = modelFactory
 
+        // JSONFactory
+        
+        jsonFactory.apiFactory = apiFactory
+
         // EntryFactory
         
         entryFactory.apiFactory = apiFactory
@@ -50,6 +54,8 @@ public class ApplicationFactory {
         // MainFactory
         
         mainFactory.apiFactory = apiFactory
+        mainFactory.applicationFactory = self
+        mainFactory.jsonFactory = jsonFactory
 
     }
     
@@ -64,9 +70,10 @@ public class ApplicationFactory {
     
     public lazy var logger: Logger = {
         let logger = Logger(tag: "Application Lifecycle", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.apiFactory.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
-        logger.thresholdLevel = .Verbose
         return logger
         }()
 
@@ -74,9 +81,10 @@ public class ApplicationFactory {
 
     public lazy var modelLogger: Logger = {
         let logger = Logger(tag: "Model", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.apiFactory.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
-        logger.thresholdLevel = .Warning
         return logger
         }()
 
