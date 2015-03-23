@@ -26,7 +26,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     // MARK:- Injectable
     
     public lazy var accountUserProvider = AccountUserProvider()
-    public lazy var animatedImageView = AnimatedImageView()
+    public lazy var imageViewLazyLoader = ImageViewLazyLoader()
     public lazy var favoriteLocationRepository = Repository<Location>()
     public lazy var oAuth2SessionManager = OAuth2SessionManager()
     public lazy var mainFactory = MainFactory()
@@ -169,7 +169,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
             cell.tag = indexPath.row
             
             let location = favoriteLocationRepository.elements[indexPath.row]
-            animatedImageView.setImage(
+            imageViewLazyLoader.setImage(
                 URLString: location.imageUrl,
                 imageView: cell.backgroundImageView,
                 animated: true

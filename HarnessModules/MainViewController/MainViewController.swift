@@ -25,7 +25,7 @@ public class MainViewController: LifecycleViewController, MenuNavigationControll
         
     public lazy var navigationDrawerViewController: NavigationDrawerViewController = {
         let navigationDrawerViewController = NavigationDrawerViewController()
-        navigationDrawerViewController.statusBarBlockerView.backgroundColor = Color.deepBlueColor
+        navigationDrawerViewController.statusBarBlockerView.backgroundColor = Color.clearColor
         navigationDrawerViewController.replaceLeftViewController(self.menuNavigationController)
         navigationDrawerViewController.replaceCenterViewController(self.mainNavigationController)
         return navigationDrawerViewController

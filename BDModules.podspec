@@ -7,11 +7,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.requires_arc = true
 
-  s.subspec 'AnimatedImageView' do |ss|
-    ss.source_files = 'AnimatedImageView/*.swift'
-    ss.dependency 'SDWebImage'
-  end
-
   s.subspec 'Button' do |ss|
     ss.source_files = 'Button/*.swift'
     ss.dependency 'BDModules/Color'
@@ -123,6 +118,15 @@ Pod::Spec.new do |s|
     ss.subspec 'UserDefaults' do |sss|
       sss.source_files = 'HarnessModules/UserDefaults/*.swift'
     end
+  end
+
+  s.subspec 'ImageBlender' do |ss|
+    ss.source_files = 'ImageBlender/*.swift'
+  end
+
+  s.subspec 'ImageViewLazyLoader' do |ss|
+    ss.source_files = 'ImageViewLazyLoader/*.swift'
+    ss.dependency 'SDWebImage'
   end
   
   s.subspec 'JSON' do |ss|

@@ -1,5 +1,5 @@
 //
-//  AnimatedImageView.swift
+//  ImageViewLazyLoader.swift
 //  BDModules
 //
 //  Created by Patrick Hogan on 1/2/15.
@@ -9,7 +9,7 @@
 import SDWebImage
 import UIKit
 
-public class AnimatedImageView {
+public class ImageViewLazyLoader {
     
     public func setImage(
         #URLString: String?,

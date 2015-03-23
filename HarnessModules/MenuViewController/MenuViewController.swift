@@ -34,7 +34,7 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     // MARK: Injectable
     
     public lazy var accountUserProvider = AccountUserProvider()
-    public lazy var animatedImageView = AnimatedImageView()
+    public lazy var imageViewLazyLoader = ImageViewLazyLoader()
     
     private let rightInset = CGFloat(Layout.navigationDrawerRevealOffset)
     private lazy var defaultTopInset: CGFloat = {
@@ -50,7 +50,6 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     
     private(set) public lazy var tableView: TouchCancelTableView = {
         let tableView = TouchCancelTableView(frame: CGRectZero)
-        tableView.contentInset = UIEdgeInsetsMake(self.defaultTopInset, 0.0, 0.0, 0.0)
         tableView.backgroundColor = Color.clearColor
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.canCancelContentTouches = true
@@ -95,13 +94,20 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         
         profileView.nameLabel.text = accountUserProvider.user.displayName
 
-        animatedImageView.setImage(
+        imageViewLazyLoader.setImage(
+            URLString: accountUserProvider.user.coverImageURL,
+            imageView: profileView.coverImageView,
+            placeholderImage: nil,
+            animated: true
+        )
+
+        imageViewLazyLoader.setImage(
             URLString: accountUserProvider.user.profileImageURL,
             imageView: profileView.profileImageView,
             placeholderImage: nil,
             animated: true
         )
-        
+
     }
     
     // MARK:- Layout
@@ -115,9 +121,20 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
             self.profileViewToTopConstraint = make.top.equalTo(offset)
         }
         
-        profileView.bindBackgroundViewBottomTo(view, offset: -scrollOffset)
+        profileView.bindBackgroundViewBottomTo(view, offset: -self.defaultTopInset - min(0.0, scrollOffset))
 
         super.updateViewConstraints()
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.contentInset = UIEdgeInsetsMake(
+            self.defaultTopInset,
+            0.0,
+            -(defaultTopInset + CGFloat(Row.count - 1) * Layout.shortCellHeight),
+            0.0
+        )
     }
     
     public class func requiresConstraintBasedLayout() -> Bool {
@@ -197,7 +214,7 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     }
 
     private var footerHeight: CGFloat {
-        return tableView.height - (defaultTopInset + CGFloat(Row.count - 1) * Layout.shortCellHeight)
+        return tableView.height
     }
     
     private var scrollOffset: CGFloat {

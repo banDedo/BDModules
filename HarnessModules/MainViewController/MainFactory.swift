@@ -20,16 +20,16 @@ public class MainFactory: NSObject {
     // MARK:- View Controllers
 
     public func favoritesViewController(#delegate: MenuNavigationControllerDelegate) -> FavoritesViewController {
-        let animatedImageView = MockAnimatedImageView()
+        let imageViewLazyLoader = MockImageViewLazyLoader()
         var backgroundImages = [ UIImage ]()
         for i in 0..<10 {
             backgroundImages.append(UIImage(named: "\(i).png")!)
         }
-        animatedImageView.images = backgroundImages
+        imageViewLazyLoader.images = backgroundImages
 
         let favoritesViewController = FavoritesViewController()
         favoritesViewController.accountUserProvider = apiFactory.accountUserProvider
-        favoritesViewController.animatedImageView = animatedImageView
+        favoritesViewController.imageViewLazyLoader = imageViewLazyLoader
         favoritesViewController.favoriteLocationRepository = apiFactory.favoriteLocationRepository(apiFactory.accountUserProvider.user.uuid)
         favoritesViewController.mainFactory = self
         favoritesViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
@@ -58,12 +58,18 @@ public class MainFactory: NSObject {
     }
 
     public func menuViewController(delegate: MenuViewControllerDelegate) -> MenuViewController {
-        let animatedImageView = MockAnimatedImageView()
-        animatedImageView.images = [ UIImage(named: "profile_image.png")! ]
+        let imageViewLazyLoader = MockImageViewLazyLoader()
+        imageViewLazyLoader.images = [
+            ImageBlender().blend(
+                UIImage(named: "cover.png")!,
+                withImage: UIImage(named: "dark_cover_gradient.png")!
+            ),
+            UIImage(named: "profile_image.png")!
+        ]
         
         let menuViewController = MenuViewController()
         menuViewController.accountUserProvider = apiFactory.accountUserProvider
-        menuViewController.animatedImageView = animatedImageView
+        menuViewController.imageViewLazyLoader = imageViewLazyLoader
         menuViewController.delegate = delegate
         return menuViewController
     }
@@ -87,7 +93,8 @@ public class MainFactory: NSObject {
     public func locationManager(#delegate: CLLocationManagerDelegate) -> CLLocationManager {
         let locationManager = self.locationManager
         locationManager.delegate = delegate
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = CLLocationDistance(1000.0)
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         return locationManager
