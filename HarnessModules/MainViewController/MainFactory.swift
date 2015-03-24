@@ -50,7 +50,7 @@ public class MainFactory: NSObject {
         mapViewController.mainFactory = self
         mapViewController.accountUserProvider = apiFactory.accountUserProvider
         mapViewController.locationManager = locationManager(delegate: mapViewController)
-        mapViewController.locationRepository = apiFactory.mapLocationRepository(apiFactory.accountUserProvider.user.uuid)
+        mapViewController.tripServiceClient = apiFactory.tripServiceClient(apiFactory.accountUserProvider.user.uuid)
         mapViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
         mapViewController.userDefaults = apiFactory.userDefaults
         mapViewController.delegate = delegate

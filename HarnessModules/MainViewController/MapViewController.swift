@@ -14,10 +14,10 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- Injectable
     
     public lazy var accountUserProvider = AccountUserProvider()
-    public lazy var locationRepository = Repository<Location>()
     public lazy var oAuth2SessionManager = OAuth2SessionManager()
     public lazy var mainFactory = MainFactory()
     public lazy var locationManager = CLLocationManager()
+    public lazy var tripServiceClient = APIServiceClient<Trip>()
     public lazy var userDefaults = UserDefaults()
     
     weak public var delegate: MenuNavigationControllerDelegate?
@@ -63,27 +63,37 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
             )
         }
         
-        locationRepository.fetch() { [weak self] locations, error in
-            if let strongSelf = self {
-                if error != nil {
-                    let alertController = UIAlertController(
-                        title: "Error",
-                        message: error!.description,
-                        preferredStyle: UIAlertControllerStyle.Alert
-                    )
-                    
-                    alertController.addAction(
-                        UIAlertAction(
-                            title: "OK",
-                            style: UIAlertActionStyle.Cancel) { action in
-                                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+        tripServiceClient.performRequest(
+            method: .GET,
+            path: APIResource.userCurrentTripPath(userUuid: accountUserProvider.user.uuid),
+            parameters: nil) { [weak self] trip, error in
+                if let strongSelf = self {
+                    if error != nil {
+                        let alertController = UIAlertController(
+                            title: "Error",
+                            message: error!.description,
+                            preferredStyle: UIAlertControllerStyle.Alert
+                        )
+                        
+                        alertController.addAction(
+                            UIAlertAction(
+                                title: "OK",
+                                style: UIAlertActionStyle.Cancel) { action in
+                                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                            }
+                        )
+                        
+                        strongSelf.presentViewController(alertController, animated: true, completion: nil)
+                    } else if trip != nil {
+                        for location in [ trip!.startLocation, trip!.endLocation ] {
+                            let annotation = MKPointAnnotation()
+                            annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                            annotation.title = location.title
+                            annotation.subtitle = location.subtitle
+                            strongSelf.mapView.addAnnotation(annotation)
                         }
-                    )
-                    
-                    strongSelf.presentViewController(alertController, animated: true, completion: nil)
+                    }
                 }
-                strongSelf.updateUI()
-            }
         }
         
     }
@@ -91,28 +101,6 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         NavigationBar.addMenuButton(target: self, action: "handleButtonTap:")
-    }
-    
-    // MARK:- UI Update
-    
-    public func updateUI() {
-        switch locationRepository.fetchState {
-        case .NotFetched:
-            break
-        case .Fetching:
-            break
-        case .Fetched:
-            for location in locationRepository.elements {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-                annotation.title = location.title
-                annotation.subtitle = location.subtitle
-                mapView.addAnnotation(annotation)
-            }
-            break
-        case .Error:
-            break
-        }
     }
     
     // MARK:- Action Handlers

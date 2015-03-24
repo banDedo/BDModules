@@ -1,5 +1,5 @@
 //
-//  UserProfile.swift
+//  Profile.swift
 //  BDModules
 //
 //  Created by Patrick Hogan on 12/7/14.
@@ -23,5 +23,6 @@ import Foundation
     var displayName: String { get }
     var profileImageURL: String? { get }
     var coverImageURL: String? { get }
+    var dictionary: NSDictionary { get }
     
 }

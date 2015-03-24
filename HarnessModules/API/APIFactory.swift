@@ -57,14 +57,13 @@ public class APIFactory {
 
     // MARK: - Location
     
-    public func mapLocationRepository(userUuid: String) -> Repository<Location> {
+    public func tripServiceClient(userUuid: String) -> APIServiceClient<Trip> {
         let sessionManager = self.sessionManager()
-        sessionManager.session.configuration.protocolClasses = [ LocationURLProtocol.self ]
+        sessionManager.session.configuration.protocolClasses = [ TripURLProtocol.self ]
 
-        return Repository<Location>(
-            path: APIResource.userLocationsPath(userUuid: userUuid),
+        return APIServiceClient<Trip>(
             accountUserProvider: accountUserProvider,
-            collectionParser: modelFactory.defaultCollectionParser,
+            objectParser: modelFactory.defaultObjectParser,
             sessionManager: sessionManager,
             oAuth2Authorization: oAuth2Authorization
         )
