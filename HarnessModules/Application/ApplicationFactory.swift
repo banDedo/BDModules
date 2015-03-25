@@ -45,7 +45,7 @@ public class ApplicationFactory {
 
         // JSONFactory
         
-        jsonFactory.apiFactory = apiFactory
+        jsonFactory.userDefaults = apiFactory.userDefaults
 
         // EntryFactory
         
@@ -54,8 +54,9 @@ public class ApplicationFactory {
         // MainFactory
         
         mainFactory.apiFactory = apiFactory
-        mainFactory.applicationFactory = self
+        mainFactory.applicationLifecycleLogger = logger
         mainFactory.jsonFactory = jsonFactory
+        mainFactory.modelLogger = modelLogger
 
     }
     

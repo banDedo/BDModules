@@ -14,8 +14,9 @@ public class MainFactory: NSObject {
     // MARK:- Injectable
     
     public lazy var apiFactory = APIFactory()
-    public lazy var applicationFactory = ApplicationFactory()
+    public lazy var applicationLifecycleLogger = Logger()
     public lazy var jsonFactory = JSONFactory()
+    public lazy var modelLogger = Logger()
 
     // MARK:- View Controllers
 
@@ -77,10 +78,10 @@ public class MainFactory: NSObject {
     public func settingsViewController(#delegate: MenuNavigationControllerDelegate) -> SettingsViewController {
         let settingsViewController = SettingsViewController()
         settingsViewController.accountUserProvider = apiFactory.accountUserProvider
-        settingsViewController.applicationLifecycleLogger = applicationFactory.logger
+        settingsViewController.applicationLifecycleLogger = applicationLifecycleLogger
         settingsViewController.apiLogger = apiFactory.logger
         settingsViewController.jsonLogger = jsonFactory.logger
-        settingsViewController.modelLogger = applicationFactory.modelLogger
+        settingsViewController.modelLogger = modelLogger
         settingsViewController.userDefaults = apiFactory.userDefaults
         settingsViewController.delegate = delegate
         return settingsViewController

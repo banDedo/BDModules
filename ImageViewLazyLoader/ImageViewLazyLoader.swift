@@ -27,7 +27,7 @@ public class ImageViewLazyLoader {
                             duration: UIView.defaultAnimationDuration(),
                             options: UIViewAnimationOptions.TransitionCrossDissolve,
                             animations: {
-                                strongImageView.image = ((image != nil && image!.data.length != 0) ? image : placeholderImage)
+                                strongImageView.image = image ?? placeholderImage
                                 return
                             }) { [weak imageView] finished in
                                 if let strongImageView = imageView {

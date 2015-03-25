@@ -30,9 +30,9 @@ class OAuth2AuthorizationTests: XCTestCase {
         mockSessionManager = MockOAuth2SessionManager()
         
         oAuth2Authorization = OAuth2Authorization(
-            accountUserProvider: mockAccountUserProvider,
             jsonSerializer: JSONSerializer(),
-            oAuth2SessionManager: mockSessionManager
+            oAuth2SessionManager: mockSessionManager,
+            oAuth2CredentialHandler: { self.mockAccountUserProvider.oAuth2Credential }
         )
         
     }

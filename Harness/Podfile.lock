@@ -6,173 +6,217 @@ PODS:
   - AFNetworking/Reachability (2.5.1)
   - AFNetworking/Security (2.5.1)
   - AFNetworking/Serialization (2.5.1)
-  - BDModules (0.0.1):
-    - BDModules/BlurView (= 0.0.1)
-    - BDModules/Button (= 0.0.1)
-    - BDModules/Collection (= 0.0.1)
-    - BDModules/Color (= 0.0.1)
-    - BDModules/ContainerViewController (= 0.0.1)
-    - BDModules/HarnessModules (= 0.0.1)
-    - BDModules/ImageBlender (= 0.0.1)
-    - BDModules/ImageViewLazyLoader (= 0.0.1)
-    - BDModules/JSON (= 0.0.1)
-    - BDModules/Keyboard (= 0.0.1)
-    - BDModules/LifecycleViewController (= 0.0.1)
-    - BDModules/Loading (= 0.0.1)
-    - BDModules/Logging (= 0.0.1)
-    - BDModules/Model (= 0.0.1)
-    - BDModules/NavigationDrawerViewController (= 0.0.1)
-    - BDModules/Networking (= 0.0.1)
-    - BDModules/Pointers (= 0.0.1)
-    - BDModules/ViewAnimations (= 0.0.1)
-    - BDModules/ViewGeometry (= 0.0.1)
-  - BDModules/BlurView (0.0.1)
-  - BDModules/Button (0.0.1):
-    - BDModules/Color
-  - BDModules/Collection (0.0.1)
-  - BDModules/Color (0.0.1)
-  - BDModules/ContainerViewController (0.0.1):
+  - BDModules (0.0.2):
+    - BDModules/BlurView (= 0.0.2)
+    - BDModules/Button (= 0.0.2)
+    - BDModules/Collection (= 0.0.2)
+    - BDModules/Color (= 0.0.2)
+    - BDModules/ContainerViewController (= 0.0.2)
+    - BDModules/HarnessModules (= 0.0.2)
+    - BDModules/ImageBlender (= 0.0.2)
+    - BDModules/ImageViewLazyLoader (= 0.0.2)
+    - BDModules/JSON (= 0.0.2)
+    - BDModules/Keyboard (= 0.0.2)
+    - BDModules/LifecycleViewController (= 0.0.2)
+    - BDModules/Loading (= 0.0.2)
+    - BDModules/Logging (= 0.0.2)
+    - BDModules/Model (= 0.0.2)
+    - BDModules/NavigationDrawerViewController (= 0.0.2)
+    - BDModules/Networking (= 0.0.2)
+    - BDModules/Pointers (= 0.0.2)
+    - BDModules/ScrollViewParallax (= 0.0.2)
+    - BDModules/ViewAnimations (= 0.0.2)
+    - BDModules/ViewGeometry (= 0.0.2)
+  - BDModules/BlurView (0.0.2):
     - Snap
-  - BDModules/HarnessModules (0.0.1):
-    - BDModules/HarnessModules/AccountUser (= 0.0.1)
-    - BDModules/HarnessModules/API (= 0.0.1)
-    - BDModules/HarnessModules/Application (= 0.0.1)
-    - BDModules/HarnessModules/Color (= 0.0.1)
-    - BDModules/HarnessModules/EntryViewController (= 0.0.1)
-    - BDModules/HarnessModules/Font (= 0.0.1)
-    - BDModules/HarnessModules/JSON (= 0.0.1)
-    - BDModules/HarnessModules/Layout (= 0.0.1)
-    - BDModules/HarnessModules/MainViewController (= 0.0.1)
-    - BDModules/HarnessModules/MenuViewController (= 0.0.1)
-    - BDModules/HarnessModules/Model (= 0.0.1)
-    - BDModules/HarnessModules/NavigationController (= 0.0.1)
-    - BDModules/HarnessModules/RootViewController (= 0.0.1)
-    - BDModules/HarnessModules/UserDefaults (= 0.0.1)
+  - BDModules/Button (0.0.2):
+    - BDModules/Color
+  - BDModules/Collection (0.0.2)
+  - BDModules/Color (0.0.2)
+  - BDModules/ContainerViewController (0.0.2):
+    - BDModules/ViewAnimations
+    - Snap
+  - BDModules/HarnessModules (0.0.2):
+    - BDModules/HarnessModules/AccountUser (= 0.0.2)
+    - BDModules/HarnessModules/API (= 0.0.2)
+    - BDModules/HarnessModules/Application (= 0.0.2)
+    - BDModules/HarnessModules/Color (= 0.0.2)
+    - BDModules/HarnessModules/EntryViewController (= 0.0.2)
+    - BDModules/HarnessModules/Font (= 0.0.2)
+    - BDModules/HarnessModules/JSON (= 0.0.2)
+    - BDModules/HarnessModules/Layout (= 0.0.2)
+    - BDModules/HarnessModules/MainViewController (= 0.0.2)
+    - BDModules/HarnessModules/MenuViewController (= 0.0.2)
+    - BDModules/HarnessModules/Model (= 0.0.2)
+    - BDModules/HarnessModules/NavigationController (= 0.0.2)
+    - BDModules/HarnessModules/RootViewController (= 0.0.2)
+    - BDModules/HarnessModules/UserDefaults (= 0.0.2)
     - BDModules/Model
-  - BDModules/HarnessModules/AccountUser (0.0.1):
+  - BDModules/HarnessModules/AccountUser (0.0.2):
+    - BDModules/HarnessModules/Model
     - BDModules/JSON
     - BDModules/Model
+    - BDModules/Networking/OAuth2
     - FXKeychain
-  - BDModules/HarnessModules/API (0.0.1):
+  - BDModules/HarnessModules/API (0.0.2):
+    - BDModules/HarnessModules/AccountUser
+    - BDModules/HarnessModules/Model
+    - BDModules/HarnessModules/UserDefaults
     - BDModules/Model
     - BDModules/Networking
-  - BDModules/HarnessModules/Application (0.0.1):
+    - FXKeychain
+  - BDModules/HarnessModules/Application (0.0.2):
     - BDModules/HarnessModules/API
     - BDModules/HarnessModules/JSON
     - BDModules/HarnessModules/Model
     - BDModules/HarnessModules/RootViewController
+    - BDModules/LifecycleViewController
     - BDModules/Model
     - FXKeychain
-  - BDModules/HarnessModules/Color (0.0.1):
+  - BDModules/HarnessModules/Color (0.0.2):
     - BDModules/Model
-  - BDModules/HarnessModules/EntryViewController (0.0.1):
+  - BDModules/HarnessModules/EntryViewController (0.0.2):
     - BDModules/Button
+    - BDModules/ContainerViewController
+    - BDModules/HarnessModules/AccountUser
     - BDModules/HarnessModules/API
-    - BDModules/HarnessModules/Model
-    - BDModules/Model
-    - Snap
-  - BDModules/HarnessModules/Font (0.0.1):
-    - BDModules/Model
-  - BDModules/HarnessModules/JSON (0.0.1):
-    - BDModules/JSON
-    - BDModules/Model
-  - BDModules/HarnessModules/Layout (0.0.1):
-    - BDModules/Model
-  - BDModules/HarnessModules/MainViewController (0.0.1):
-    - BDModules/Button
-    - BDModules/HarnessModules/API
-    - BDModules/HarnessModules/Model
-    - BDModules/Model
-    - Snap
-  - BDModules/HarnessModules/MenuViewController (0.0.1):
     - BDModules/HarnessModules/Color
+    - BDModules/HarnessModules/Font
+    - BDModules/HarnessModules/Layout
+    - BDModules/HarnessModules/Model
+    - BDModules/HarnessModules/NavigationController
+    - BDModules/LifecycleViewController
     - BDModules/Model
+    - BDModules/ViewGeometry
     - Snap
-  - BDModules/HarnessModules/Model (0.0.1):
+  - BDModules/HarnessModules/Font (0.0.2):
+    - BDModules/Model
+  - BDModules/HarnessModules/JSON (0.0.2):
+    - BDModules/HarnessModules/UserDefaults
+    - BDModules/JSON
     - BDModules/Logging
     - BDModules/Model
-  - BDModules/HarnessModules/NavigationController (0.0.1):
-    - BDModules/HarnessModules/Color
+  - BDModules/HarnessModules/Layout (0.0.2):
     - BDModules/Model
-  - BDModules/HarnessModules/RootViewController (0.0.1):
+  - BDModules/HarnessModules/MainViewController (0.0.2):
+    - BDModules/BlurView
+    - BDModules/Button
+    - BDModules/ContainerViewController
+    - BDModules/HarnessModules/AccountUser
     - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/Color
+    - BDModules/HarnessModules/Font
+    - BDModules/HarnessModules/JSON
+    - BDModules/HarnessModules/Layout
+    - BDModules/HarnessModules/MenuViewController
+    - BDModules/HarnessModules/Model
+    - BDModules/HarnessModules/NavigationController
+    - BDModules/HarnessModules/UserDefaults
+    - BDModules/ImageBlender
+    - BDModules/ImageViewLazyLoader
+    - BDModules/LifecycleViewController
+    - BDModules/Loading
+    - BDModules/Model
+    - BDModules/NavigationDrawerViewController
+    - BDModules/ViewGeometry
+    - Snap
+  - BDModules/HarnessModules/MenuViewController (0.0.2):
+    - BDModules/Button
+    - BDModules/HarnessModules/AccountUser
+    - BDModules/HarnessModules/Color
+    - BDModules/HarnessModules/Font
+    - BDModules/HarnessModules/Layout
+    - BDModules/ImageViewLazyLoader
+    - BDModules/LifecycleViewController
+    - BDModules/Model
+    - BDModules/ViewGeometry
+    - Snap
+  - BDModules/HarnessModules/Model (0.0.2):
+    - BDModules/Logging
+    - BDModules/Model
+  - BDModules/HarnessModules/NavigationController (0.0.2):
+    - BDModules/Color
+    - BDModules/HarnessModules/Color
+    - BDModules/HarnessModules/Font
+    - BDModules/HarnessModules/Layout
+    - BDModules/Model
+  - BDModules/HarnessModules/RootViewController (0.0.2):
+    - BDModules/ContainerViewController
+    - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/EntryViewController
+    - BDModules/HarnessModules/MainViewController
+    - BDModules/HarnessModules/MenuViewController
     - BDModules/HarnessModules/Model
     - BDModules/Model
     - Snap
-  - BDModules/HarnessModules/UserDefaults (0.0.1):
+  - BDModules/HarnessModules/UserDefaults (0.0.2):
+    - BDModules/Logging
     - BDModules/Model
-  - BDModules/ImageBlender (0.0.1)
-  - BDModules/ImageViewLazyLoader (0.0.1):
+  - BDModules/ImageBlender (0.0.2)
+  - BDModules/ImageViewLazyLoader (0.0.2):
+    - BDModules/ViewAnimations
     - SDWebImage
-  - BDModules/JSON (0.0.1)
-  - BDModules/Keyboard (0.0.1)
-  - BDModules/LifecycleViewController (0.0.1)
-  - BDModules/Loading (0.0.1):
+  - BDModules/JSON (0.0.2)
+  - BDModules/Keyboard (0.0.2)
+  - BDModules/LifecycleViewController (0.0.2)
+  - BDModules/Loading (0.0.2):
+    - BDModules/HarnessModules/Color
     - Snap
-  - BDModules/Logging (0.0.1)
-  - BDModules/Model (0.0.1):
+  - BDModules/Logging (0.0.2)
+  - BDModules/Model (0.0.2):
     - BDModules/JSON
-  - BDModules/NavigationDrawerViewController (0.0.1):
-    - Snap
-  - BDModules/Networking (0.0.1):
-    - AFNetworking/NSURLSession
-    - BDModules/JSON
-    - BDModules/Logging
-    - BDModules/Networking/APIServiceClient (= 0.0.1)
-    - BDModules/Networking/OAuth2 (= 0.0.1)
     - BDModules/Pointers
-  - BDModules/Networking/APIServiceClient (0.0.1):
-    - AFNetworking/NSURLSession
-    - BDModules/JSON
-    - BDModules/Logging
+  - BDModules/NavigationDrawerViewController (0.0.2):
+    - BDModules/LifecycleViewController
+    - BDModules/ViewAnimations
+    - Snap
+  - BDModules/Networking (0.0.2):
+    - BDModules/Networking/APIServiceClient (= 0.0.2)
+    - BDModules/Networking/Core (= 0.0.2)
+    - BDModules/Networking/OAuth2 (= 0.0.2)
+    - BDModules/Networking/Repository (= 0.0.2)
+  - BDModules/Networking/APIServiceClient (0.0.2):
     - BDModules/Model
-    - BDModules/Networking/APIServiceClient/Repository (= 0.0.1)
-    - BDModules/Pointers
-  - BDModules/Networking/APIServiceClient/Repository (0.0.1):
+    - BDModules/Networking/Core
+    - BDModules/Networking/OAuth2
+  - BDModules/Networking/Core (0.0.2):
     - AFNetworking/NSURLSession
+    - BDModules/JSON
+    - BDModules/Logging
+    - BDModules/Pointers
+  - BDModules/Networking/OAuth2 (0.0.2):
+    - BDModules/Networking/Core
+  - BDModules/Networking/Repository (0.0.2):
     - BDModules/Collection
-    - BDModules/JSON
-    - BDModules/Logging
     - BDModules/Model
-    - BDModules/Pointers
-  - BDModules/Networking/OAuth2 (0.0.1):
-    - AFNetworking/NSURLSession
-    - BDModules/JSON
-    - BDModules/Logging
-    - BDModules/Pointers
-  - BDModules/Pointers (0.0.1)
-  - BDModules/ViewAnimations (0.0.1)
-  - BDModules/ViewGeometry (0.0.1)
+    - BDModules/Networking/Core
+    - BDModules/Networking/OAuth2
+  - BDModules/Pointers (0.0.2)
+  - BDModules/ScrollViewParallax (0.0.2)
+  - BDModules/ViewAnimations (0.0.2)
+  - BDModules/ViewGeometry (0.0.2)
   - FXKeychain (1.5.2)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
-  - Snap (0.0.6)
+  - Snap (0.9.2)
 
 DEPENDENCIES:
   - AFNetworking/NSURLSession (~> 2.5.0)
   - BDModules (from `../`)
   - FXKeychain (~> 1.5.2)
   - SDWebImage (~> 3.7.2)
-  - Snap (from `https://github.com/Masonry/Snap.git`, commit `4158cf0d9980d6b666f7736242423ac473c96800`)
+  - Snap (~> 0.9.2)
 
 EXTERNAL SOURCES:
   BDModules:
     :path: ../
-  Snap:
-    :commit: 4158cf0d9980d6b666f7736242423ac473c96800
-    :git: https://github.com/Masonry/Snap.git
-
-CHECKOUT OPTIONS:
-  Snap:
-    :commit: 4158cf0d9980d6b666f7736242423ac473c96800
-    :git: https://github.com/Masonry/Snap.git
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDModules: 83350301e33312fa060b8391fb260b589080e10f
+  BDModules: 43446bb54db95e986ac87b684858e29f2ad8fd24
   FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  Snap: c691705e45df9cae55cebedde52013683588db52
+  Snap: 7318f07bc3d43adb0706f36ede18fa18d2347037
 
 COCOAPODS: 0.36.0

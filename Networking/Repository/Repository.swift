@@ -71,13 +71,13 @@ public class Repository<T: ModelObject>: Hashable {
         options: [ String: AnyObject ] = [ String: AnyObject ](),
         orderingType: OrderingType = .None,
         pagingMode: PagingMode = .Standard,
-        accountUserProvider: AccountUserProvider,
+        authHeaderHandler: Void -> String?,
         collectionParser: (NSDictionary -> [ ModelObject ]),
         sessionManager: APISessionManager,
         oAuth2Authorization: OAuth2Authorization) {
             self.path = path
             self.options = options
-            self.accountUserProvider = accountUserProvider
+            self.authHeaderHandler = authHeaderHandler
             self.collectionParser = collectionParser
             self.oAuth2Authorization = oAuth2Authorization
             self.sessionManager = sessionManager
@@ -132,11 +132,6 @@ public class Repository<T: ModelObject>: Hashable {
                         
             let updatedParameters = requestParameters(parameters)
             
-            var headers: [ String: String ]?
-            if let bearerHeader = accountUserProvider.bearerHeader() {
-                headers = [ "Authorization": bearerHeader ]
-            }
-            
             performRequest(
                 parameters: updatedParameters,
                 handler: { [weak self] urlSessionDataTask, responseObject, error in
@@ -175,7 +170,7 @@ public class Repository<T: ModelObject>: Hashable {
         handler: URLSessionDataTaskHandler) {
             
             var headers: [ String: String ]?
-            if let bearerHeader = accountUserProvider.bearerHeader() {
+            if let bearerHeader = authHeaderHandler() {
                 headers = [ "Authorization": bearerHeader ]
             }
             
@@ -273,7 +268,7 @@ public class Repository<T: ModelObject>: Hashable {
     
     // MARK:- Private
 
-    private let accountUserProvider: AccountUserProvider
+    private let authHeaderHandler: Void -> String?
     private let collectionParser: (NSDictionary -> [ ModelObject ])
     private let oAuth2Authorization: OAuth2Authorization
     private let sessionManager: APISessionManager

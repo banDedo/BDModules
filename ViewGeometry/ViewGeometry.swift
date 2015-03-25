@@ -8,9 +8,9 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
 
-    var x: CGFloat {
+    public var x: CGFloat {
         get {
             return CGRectGetMinX(frame);
         }
@@ -21,7 +21,7 @@ extension UIView {
         }
     }
 
-    var y: CGFloat {
+    public var y: CGFloat {
         get {
             return CGRectGetMinY(frame);
         }
@@ -32,7 +32,7 @@ extension UIView {
         }
     }
     
-    var origin: CGPoint {
+    public var origin: CGPoint {
         get {
             return CGPointMake(x, y)
         }
@@ -42,19 +42,19 @@ extension UIView {
         }
     }
 
-    var size: CGSize {
+    public var size: CGSize {
         get {
             return CGSizeMake(width, height)
         }
     }
 
-    var width: CGFloat {
+    public var width: CGFloat {
         get {
             return CGRectGetWidth(frame);
         }
     }
 
-    var height: CGFloat {
+    public var height: CGFloat {
         get {
             return CGRectGetHeight(frame);
         }

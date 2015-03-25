@@ -9,7 +9,7 @@
 import Snap
 import UIKit
 
-public let kNavigationDrawerDefaultRevealOffset = CGFloat(50.0)
+private let kNavigationDrawerDefaultRevealOffset = CGFloat(50.0)
 
 public class NavigationDrawerViewController: LifecycleViewController, UIGestureRecognizerDelegate {
 
