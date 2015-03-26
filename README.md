@@ -109,7 +109,7 @@ public class ApplicationFactory {
         return rootViewController
     }
 
-    // MARK:- Initialization
+    // MARK:- Constructor
 
     public init() {
 
@@ -117,13 +117,16 @@ public class ApplicationFactory {
         
         modelFactory.jsonSerializer = jsonFactory.jsonSerializer
         modelFactory.logError = log(modelLogger, .Error)
-        modelFactory.objectMapperPair = self.dynamicType.objectMapperPair(modelFactory)
+        modelFactory.objectMapperPair = ModelFactoryMapper.objectMapperPair(modelFactory)
 
         // APIFactory
         
         apiFactory.jsonSerializer = jsonFactory.jsonSerializer
         apiFactory.modelFactory = modelFactory
-        apiFactory.configureOAuth2Properties()
+
+        // JSONFactory
+        
+        jsonFactory.apiFactory = apiFactory
 
         // EntryFactory
         
@@ -132,6 +135,8 @@ public class ApplicationFactory {
         // MainFactory
         
         mainFactory.apiFactory = apiFactory
+        mainFactory.applicationFactory = self
+        mainFactory.jsonFactory = jsonFactory
 
     }
     
@@ -144,47 +149,25 @@ public class ApplicationFactory {
 
     // MARK:- Application
     
-    lazy public var logger: Logger = {
+    public lazy var logger: Logger = {
         let logger = Logger(tag: "Application Lifecycle", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.apiFactory.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
-        logger.thresholdLevel = .Verbose
         return logger
         }()
-        
+
     // MARK:- ModelFactory
 
-    lazy public var modelLogger: Logger = {
+    public lazy var modelLogger: Logger = {
         let logger = Logger(tag: "Model", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.apiFactory.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
-        logger.thresholdLevel = .Warning
         return logger
         }()
-
-    class func objectMapperPair(modelFactory: ModelFactory) -> (String, NSDictionary) -> (ValueObject, ValueObjectAPIMapper) {
-        return { type, dictionary in
-            var object: ValueObject
-            var mapper: ValueObjectAPIMapper
-            
-            switch (ObjectType(rawValue: type)!) {
-            case .User:
-                object = User(dictionary: dictionary)
-                mapper = UserAPIMapper(delegate: modelFactory)
-                break
-            case .Location:
-                object = Location(dictionary: dictionary)
-                mapper = LocationAPIMapper(delegate: modelFactory)
-            }
-            
-            return (object, mapper)
-        }
-    }
-    
-    private enum ObjectType: String {
-        case User = "User"
-        case Location = "Location"
-    }
 
 }
 ```
@@ -689,37 +672,50 @@ We see an example of its use in `MapViewController` class:
 ```swift
 // MARK:- View lifecycle
     
-override public func viewDidLoad() {
+public override func viewDidLoad() {
     super.viewDidLoad()
-   
-    view.backgroundColor = UIColor.whiteColor()
-   
+    
+    title = "On Trip"
+    
     view.addSubview(mapView)
-   
+            
     mapView.snp_makeConstraints { make in
         make.edges.equalTo(UIEdgeInsetsZero)
     }
-   
-    locationRepository.fetchNextPage() { [weak self] locations, error in
+    
+    if let location = userDefaults.lastUserLocation {
+        zoomToCoordinate(
+            CLLocationCoordinate2DMake(
+                location[kUserDefaultsLastUserLocationLatitudeKey] as! CLLocationDegrees,
+                location[kUserDefaultsLastUserLocationLongitudeKey] as! CLLocationDegrees
+            ),
+            animated: false
+        )
+    }
+    
+    locationRepository.fetch() { [weak self] locations, error in
         if let strongSelf = self {
             if error != nil {
                 let alertController = UIAlertController(
                     title: "Error",
                     message: error!.description,
-                    preferredStyle: UIAlertControllerStyle.Alert)
+                    preferredStyle: UIAlertControllerStyle.Alert
+                )
                 
                 alertController.addAction(
-                    UIAlertAction(title: "OK",
+                    UIAlertAction(
+                        title: "OK",
                         style: UIAlertActionStyle.Cancel) { action in
-                            strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                             strongSelf.dismissViewControllerAnimated(true, completion: nil)
                     }
                 )
-               
+                
                 strongSelf.presentViewController(alertController, animated: true, completion: nil)
             }
             strongSelf.updateUI()
         }
     }
+   
 }
 ```
 On successful completion of the fetch request, we switch off of the state of the repository and iterate through its parsed `ModelObject` elements to update the UI.

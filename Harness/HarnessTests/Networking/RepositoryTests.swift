@@ -39,9 +39,9 @@ class RepositoryTests: XCTestCase {
         
         mockOAuth2SessionManager = MockOAuth2SessionManager()
         mockOAuth2Authorization = MockOAuth2Authorization(
-            accountUserProvider: mockAccountUserProvider,
             jsonSerializer: JSONSerializer(),
-            oAuth2SessionManager: mockOAuth2SessionManager
+            oAuth2SessionManager: mockOAuth2SessionManager,
+            oAuth2CredentialHandler: { self.mockAccountUserProvider.oAuth2Credential }
         )
         
 
@@ -50,7 +50,7 @@ class RepositoryTests: XCTestCase {
             options: options,
             orderingType: orderingType,
             pagingMode: pagingMode,
-            accountUserProvider: mockAccountUserProvider,
+            authHeaderHandler: { self.mockAccountUserProvider.bearerHeader() },
             collectionParser: mockModelFactory.defaultCollectionParser,
             sessionManager: mockSessionManager,
             oAuth2Authorization: mockOAuth2Authorization
@@ -81,7 +81,7 @@ class RepositoryTests: XCTestCase {
         mockSessionManager.error = NSError()
         
         var isSecondHandlerCalled = false
-        repository.fetchNextPage { newElements, error in
+        repository.fetch { newElements, error in
             XCTAssertEqual(self.repository.fetchState, .Error)
             XCTAssertEqual(self.repository.elementCount, 0)
             XCTAssertEqual(error!, self.mockSessionManager.error!)
@@ -91,7 +91,7 @@ class RepositoryTests: XCTestCase {
             self.mockSessionManager.responseObject = self.responseObject([ (uuid, pagingId) ], count: 1, total: 2)
             self.mockSessionManager.error = nil
             
-            self.repository.fetchNextPage() { newElements, error in
+            self.repository.fetch() { newElements, error in
                 isSecondHandlerCalled = true
                 XCTAssertEqual(self.repository.fetchState, .Fetched)
                 XCTAssertEqual(self.repository.elementCount, 1)
@@ -107,13 +107,13 @@ class RepositoryTests: XCTestCase {
         mockSessionManager.responseObject = responseObject([ ("123", "abc") ], count: 1, total: 1)
         
         var isSecondHandlerCalled = false
-        repository.fetchNextPage { newElements, error in
+        repository.fetch { newElements, error in
             XCTAssertEqual(self.repository.fetchState, .Fetched)
             XCTAssertEqual(self.repository.elementCount, 1)
             XCTAssertTrue(self.repository.atEnd)
             XCTAssertNil(error)
 
-            self.repository.fetchNextPage() { newElements, error in
+            self.repository.fetch() { newElements, error in
                 isSecondHandlerCalled = true
             }
         }
@@ -127,7 +127,7 @@ class RepositoryTests: XCTestCase {
             options: options,
             orderingType: orderingType,
             pagingMode: pagingMode,
-            accountUserProvider: mockAccountUserProvider,
+            authHeaderHandler: { self.mockAccountUserProvider.bearerHeader() },
             collectionParser: mockModelFactory.defaultCollectionParser,
             sessionManager: mockSessionManager,
             oAuth2Authorization: mockOAuth2Authorization
@@ -141,14 +141,14 @@ class RepositoryTests: XCTestCase {
         mockSessionManager.responseObject = responseObject([ (firstUuid, firstPagingId), (secondUuid, secondPagingId) ], count: 2, total: 3)
         
         var isSecondHandlerCalled = false
-        repository.fetchNextPage { newElements, error in
+        repository.fetch { newElements, error in
             
             let thirdUuid = "789"
             let thirdPagingId = "ghi"
             // Purposely add second uuid again.  Underlying set implementation should not append again
             self.mockSessionManager.responseObject = self.responseObject([ (secondUuid, secondPagingId), (thirdUuid, thirdPagingId) ], count: 3, total: 3)
             
-            self.repository.fetchNextPage() { newElements, error in
+            self.repository.fetch() { newElements, error in
                 
                 XCTAssertEqual(self.repository.fetchState, .Fetched)
                 XCTAssertEqual(self.repository.elementCount, 3)

@@ -28,6 +28,8 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
 
+        NavigationBar.configure()
+        
         appLifecycleLogger.logVerbose("Application did finish launching")
 
         return true

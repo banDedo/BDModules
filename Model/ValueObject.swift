@@ -34,7 +34,7 @@ public class ValueObject: NSObject, NSCoding, Equatable {
 
     // MARK:- NSCoding
     
-    public required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         dictionary = aDecoder.decodeObjectForKey(kValueObjectDictionaryKey) as! NSMutableDictionary
         super.init()
     }

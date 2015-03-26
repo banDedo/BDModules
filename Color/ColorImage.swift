@@ -8,9 +8,9 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     
-    func image(size: CGSize = CGSizeMake(1, 1)) -> UIImage {
+    public func image(size: CGSize = CGSizeMake(1, 1)) -> UIImage {
         UIGraphicsBeginImageContext(size)
         let currentContext = UIGraphicsGetCurrentContext()
         

@@ -40,13 +40,13 @@ class APIServiceClientTests: XCTestCase {
         
         mockOAuth2SessionManager = MockOAuth2SessionManager()
         mockOAuth2Authorization = MockOAuth2Authorization(
-            accountUserProvider: mockAccountUserProvider,
             jsonSerializer: JSONSerializer(),
-            oAuth2SessionManager: mockOAuth2SessionManager
+            oAuth2SessionManager: mockOAuth2SessionManager,
+            oAuth2CredentialHandler: { self.mockAccountUserProvider.oAuth2Credential }
         )
         
         serviceClient = APIServiceClient(
-            accountUserProvider: mockAccountUserProvider,
+            authHeaderHandler: { self.mockAccountUserProvider.bearerHeader() },
             objectParser: mockModelFactory.defaultObjectParser,
             sessionManager: mockSessionManager,
             oAuth2Authorization: mockOAuth2Authorization

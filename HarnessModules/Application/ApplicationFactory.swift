@@ -42,7 +42,10 @@ public class ApplicationFactory {
         
         apiFactory.jsonSerializer = jsonFactory.jsonSerializer
         apiFactory.modelFactory = modelFactory
-        apiFactory.configureOAuth2Properties()
+
+        // JSONFactory
+        
+        jsonFactory.userDefaults = apiFactory.userDefaults
 
         // EntryFactory
         
@@ -51,6 +54,9 @@ public class ApplicationFactory {
         // MainFactory
         
         mainFactory.apiFactory = apiFactory
+        mainFactory.applicationLifecycleLogger = logger
+        mainFactory.jsonFactory = jsonFactory
+        mainFactory.modelLogger = modelLogger
 
     }
     
@@ -65,19 +71,21 @@ public class ApplicationFactory {
     
     public lazy var logger: Logger = {
         let logger = Logger(tag: "Application Lifecycle", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.apiFactory.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
-        logger.thresholdLevel = .Verbose
         return logger
         }()
-        
+
     // MARK:- ModelFactory
 
     public lazy var modelLogger: Logger = {
         let logger = Logger(tag: "Model", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.apiFactory.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
-        logger.thresholdLevel = .Warning
         return logger
         }()
 

@@ -36,6 +36,12 @@ public class EntryViewController: LifecycleViewController, LandingViewController
         replaceRootViewController(entryNavigationController)
     }
     
+    // MARK:- Status bar
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return entryNavigationController.preferredStatusBarStyle()
+    }
+
     // MARK:- LandingViewControllerDelegate
     
     public func landingViewControllerDidLogin(landingViewController: LandingViewController) {

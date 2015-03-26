@@ -1,0 +1,50 @@
+{
+    "data": [
+        {
+            "type": "Location",
+            "id": "g1476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Mission Street",
+            "subtitle": "San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "f6476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Mission District",
+            "subtitle": "San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "a2476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Mission Beach Cafe",
+            "subtitle": "Guerrero Street, San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "d4476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Mission Bay",
+            "subtitle": "San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        },
+        {
+            "type": "Location",
+            "id": "g5476de8-be3c-11e4-a0c5-3b35f901588d",
+            "title": "Mission Cliffs",
+            "subtitle": "Harrison Street, San Francisco, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526
+        }
+    ],
+    "info": {
+        "offset": 5,
+        "count": 10,
+        "total": 10
+    },
+    "code": "OK"
+}

@@ -12,6 +12,7 @@ public enum APIResource: String {
    
     case Users = "/users"
     case Locations = "/locations"
+    case Trips = "/trips"
 
     // MARK: - Paths
 
@@ -22,7 +23,7 @@ public enum APIResource: String {
     public func path(#uuid: String) -> String {
         return "\(rawValue)/\(uuid)"
     }
-    
+
     public static func userLocationsPath(
         #userUuid: String,
         locationUuid: String? = nil) -> String {
@@ -31,6 +32,21 @@ public enum APIResource: String {
                 resourceType: .Locations,
                 uuid: locationUuid
             )
+    }
+
+    public static func userTripsPath(
+        #userUuid: String,
+        tripUuid: String? = nil) -> String {
+            return resourcePath(
+                base: self.Users.path(uuid: userUuid),
+                resourceType: .Trips,
+                uuid: tripUuid
+            )
+    }
+
+    public static func userCurrentTripPath(
+        #userUuid: String) -> String {
+            return userTripsPath(userUuid: userUuid).stringByAppendingPathComponent("/current")
     }
 
     // MARK: - Private path

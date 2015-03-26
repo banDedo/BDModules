@@ -40,13 +40,13 @@ public class RootViewController: LifecycleViewController, EntryViewControllerDel
     
     // MARK:- Child view controllers
     
-    public func presentEntryController() {
+    public func presentEntryController(animated: Bool = false) {
         logoutAccountUser()
-        replaceRootViewController(entryFactory.entryViewController(delegate: self))
+        replaceRootViewController(entryFactory.entryViewController(delegate: self), animated: animated)
     }
     
-    public func presentMainViewController() {
-        replaceRootViewController(mainFactory.mainViewController(delegate: self))
+    public func presentMainViewController(animated: Bool = false) {
+        replaceRootViewController(mainFactory.mainViewController(delegate: self), animated: animated)
     }
     
     // MARK:- Status Bar Style
@@ -77,13 +77,13 @@ public class RootViewController: LifecycleViewController, EntryViewControllerDel
     // MARK:- LoginViewControllerDelegate
         
     public func entryViewControllerDidLogin(entryViewController: EntryViewController) {
-        presentMainViewController()
+        presentMainViewController(animated: true)
     }
     
     // MARK:- MainViewControllerDelegate
     
     public func mainViewControllerDidLogout(mainViewController: MainViewController) {
-        presentEntryController()
+        presentEntryController(animated: true)
     }
     
 }

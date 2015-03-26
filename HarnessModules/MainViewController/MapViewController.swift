@@ -9,23 +9,22 @@
 import MapKit
 import UIKit
 
-@objc public protocol MapViewControllerDelegate {
-    func mapViewControllerDidLogout(mapViewController: MapViewController)
-}
-
 public class MapViewController: LifecycleViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     // MARK:- Injectable
     
     public lazy var accountUserProvider = AccountUserProvider()
-    public lazy var locationRepository = Repository<Location>()
     public lazy var oAuth2SessionManager = OAuth2SessionManager()
     public lazy var mainFactory = MainFactory()
     public lazy var locationManager = CLLocationManager()
+    public lazy var tripServiceClient = APIServiceClient<Trip>()
+    public lazy var userDefaults = UserDefaults()
     
-    weak public var delegate: MapViewControllerDelegate?
+    weak public var delegate: MenuNavigationControllerDelegate?
     
     // MARK:- Properties
+    
+    private var lastUpdate = CFTimeInterval(0.0)
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView(frame: CGRectZero)
@@ -34,83 +33,93 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
         return mapView
         }()
     
-    private lazy var logoutButton: UIBarButtonItem = {
-        return UIBarButtonItem(
-            title: "Logout",
-            style: UIBarButtonItemStyle.Plain,
-            target: self,
-            action: "handleButtonTap:")
-        }()
+    // MARK:- Cleanup
     
+    deinit {
+        locationManager.delegate = nil
+        mapView.delegate = nil
+    }
+
     // MARK:- View lifecycle
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        title = "On Trip"
         
         view.addSubview(mapView)
-        
+                
         mapView.snp_makeConstraints { make in
             make.edges.equalTo(UIEdgeInsetsZero)
         }
         
-        locationRepository.fetchNextPage() { [weak self] locations, error in
-            if let strongSelf = self {
-                if error != nil {
-                    let alertController = UIAlertController(
-                        title: "Error",
-                        message: error!.description,
-                        preferredStyle: UIAlertControllerStyle.Alert)
-                    
-                    alertController.addAction(
-                        UIAlertAction(title: "OK",
-                            style: UIAlertActionStyle.Cancel) { action in
-                                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+        if let location = userDefaults.lastUserLocation {
+            zoomToCoordinate(
+                CLLocationCoordinate2DMake(
+                    location[kUserDefaultsLastUserLocationLatitudeKey] as! CLLocationDegrees,
+                    location[kUserDefaultsLastUserLocationLongitudeKey] as! CLLocationDegrees
+                ),
+                animated: false
+            )
+        }
+        
+        tripServiceClient.performRequest(
+            method: .GET,
+            path: APIResource.userCurrentTripPath(userUuid: accountUserProvider.user.uuid),
+            parameters: nil) { [weak self] trip, error in
+                if let strongSelf = self {
+                    if error != nil {
+                        let alertController = UIAlertController(
+                            title: "Error",
+                            message: error!.description,
+                            preferredStyle: UIAlertControllerStyle.Alert
+                        )
+                        
+                        alertController.addAction(
+                            UIAlertAction(
+                                title: "OK",
+                                style: UIAlertActionStyle.Cancel) { action in
+                                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                            }
+                        )
+                        
+                        strongSelf.presentViewController(alertController, animated: true, completion: nil)
+                    } else if trip != nil {
+                        for location in [ trip!.startLocation, trip!.endLocation ] {
+                            let annotation = MKPointAnnotation()
+                            annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                            annotation.title = location.title
+                            annotation.subtitle = location.subtitle
+                            strongSelf.mapView.addAnnotation(annotation)
                         }
-                    )
-                    
-                    strongSelf.presentViewController(alertController, animated: true, completion: nil)
+                    }
                 }
-                strongSelf.updateUI()
-            }
         }
         
     }
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.leftBarButtonItem = logoutButton
-    }
-    
-    // MARK:- UI Update
-    
-    public func updateUI() {
-        switch locationRepository.fetchState {
-        case .NotFetched:
-            break
-        case .Fetching:
-            break
-        case .Fetched:
-            for location in locationRepository.elements {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-                annotation.title = location.title
-                annotation.subtitle = location.subtitle
-                mapView.addAnnotation(annotation)
-            }
-            break
-        case .Error:
-            break
-        }
+        NavigationBar.addMenuButton(target: self, action: "handleButtonTap:")
     }
     
     // MARK:- Action Handlers
     
     public func handleButtonTap(sender: UIButton) {
-        delegate?.mapViewControllerDidLogout(self)
+        delegate?.viewController(self, didTapMenuButton: sender)
     }
     
+    // MARK:- Status Bar
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.Default
+    }
+    
+    private func zoomToCoordinate(coordinate: CLLocationCoordinate2D, animated: Bool = false) {
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 5000.0, 5000.0)
+        mapView.setRegion(region, animated: animated)
+    }
+
     // MARK:- CLLocationManagerDelegate
     
     public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -123,10 +132,12 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
             let alertController = UIAlertController(
                 title: "Error",
                 message: "Enable location access through phone settings menu.",
-                preferredStyle: UIAlertControllerStyle.Alert)
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
             
             alertController.addAction(
-                UIAlertAction(title: "OK",
+                UIAlertAction(
+                    title: "OK",
                     style: UIAlertActionStyle.Cancel) { action in
                         self.dismissViewControllerAnimated(true, completion: nil)
                 }
@@ -142,8 +153,16 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     // MARK:- MKMapViewDelegate
     
     public func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 25000.0, 25000.0)
-        mapView.setRegion(region, animated: true)
+        let currentTime = CACurrentMediaTime()
+        let lastFire = currentTime - lastUpdate
+        if lastFire > 5 {
+            lastUpdate = currentTime
+            zoomToCoordinate(userLocation.coordinate, animated: true)
+            userDefaults.lastUserLocation = [
+                kUserDefaultsLastUserLocationLatitudeKey: userLocation.coordinate.latitude,
+                kUserDefaultsLastUserLocationLongitudeKey: userLocation.coordinate.longitude
+            ]
+        }
     }
     
 }

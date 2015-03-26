@@ -15,6 +15,7 @@ public class ModelFactoryMapper {
     private enum ObjectType: String {
         case User = "User"
         case Location = "Location"
+        case Trip = "Trip"
     }
 
     // MARK:- Enumerated Type
@@ -32,6 +33,9 @@ public class ModelFactoryMapper {
             case .Location:
                 object = Location(dictionary: dictionary)
                 mapper = LocationAPIMapper(delegate: modelFactory)
+            case .Trip:
+                object = Trip(dictionary: dictionary)
+                mapper = TripAPIMapper(delegate: modelFactory)
             }
             
             return (object, mapper)

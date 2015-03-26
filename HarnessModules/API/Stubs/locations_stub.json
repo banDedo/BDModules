@@ -1,0 +1,30 @@
+{
+    "data": [
+        {
+            "type": "Location",
+            "id": "a3476de8-be3c-11e4-a0c5-3b35f901588d",
+            "subtitle": "Pacifica, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526,
+            "title": "703 Bradford Way",
+            "nickname": null,
+            "image_url": "https://www.test.com/image1.jpg"
+        },
+        {
+            "type": "Location",
+            "id": "c3476de8-be3c-11e4-a0c5-3b35f901588d",
+            "subtitle": "San Francisco International Airport (SFO), San Francisco, CA 94128, USA",
+            "longitude": -122.399322,
+            "latitude": 37.617644,
+            "title": "San Francisco International Airport (SFO)",
+            "nickname": "San Francisco International Airport (SFO)",
+            "image_url": "https://www.test.com/image2.jpg"
+        }
+    ],
+    "info": {
+        "offset": 0,
+        "count": 2,
+        "total": 2
+    },
+    "code": "OK"
+}

@@ -16,9 +16,6 @@ public class APIFactory {
     public lazy var jsonSerializer: JSONSerializer = JSONSerializer()
     public lazy var modelFactory = ModelFactory()
     
-    public func configureOAuth2Properties() {
-    }
-    
     // MARK:- Account User
     
     public lazy var accountUserProvider: AccountUserProvider = {
@@ -26,6 +23,14 @@ public class APIFactory {
         accountUserProvider.keychain = self.keychain
         accountUserProvider.modelFactory = self.modelFactory
         return accountUserProvider
+        }()
+    
+    // MARK:- User Defaults
+    
+    public lazy var userDefaults: UserDefaults = {
+        let userDefaults = UserDefaults()
+        userDefaults.suiteName = "com.bandedo.harness"
+        return userDefaults
         }()
     
     // MARK:- User
@@ -43,7 +48,7 @@ public class APIFactory {
         sessionManager.session.configuration.protocolClasses = [ UserURLProtocol.self ]
         
         return APIServiceClient<User>(
-            accountUserProvider: accountUserProvider,
+            authHeaderHandler: { self.accountUserProvider.bearerHeader() },
             objectParser: modelFactory.defaultObjectParser,
             sessionManager: sessionManager,
             oAuth2Authorization: oAuth2Authorization
@@ -52,19 +57,33 @@ public class APIFactory {
 
     // MARK: - Location
     
-    public func locationRepository(userUuid: String) -> Repository<Location> {
+    public func tripServiceClient(userUuid: String) -> APIServiceClient<Trip> {
         let sessionManager = self.sessionManager()
-        sessionManager.session.configuration.protocolClasses = [ LocationURLProtocol.self ]
+        sessionManager.session.configuration.protocolClasses = [ TripURLProtocol.self ]
 
+        return APIServiceClient<Trip>(
+            authHeaderHandler: { self.accountUserProvider.bearerHeader() },
+            objectParser: modelFactory.defaultObjectParser,
+            sessionManager: sessionManager,
+            oAuth2Authorization: oAuth2Authorization
+        )
+    }
+
+    public func favoriteLocationRepository(userUuid: String) -> Repository<Location> {
+        let sessionManager = self.sessionManager()
+        
+        FavoriteLocationURLProtocol.counter = 0
+        sessionManager.session.configuration.protocolClasses = [ FavoriteLocationURLProtocol.self ]
+        
         return Repository<Location>(
             path: APIResource.userLocationsPath(userUuid: userUuid),
-            accountUserProvider: accountUserProvider,
+            authHeaderHandler: { self.accountUserProvider.bearerHeader() },
             collectionParser: modelFactory.defaultCollectionParser,
             sessionManager: sessionManager,
             oAuth2Authorization: oAuth2Authorization
         )
     }
-    
+
     // MARK:- Persistence
     
     public var keychain: FXKeychain {
@@ -98,9 +117,9 @@ public class APIFactory {
     
     public lazy var oAuth2Authorization: OAuth2Authorization = {
         let oAuth2Authorization = OAuth2Authorization(
-            accountUserProvider: self.accountUserProvider,
             jsonSerializer: self.jsonSerializer,
-            oAuth2SessionManager: self.oAuth2SessionManager()
+            oAuth2SessionManager: self.oAuth2SessionManager(),
+            oAuth2CredentialHandler: { self.accountUserProvider.oAuth2Credential }
         )
         return oAuth2Authorization
         }()
@@ -127,7 +146,9 @@ public class APIFactory {
     
     public lazy var logger: Logger = {
         let logger = Logger(tag: "API", applicationName: "BDModules")
-        logger.enabled = true
+        let loggerSettings = self.userDefaults.loggerSettings
+        logger.enabled = loggerSettings.isLoggerEnabled(logger)
+        logger.thresholdLevel = loggerSettings.loggerLevel(logger)
         logger.synchronous = true
         logger.thresholdLevel = .Info
         return logger

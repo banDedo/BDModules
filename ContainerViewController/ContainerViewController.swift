@@ -29,37 +29,44 @@ public extension UIViewController {
     public func replaceRootViewController(
         rootViewController: UIViewController,
         animated: Bool = false,
-        completion: (Bool -> Void)? = nil) {
-        
-        let currentRootViewController: UIViewController? = self.rootViewController
-        
-        self.rootViewController = rootViewController
-        
-        if (animated && currentRootViewController != nil) {
-            self.transitionFromViewController(currentRootViewController!, toViewController: rootViewController, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: nil, completion: completion)
-        } else {
-            if currentRootViewController != nil {
-                currentRootViewController!.willMoveToParentViewController(nil)
-            }
+        completion: (Bool -> Void) = { $0 }) {
             
+            let currentRootViewController: UIViewController? = self.rootViewController
+            self.rootViewController = rootViewController
+            
+            currentRootViewController?.willMoveToParentViewController(nil)
             addChildViewController(rootViewController)
-            view.addSubview(rootViewController.view)
             
+            view.addSubview(rootViewController.view)
             rootViewController.view.snp_makeConstraints { make in
                 make.edges.equalTo(UIEdgeInsetsZero)
             }
             
-            if currentRootViewController != nil {
-                currentRootViewController!.view.removeFromSuperview()
+            rootViewController.view.alpha = 0.0
+            view.layoutIfNeeded()
+            
+            UIView.animate(
+                animated,
+                duration: 0.3,
+                animations: {
+                    currentRootViewController?.view.layer.transform = {
+                        let scaleFactor = CGFloat(0.2)
+                        var transform = CATransform3DMakeScale(scaleFactor, scaleFactor, 1.0)
+                        return transform
+                        }()
+                    rootViewController.view.alpha = 1.0
+                }) { finished in
+                    currentRootViewController?.view.removeFromSuperview()
+                    
+                    rootViewController.didMoveToParentViewController(self)
+                    
+                    currentRootViewController?.removeFromParentViewController()
+                    currentRootViewController?.didMoveToParentViewController(nil)
+                    
+                    self.setNeedsStatusBarAppearanceUpdate()
+                    completion(finished)
             }
             
-            rootViewController.didMoveToParentViewController(self)
-            
-            if currentRootViewController != nil {
-                currentRootViewController!.didMoveToParentViewController(nil)
-            }
-        }
-        
     }
     
 }

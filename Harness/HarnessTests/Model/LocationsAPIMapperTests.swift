@@ -33,7 +33,7 @@ class LocationsAPIMapperTests: XCTestCase {
 
     func testParseLocation() {
         let dictionary = jsonSerializer.object(
-            resourceName: "favorite_locations_stub",
+            resourceName: "locations_stub",
             bundle: NSBundle(forClass: Location.self)) as! NSDictionary
         
         let locationDictionary = (dictionary["data"] as! NSArray)[1] as! NSDictionary
@@ -46,6 +46,7 @@ class LocationsAPIMapperTests: XCTestCase {
         XCTAssertEqual(location.nickname!, locationDictionary[kLocationNicknameApiKeyPath] as! String)
         XCTAssertEqual(location.latitude, locationDictionary[kLocationLatitudeApiKeyPath] as! CLLocationDegrees)
         XCTAssertEqual(location.longitude, locationDictionary[kLocationLongitudeApiKeyPath] as! CLLocationDegrees)
+        XCTAssertEqual(location.imageUrl!, locationDictionary[kLocationImageUrlApiKeyPath] as! String)
     }
     
 }

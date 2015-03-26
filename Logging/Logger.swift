@@ -19,6 +19,9 @@ public func log(logger: Logger, level: Logger.Level, function: String = __FUNCTI
 public class Logger: NSObject {
     // MARK:- Public properties
 
+    /// Logger tag for console identification/search
+    public var tag: String
+
     /// Toggle to enable/disable logging.
     public var enabled = true
     
@@ -173,7 +176,6 @@ public class Logger: NSObject {
     
     // MARK:- Private logging
 
-    private var tag: String
     private var applicationName: String
 
     private func logText(message: String, _ level: Level, _ function: String, _ file: String, _ line: Int) -> String {

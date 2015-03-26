@@ -14,6 +14,7 @@ private let kLocationSubtitleKey = "subtitle"
 private let kLocationNicknameKey = "nickname"
 private let kLocationLatitudeKey = "latitude"
 private let kLocationLongitudeKey = "longitude"
+private let kLocationImageUrlKey = "imageUrl"
 
 public class Location: ModelObject {
    
@@ -24,6 +25,7 @@ public class Location: ModelObject {
     private(set) public var nickname: String?
     private(set) public var latitude = CLLocationDegrees(0.0)
     private(set) public var longitude = CLLocationDegrees(0.0)
+    private(set) public var imageUrl: String?
 
 }
 
@@ -32,6 +34,7 @@ public let kLocationSubtitleApiKeyPath = "subtitle"
 public let kLocationNicknameApiKeyPath = "nickname"
 public let kLocationLatitudeApiKeyPath = "latitude"
 public let kLocationLongitudeApiKeyPath = "longitude"
+public let kLocationImageUrlApiKeyPath = "image_url"
 
 public class LocationAPIMapper: ModelObjectAPIMapper {
     
@@ -45,7 +48,8 @@ public class LocationAPIMapper: ModelObjectAPIMapper {
             delegate.fieldMapper(apiKeyPath: kLocationSubtitleApiKeyPath, modelKey: kLocationSubtitleKey),
             delegate.fieldMapper(apiKeyPath: kLocationNicknameApiKeyPath, modelKey: kLocationNicknameKey, required: false),
             delegate.fieldMapper(apiKeyPath: kLocationLatitudeApiKeyPath, modelKey: kLocationLatitudeKey),
-            delegate.fieldMapper(apiKeyPath: kLocationLongitudeApiKeyPath, modelKey: kLocationLongitudeKey)
+            delegate.fieldMapper(apiKeyPath: kLocationLongitudeApiKeyPath, modelKey: kLocationLongitudeKey),
+            delegate.fieldMapper(apiKeyPath: kLocationImageUrlApiKeyPath, modelKey: kLocationImageUrlKey)
         ]
         self.apiFieldMappers = apiFieldMappers
     }

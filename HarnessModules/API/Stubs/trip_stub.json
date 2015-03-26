@@ -1,0 +1,37 @@
+{
+    "data": {
+        "type": "Trip",
+        "id": "g2ab6de8-be3c-11e4-a0c5-3b35f901588d",
+        "profile": {
+            "id": "b3476de8-be3c-11e4-a0c5-3b35f9015881",
+            "cover_image_url": "http://test.com/users/cover.png",
+            "phone_number": "5555551212",
+            "type": "User",
+            "profile_image_url": "http://test.com/users/profile.png",
+            "first_name": "Patrick",
+            "last_name": "Hogan",
+            "email": "abc@cba.com"
+        },
+        "start_location": {
+            "type": "Location",
+            "id": "afd36de8-be3c-11e4-a0c5-3b35f901588d",
+            "subtitle": "Pacifica, CA",
+            "longitude": -122.48551,
+            "latitude": 37.621526,
+            "title": "703 Bradford Way",
+            "nickname": null,
+            "image_url": "https://www.test.com/image1.jpg"
+        },
+        "end_location": {
+            "type": "Location",
+            "id": "c3476de8-be3c-11e4-a0c5-3b35f901588d",
+            "subtitle": "San Francisco International Airport (SFO), San Francisco, CA 94128, USA",
+            "longitude": -122.399322,
+            "latitude": 37.617644,
+            "title": "San Francisco International Airport (SFO)",
+            "nickname": "San Francisco International Airport (SFO)",
+            "image_url": "https://www.test.com/image2.jpg"
+        }
+    },
+    "code": "OK"
+}

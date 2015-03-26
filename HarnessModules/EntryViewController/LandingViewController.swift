@@ -27,7 +27,7 @@ public class LandingViewController: LifecycleViewController {
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton(frame: CGRectZero)
         loginButton.setTitle("Login", forState: UIControlState.Normal)
-        loginButton.setBackgroundColor(UIColor.grayColor(), forControlState: UIControlState.Normal)
+        loginButton.setBackgroundColor(Color.darkBlueColor, forControlState: UIControlState.Normal)
         loginButton.addTarget(self, action: "handleButtonTap:", forControlEvents: UIControlEvents.TouchUpInside)
         return loginButton
         }()
@@ -37,12 +37,13 @@ public class LandingViewController: LifecycleViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = Color.whiteColor
         
         view.addSubview(loginButton)
         
         loginButton.snp_makeConstraints { make in
-            make.left.and.right.equalTo(UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0))
+            let padding = Layout.shortAnchorPadding
+            make.left.and.right.equalTo(UIEdgeInsetsMake(0.0, padding, 0.0, padding))
             make.height.equalTo(100.0)
             make.centerY.equalTo(0.0)
         }
@@ -59,10 +60,12 @@ public class LandingViewController: LifecycleViewController {
                         let alertController = UIAlertController(
                             title: "Error",
                             message: error!.description,
-                            preferredStyle: UIAlertControllerStyle.Alert)
+                            preferredStyle: UIAlertControllerStyle.Alert
+                        )
                         
                         alertController.addAction(
-                            UIAlertAction(title: "OK",
+                            UIAlertAction(
+                                title: "OK",
                                 style: UIAlertActionStyle.Cancel) { action in
                                     strongSelf.dismissViewControllerAnimated(true, completion: nil)
                             }
