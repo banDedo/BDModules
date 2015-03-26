@@ -13,7 +13,7 @@ public protocol MenuViewControllerDelegate: class {
     func menuViewController(menuViewController: MenuViewController, didSelectRow: MenuViewController.Row)
 }
 
-public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITableViewDataSource, UITableViewDelegate {
+public class MenuViewController: LifecycleViewController, MenuCellDelegate, ScrollViewParallaxDelegate, UITableViewDataSource, UITableViewDelegate {
     
     // MARK:- Enumerate type
     
@@ -60,6 +60,16 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         return tableView
         }()
     
+    public lazy var scrollviewParallax: ScrollViewParallax = {
+        return ScrollViewParallax(
+            parallaxContentView: self.profileView,
+            parallaxBackgroundView: self.profileView.coverImageView,
+            scrollView: self.tableView,
+            containerView: self.view,
+            delegate: self
+        )
+        }()
+    
     public weak var delegate: MenuViewControllerDelegate?
     
     private var profileViewToTopConstraint: Constraint?
@@ -78,19 +88,6 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         super.viewDidLoad()
         
         view.backgroundColor = Color.darkBlueColor
-        view.addSubview(profileView)
-        view.addSubview(tableView)
-        
-        profileView.bindBackgroundViewBottomTo(view, offset: 0.0)
-        
-        profileView.snp_makeConstraints() { make in
-            make.left.and.right.equalTo(UIEdgeInsetsZero)
-            make.height.equalTo(self.profileView.snp_width)
-        }
-        
-        tableView.snp_makeConstraints() { make in
-            make.edges.equalTo(UIEdgeInsetsZero)
-        }
         
         profileView.nameLabel.text = accountUserProvider.user.displayName
 
@@ -113,28 +110,13 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
     // MARK:- Layout
     
     public override func updateViewConstraints() {
-        
-        profileViewToTopConstraint?.uninstall()
-        profileView.snp_makeConstraints() { make in
-            var offset = 0.2 * (self.defaultTopInset + self.tableView.contentOffset.y)
-            offset = -max(offset, 0.0)
-            self.profileViewToTopConstraint = make.top.equalTo(offset)
-        }
-        
-        profileView.bindBackgroundViewBottomTo(view, offset: -self.defaultTopInset - min(0.0, scrollOffset))
-
+        scrollviewParallax.updateConstraints()
         super.updateViewConstraints()
     }
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        tableView.contentInset = UIEdgeInsetsMake(
-            self.defaultTopInset,
-            0.0,
-            -(defaultTopInset + CGFloat(Row.count - 1) * Layout.shortCellHeight),
-            0.0
-        )
+        scrollviewParallax.updateScrollViewContentInset()
     }
     
     public class func requiresConstraintBasedLayout() -> Bool {
@@ -207,6 +189,16 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
+    // MARK:- ScrollViewParallaxDelegate
+    
+    public func defaultTopInsetForScrollViewParallax(scrollViewParallax: ScrollViewParallax) -> CGFloat {
+        return defaultTopInset
+    }
+    
+    public func contentHeightForScrollViewParallax(scrollViewParallax: ScrollViewParallax) -> CGFloat {
+        return CGFloat(Row.count - 1) * Layout.shortCellHeight
+    }
+    
     // MARK:- Accessors
     
     private func row(cell: MenuCell) -> Row {
@@ -215,10 +207,6 @@ public class MenuViewController: LifecycleViewController, MenuCellDelegate, UITa
 
     private var footerHeight: CGFloat {
         return tableView.height
-    }
-    
-    private var scrollOffset: CGFloat {
-        return defaultTopInset + tableView.contentOffset.y
     }
     
 }

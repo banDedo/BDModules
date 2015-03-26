@@ -69,7 +69,7 @@ public class APIServiceClient<T: ValueObject> {
         handler: URLSessionDataTaskHandler) {
             
             var headers: [ String: String ]?
-            if let bearerHeader = accountUserProvider.bearerHeader() {
+            if let bearerHeader = authHeaderHandler() {
                 headers = [ "Authorization": bearerHeader ]
             }
             
@@ -86,11 +86,11 @@ public class APIServiceClient<T: ValueObject> {
     // MARK:- Constructors
     
     public init(
-        accountUserProvider: AccountUserProvider,
+        authHeaderHandler: Void -> String?,
         objectParser: (NSDictionary -> ValueObject),
         sessionManager: APISessionManager,
         oAuth2Authorization: OAuth2Authorization) {
-            self.accountUserProvider = accountUserProvider
+            self.authHeaderHandler = authHeaderHandler
             self.objectParser = objectParser
             self.sessionManager = sessionManager
             self.oAuth2Authorization = oAuth2Authorization
@@ -102,7 +102,7 @@ public class APIServiceClient<T: ValueObject> {
     
     // MARK:- Private
     
-    private let accountUserProvider: AccountUserProvider
+    private let authHeaderHandler: Void -> String?
     private let objectParser: (NSDictionary -> ValueObject)
     internal let oAuth2Authorization: OAuth2Authorization
 }

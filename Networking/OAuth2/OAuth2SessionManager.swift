@@ -107,12 +107,12 @@ public class OAuth2Authorization {
     // MARK:- Constructor
     
     public init(
-        accountUserProvider: AccountUserProvider,
         jsonSerializer: JSONSerializer,
-        oAuth2SessionManager: OAuth2SessionManager) {
-            self.accountUserProvider = accountUserProvider
+        oAuth2SessionManager: OAuth2SessionManager,
+        oAuth2CredentialHandler: (Void -> OAuth2Credential?)) {
             self.jsonSerializer = jsonSerializer
             self.oAuth2SessionManager = oAuth2SessionManager
+            self.oAuth2CredentialHandler = oAuth2CredentialHandler
     }
     
     public init() {
@@ -125,16 +125,16 @@ public class OAuth2Authorization {
         #urlSessionDataTask: NSURLSessionDataTask,
         error: NSError?,
         handler: URLSessionDataTaskHandler) -> Bool {
-            let accessToken = accountUserProvider.oAuth2Credential?.accessToken
+            let accessToken = oAuth2CredentialHandler()?.accessToken
             
-            if error == nil || accountUserProvider.oAuth2Credential == nil {
+            if error == nil || oAuth2CredentialHandler() == nil {
                 return false
             } else {
                 let statusCode = (urlSessionDataTask.response as? NSHTTPURLResponse)?.statusCode
-                let isUnauthorizedLoggedInRequest = (statusCode != nil && statusCode! == 401 && accountUserProvider.oAuth2Credential != nil)
+                let isUnauthorizedLoggedInRequest = (statusCode != nil && statusCode! == 401 && oAuth2CredentialHandler() != nil)
                 
                 if isUnauthorizedLoggedInRequest {
-                    if accountUserProvider.oAuth2Credential.accessToken != accessToken {
+                    if oAuth2CredentialHandler()?.accessToken != accessToken {
                         // Access token changed while this request was inflight.  Retry one more time.
                         handler(urlSessionDataTask, nil, error)
                     } else {
@@ -159,7 +159,7 @@ public class OAuth2Authorization {
                         // Only refresh once at any given time.  Queue will be serviced at the end of one successful authorization.
                         if !oAuth2SessionManager.isRefreshing {
                             oAuth2SessionManager.isRefreshing = true
-                            oAuth2SessionManager.refreshToken(refreshToken: accountUserProvider.oAuth2Credential.refreshToken, handler: { [weak self] urlSessionDataTask, responseObject, error in
+                            oAuth2SessionManager.refreshToken(refreshToken: oAuth2CredentialHandler()!.refreshToken, handler: { [weak self] urlSessionDataTask, responseObject, error in
                                 if let strongSelf = self {
                                     strongSelf.oAuth2SessionManager.isRefreshing = false
                                     queueHandler(urlSessionDataTask, responseObject, error)
@@ -179,7 +179,7 @@ public class OAuth2Authorization {
     
     // MARK:- Private Properties
     
-    private let accountUserProvider: AccountUserProvider
+    private let oAuth2CredentialHandler: (Void -> OAuth2Credential?)
     private let jsonSerializer: JSONSerializer
     private let oAuth2SessionManager: OAuth2SessionManager
 

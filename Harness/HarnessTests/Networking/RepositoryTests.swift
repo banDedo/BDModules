@@ -39,9 +39,9 @@ class RepositoryTests: XCTestCase {
         
         mockOAuth2SessionManager = MockOAuth2SessionManager()
         mockOAuth2Authorization = MockOAuth2Authorization(
-            accountUserProvider: mockAccountUserProvider,
             jsonSerializer: JSONSerializer(),
-            oAuth2SessionManager: mockOAuth2SessionManager
+            oAuth2SessionManager: mockOAuth2SessionManager,
+            oAuth2CredentialHandler: { self.mockAccountUserProvider.oAuth2Credential }
         )
         
 
@@ -50,7 +50,7 @@ class RepositoryTests: XCTestCase {
             options: options,
             orderingType: orderingType,
             pagingMode: pagingMode,
-            accountUserProvider: mockAccountUserProvider,
+            authHeaderHandler: { self.mockAccountUserProvider.bearerHeader() },
             collectionParser: mockModelFactory.defaultCollectionParser,
             sessionManager: mockSessionManager,
             oAuth2Authorization: mockOAuth2Authorization
@@ -127,7 +127,7 @@ class RepositoryTests: XCTestCase {
             options: options,
             orderingType: orderingType,
             pagingMode: pagingMode,
-            accountUserProvider: mockAccountUserProvider,
+            authHeaderHandler: { self.mockAccountUserProvider.bearerHeader() },
             collectionParser: mockModelFactory.defaultCollectionParser,
             sessionManager: mockSessionManager,
             oAuth2Authorization: mockOAuth2Authorization

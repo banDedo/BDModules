@@ -37,7 +37,7 @@ public class LandingViewController: LifecycleViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = Color.whiteColor
         
         view.addSubview(loginButton)
         

@@ -46,10 +46,6 @@ public class ProfileView: UIView {
         return containerView
         }()
     
-    private var boundView: UIView?
-    private var boundViewOffset: CGFloat?
-    private var backgroundViewToBottomContraint: Constraint?
-    
     private let profileImageViewSize = Layout.largeProfileImageSize
     
     // MARK:- Constructors
@@ -62,11 +58,7 @@ public class ProfileView: UIView {
         
         containerView.addSubview(profileImageView)
         containerView.addSubview(nameLabel)
-        
-        coverImageView.snp_makeConstraints() { make in
-            make.top.left.and.right.equalTo(UIEdgeInsetsZero)
-        }
-        
+                
         containerView.snp_makeConstraints() { make in
             let offset = -self.rightInset/2.0
             make.center.equalTo(CGPointZero).with.offset(CGPointMake(offset, offset))
@@ -90,25 +82,6 @@ public class ProfileView: UIView {
     
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK:- Layout
-    
-    public override func updateConstraints() {
-        backgroundViewToBottomContraint?.uninstall()
-        if let boundView = self.boundView, boundViewOffset = self.boundViewOffset {
-            coverImageView.snp_makeConstraints() { make in
-                self.backgroundViewToBottomContraint = make.bottom.equalTo(boundView).with.offset(boundViewOffset)
-            }
-        }
-        
-        super.updateConstraints()
-    }
-    
-    public func bindBackgroundViewBottomTo(view: UIView, offset: CGFloat) {
-        boundView = view
-        boundViewOffset = offset
-        updateConstraints()
     }
     
 }

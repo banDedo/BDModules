@@ -16,10 +16,14 @@ class MockOAuth2Authorization: OAuth2Authorization {
     var handler: URLSessionDataTaskHandler?
     
     override init(
-        accountUserProvider: AccountUserProvider,
         jsonSerializer: JSONSerializer,
-        oAuth2SessionManager: OAuth2SessionManager) {
-            super.init(accountUserProvider: accountUserProvider, jsonSerializer: jsonSerializer, oAuth2SessionManager: oAuth2SessionManager)
+        oAuth2SessionManager: OAuth2SessionManager,
+        oAuth2CredentialHandler: (Void -> OAuth2Credential?)) {
+            super.init(
+                jsonSerializer: jsonSerializer,
+                oAuth2SessionManager: oAuth2SessionManager,
+                oAuth2CredentialHandler: oAuth2CredentialHandler
+            )
     }
 
     override init() {

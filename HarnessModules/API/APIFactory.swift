@@ -48,7 +48,7 @@ public class APIFactory {
         sessionManager.session.configuration.protocolClasses = [ UserURLProtocol.self ]
         
         return APIServiceClient<User>(
-            accountUserProvider: accountUserProvider,
+            authHeaderHandler: { self.accountUserProvider.bearerHeader() },
             objectParser: modelFactory.defaultObjectParser,
             sessionManager: sessionManager,
             oAuth2Authorization: oAuth2Authorization
@@ -62,7 +62,7 @@ public class APIFactory {
         sessionManager.session.configuration.protocolClasses = [ TripURLProtocol.self ]
 
         return APIServiceClient<Trip>(
-            accountUserProvider: accountUserProvider,
+            authHeaderHandler: { self.accountUserProvider.bearerHeader() },
             objectParser: modelFactory.defaultObjectParser,
             sessionManager: sessionManager,
             oAuth2Authorization: oAuth2Authorization
@@ -77,7 +77,7 @@ public class APIFactory {
         
         return Repository<Location>(
             path: APIResource.userLocationsPath(userUuid: userUuid),
-            accountUserProvider: accountUserProvider,
+            authHeaderHandler: { self.accountUserProvider.bearerHeader() },
             collectionParser: modelFactory.defaultCollectionParser,
             sessionManager: sessionManager,
             oAuth2Authorization: oAuth2Authorization
@@ -117,9 +117,9 @@ public class APIFactory {
     
     public lazy var oAuth2Authorization: OAuth2Authorization = {
         let oAuth2Authorization = OAuth2Authorization(
-            accountUserProvider: self.accountUserProvider,
             jsonSerializer: self.jsonSerializer,
-            oAuth2SessionManager: self.oAuth2SessionManager()
+            oAuth2SessionManager: self.oAuth2SessionManager(),
+            oAuth2CredentialHandler: { self.accountUserProvider.oAuth2Credential }
         )
         return oAuth2Authorization
         }()

@@ -29,7 +29,7 @@ public class Layout {
     }
 
     public static var navigationDrawerRevealOffset: CGFloat {
-        return kNavigationDrawerDefaultRevealOffset
+        return 50.0
     }
 
     // MARK:- Short Cells

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 bandedo. All rights reserved.
 //
 
+import Snap
 import UIKit
 
 public class BlurView: UIView {
@@ -31,16 +32,17 @@ public class BlurView: UIView {
         self.style = style
         super.init(frame: CGRectZero)
         
-        blurView.contentView.addSubview(vibrancyView)
         addSubview(blurView)
+        blurView.contentView.addSubview(vibrancyView)
+        
+        blurView.snp_makeConstraints{ make in
+            make.edges.equalTo(UIEdgeInsetsZero)
+        }
         
         vibrancyView.snp_makeConstraints{ make in
             make.edges.equalTo(UIEdgeInsetsZero)
         }
 
-        blurView.snp_makeConstraints{ make in
-            make.edges.equalTo(UIEdgeInsetsZero)
-        }
     }
 
     required public init(coder aDecoder: NSCoder) {
