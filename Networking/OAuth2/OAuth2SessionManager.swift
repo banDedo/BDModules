@@ -16,7 +16,7 @@ private let kOAuth2SessionManagerSecretKey = "secret"
 private let kOAuth2SessionManagerPathKey = "path"
 private let kOAuth2SessionManagerCredentialKey = "credential"
 
-@objc public protocol OAuth2SessionManagerDelegate {
+public protocol OAuth2SessionManagerDelegate: class {
     func oAuth2SessionManager(oAuth2SessionManager: OAuth2SessionManager, didUpdateCredential credential: OAuth2Credential)
 }
 

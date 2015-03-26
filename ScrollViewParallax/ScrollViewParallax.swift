@@ -9,7 +9,7 @@
 import Snap
 import UIKit
 
-@objc public protocol ScrollViewParallaxDelegate {
+public protocol ScrollViewParallaxDelegate: class {
     func defaultTopInsetForScrollViewParallax(scrollViewParallax: ScrollViewParallax) -> CGFloat
     func contentHeightForScrollViewParallax(scrollViewParallax: ScrollViewParallax) -> CGFloat
 }
@@ -95,11 +95,7 @@ public class ScrollViewParallax: NSObject {
     }
 
     private var scrollOffset: CGFloat {
-        if let defaultTopInset = delegate?.defaultTopInsetForScrollViewParallax(self) {
-            return defaultTopInset + scrollView.contentOffset.y
-        } else {
-            return scrollView.contentOffset.y
-        }
+        return (delegate?.defaultTopInsetForScrollViewParallax(self) ?? 0) + scrollView.contentOffset.y
     }
     
 }

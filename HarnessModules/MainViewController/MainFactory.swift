@@ -24,7 +24,7 @@ public class MainFactory: NSObject {
         let imageViewLazyLoader = MockImageViewLazyLoader()
         var backgroundImages = [ UIImage ]()
         for i in 0..<10 {
-            backgroundImages.append(UIImage(named: "\(i).png")!)
+            backgroundImages.append(UIImage(named: "\(i).png", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!)
         }
         imageViewLazyLoader.images = backgroundImages
 
@@ -32,7 +32,6 @@ public class MainFactory: NSObject {
         favoritesViewController.accountUserProvider = apiFactory.accountUserProvider
         favoritesViewController.imageViewLazyLoader = imageViewLazyLoader
         favoritesViewController.favoriteLocationRepository = apiFactory.favoriteLocationRepository(apiFactory.accountUserProvider.user.uuid)
-        favoritesViewController.mainFactory = self
         favoritesViewController.oAuth2SessionManager = apiFactory.oAuth2SessionManager()
         favoritesViewController.delegate = delegate
         return favoritesViewController
@@ -48,7 +47,6 @@ public class MainFactory: NSObject {
     
     public func mapViewController(#delegate: MenuNavigationControllerDelegate) -> MapViewController {
         let mapViewController = MapViewController()
-        mapViewController.mainFactory = self
         mapViewController.accountUserProvider = apiFactory.accountUserProvider
         mapViewController.locationManager = locationManager(delegate: mapViewController)
         mapViewController.tripServiceClient = apiFactory.tripServiceClient(apiFactory.accountUserProvider.user.uuid)
@@ -62,10 +60,10 @@ public class MainFactory: NSObject {
         let imageViewLazyLoader = MockImageViewLazyLoader()
         imageViewLazyLoader.images = [
             ImageBlender().blend(
-                UIImage(named: "cover.png")!,
-                withImage: UIImage(named: "dark_cover_gradient.png")!
+                UIImage(named: "cover.png", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!,
+                withImage: UIImage(named: "dark_cover_gradient.png", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
             ),
-            UIImage(named: "profile_image.png")!
+            UIImage(named: "profile_image.png", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         ]
         
         let menuViewController = MenuViewController()
@@ -77,7 +75,6 @@ public class MainFactory: NSObject {
 
     public func settingsViewController(#delegate: MenuNavigationControllerDelegate) -> SettingsViewController {
         let settingsViewController = SettingsViewController()
-        settingsViewController.accountUserProvider = apiFactory.accountUserProvider
         settingsViewController.applicationLifecycleLogger = applicationLifecycleLogger
         settingsViewController.apiLogger = apiFactory.logger
         settingsViewController.jsonLogger = jsonFactory.logger
