@@ -13,6 +13,7 @@ PODS:
     - BDModules/Color (= 0.0.2)
     - BDModules/ContainerViewController (= 0.0.2)
     - BDModules/HarnessModules (= 0.0.2)
+    - BDModules/Image (= 0.0.2)
     - BDModules/ImageBlender (= 0.0.2)
     - BDModules/ImageViewLazyLoader (= 0.0.2)
     - BDModules/JSON (= 0.0.2)
@@ -42,14 +43,17 @@ PODS:
     - BDModules/HarnessModules/Application (= 0.0.2)
     - BDModules/HarnessModules/Color (= 0.0.2)
     - BDModules/HarnessModules/EntryViewController (= 0.0.2)
+    - BDModules/HarnessModules/FavoritesViewController (= 0.0.2)
     - BDModules/HarnessModules/Font (= 0.0.2)
     - BDModules/HarnessModules/JSON (= 0.0.2)
     - BDModules/HarnessModules/Layout (= 0.0.2)
     - BDModules/HarnessModules/MainViewController (= 0.0.2)
+    - BDModules/HarnessModules/MapViewController (= 0.0.2)
     - BDModules/HarnessModules/MenuViewController (= 0.0.2)
     - BDModules/HarnessModules/Model (= 0.0.2)
     - BDModules/HarnessModules/NavigationController (= 0.0.2)
     - BDModules/HarnessModules/RootViewController (= 0.0.2)
+    - BDModules/HarnessModules/SettingsViewController (= 0.0.2)
     - BDModules/HarnessModules/UserDefaults (= 0.0.2)
     - BDModules/Model
   - BDModules/HarnessModules/AccountUser (0.0.2):
@@ -89,6 +93,21 @@ PODS:
     - BDModules/Model
     - BDModules/ViewGeometry
     - Snap
+  - BDModules/HarnessModules/FavoritesViewController (0.0.2):
+    - BDModules/BlurView
+    - BDModules/HarnessModules/AccountUser
+    - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/Color
+    - BDModules/HarnessModules/Font
+    - BDModules/HarnessModules/JSON
+    - BDModules/HarnessModules/Layout
+    - BDModules/HarnessModules/NavigationController
+    - BDModules/ImageViewLazyLoader
+    - BDModules/LifecycleViewController
+    - BDModules/Loading
+    - BDModules/Model
+    - BDModules/ViewGeometry
+    - Snap
   - BDModules/HarnessModules/Font (0.0.2):
     - BDModules/Model
   - BDModules/HarnessModules/JSON (0.0.2):
@@ -99,25 +118,29 @@ PODS:
   - BDModules/HarnessModules/Layout (0.0.2):
     - BDModules/Model
   - BDModules/HarnessModules/MainViewController (0.0.2):
-    - BDModules/BlurView
-    - BDModules/Button
     - BDModules/ContainerViewController
+    - BDModules/HarnessModules/FavoritesViewController
+    - BDModules/HarnessModules/MapViewController
+    - BDModules/HarnessModules/MenuViewController
+    - BDModules/HarnessModules/SettingsViewController
+    - BDModules/HarnessModules/UserDefaults
+    - BDModules/Image
+    - BDModules/ImageBlender
+    - BDModules/LifecycleViewController
+    - BDModules/Model
+    - BDModules/NavigationDrawerViewController
+    - Snap
+  - BDModules/HarnessModules/MapViewController (0.0.2):
     - BDModules/HarnessModules/AccountUser
     - BDModules/HarnessModules/API
     - BDModules/HarnessModules/Color
     - BDModules/HarnessModules/Font
-    - BDModules/HarnessModules/JSON
     - BDModules/HarnessModules/Layout
-    - BDModules/HarnessModules/MenuViewController
     - BDModules/HarnessModules/Model
     - BDModules/HarnessModules/NavigationController
     - BDModules/HarnessModules/UserDefaults
-    - BDModules/ImageBlender
-    - BDModules/ImageViewLazyLoader
     - BDModules/LifecycleViewController
-    - BDModules/Loading
     - BDModules/Model
-    - BDModules/NavigationDrawerViewController
     - BDModules/ViewGeometry
     - Snap
   - BDModules/HarnessModules/MenuViewController (0.0.2):
@@ -126,9 +149,12 @@ PODS:
     - BDModules/HarnessModules/Color
     - BDModules/HarnessModules/Font
     - BDModules/HarnessModules/Layout
+    - BDModules/Image
+    - BDModules/ImageBlender
     - BDModules/ImageViewLazyLoader
     - BDModules/LifecycleViewController
     - BDModules/Model
+    - BDModules/ScrollViewParallax
     - BDModules/ViewGeometry
     - Snap
   - BDModules/HarnessModules/Model (0.0.2):
@@ -139,6 +165,8 @@ PODS:
     - BDModules/HarnessModules/Color
     - BDModules/HarnessModules/Font
     - BDModules/HarnessModules/Layout
+    - BDModules/Image
+    - BDModules/ImageBlender
     - BDModules/Model
   - BDModules/HarnessModules/RootViewController (0.0.2):
     - BDModules/ContainerViewController
@@ -149,9 +177,24 @@ PODS:
     - BDModules/HarnessModules/Model
     - BDModules/Model
     - Snap
+  - BDModules/HarnessModules/SettingsViewController (0.0.2):
+    - BDModules/HarnessModules/API
+    - BDModules/HarnessModules/Color
+    - BDModules/HarnessModules/Font
+    - BDModules/HarnessModules/JSON
+    - BDModules/HarnessModules/Layout
+    - BDModules/HarnessModules/Model
+    - BDModules/HarnessModules/NavigationController
+    - BDModules/HarnessModules/UserDefaults
+    - BDModules/LifecycleViewController
+    - BDModules/Logging
+    - BDModules/Model
+    - BDModules/ViewGeometry
+    - Snap
   - BDModules/HarnessModules/UserDefaults (0.0.2):
     - BDModules/Logging
     - BDModules/Model
+  - BDModules/Image (0.0.2)
   - BDModules/ImageBlender (0.0.2)
   - BDModules/ImageViewLazyLoader (0.0.2):
     - BDModules/ViewAnimations
@@ -192,7 +235,8 @@ PODS:
     - BDModules/Networking/Core
     - BDModules/Networking/OAuth2
   - BDModules/Pointers (0.0.2)
-  - BDModules/ScrollViewParallax (0.0.2)
+  - BDModules/ScrollViewParallax (0.0.2):
+    - Snap
   - BDModules/ViewAnimations (0.0.2)
   - BDModules/ViewGeometry (0.0.2)
   - FXKeychain (1.5.2)
@@ -214,7 +258,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDModules: 43446bb54db95e986ac87b684858e29f2ad8fd24
+  BDModules: 080372318c1a98e28eeb3bc3c744dbe8f1f93c89
   FXKeychain: c97c352f1923809032339514ec4d6b0ed151bc3b
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   Snap: 7318f07bc3d43adb0706f36ede18fa18d2347037

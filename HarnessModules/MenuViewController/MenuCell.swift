@@ -53,7 +53,7 @@ public class MenuCell: UITableViewCell {
         separator.hidden = false
         userInteractionEnabled = true
         
-        let image = UIImage(named: imageName)!
+        let image = UIImage(named: imageName + ".png", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let imageWidthOffset = (self.dynamicType.imageWidth - image.size.width)/2.0
         let contentPadding = CGFloat(Layout.shortAnchorPadding)
         let imagePadding = CGFloat(Layout.shortCellImagePadding)

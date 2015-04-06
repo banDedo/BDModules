@@ -28,7 +28,6 @@ public class SettingsViewController: LifecycleViewController, SettingsLoggerCell
     
     // MARK:- Injectable
     
-    public lazy var accountUserProvider = AccountUserProvider()
     public lazy var apiLogger = Logger()
     public lazy var applicationLifecycleLogger = Logger()
     public lazy var jsonLogger = Logger()

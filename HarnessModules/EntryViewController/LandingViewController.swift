@@ -9,7 +9,7 @@
 import Snap
 import UIKit
 
-@objc public protocol LandingViewControllerDelegate {
+public protocol LandingViewControllerDelegate: class {
     func landingViewControllerDidLogin(landingViewController: LandingViewController)
 }
 

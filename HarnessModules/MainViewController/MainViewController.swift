@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol MainViewControllerDelegate: class {
+public protocol MainViewControllerDelegate: class {
     func mainViewControllerDidLogout(mainViewController: MainViewController)
 }
 

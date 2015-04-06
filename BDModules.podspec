@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'BDModules'
-  s.version = '0.0.2'
+  s.version = '0.0.3'
   s.license = 'Apache 2.0'
   s.summary = 'Bandedo Swift Modules'
   s.authors = { 'Patrick Hogan' => 'phoganuci@gmail.com' }
@@ -84,12 +84,25 @@ Pod::Spec.new do |s|
       sss.dependency 'Snap'
     end
 
-    ss.subspec 'Font' do |sss|
-      sss.source_files = 'HarnessModules/Font/*.swift'
+    ss.subspec 'FavoritesViewController' do |sss|
+      sss.source_files = 'HarnessModules/FavoritesViewController/*.swift'
+      sss.dependency 'BDModules/BlurView'
+      sss.dependency 'BDModules/HarnessModules/AccountUser'
+      sss.dependency 'BDModules/HarnessModules/API'
+      sss.dependency 'BDModules/HarnessModules/Color'
+      sss.dependency 'BDModules/HarnessModules/Font'
+      sss.dependency 'BDModules/HarnessModules/JSON'
+      sss.dependency 'BDModules/HarnessModules/Layout'
+      sss.dependency 'BDModules/HarnessModules/NavigationController'
+      sss.dependency 'BDModules/ImageViewLazyLoader'
+      sss.dependency 'BDModules/LifecycleViewController'
+      sss.dependency 'BDModules/Loading'
+      sss.dependency 'BDModules/ViewGeometry'
+      sss.dependency 'Snap'
     end
 
-    ss.subspec 'Layout' do |sss|
-      sss.source_files = 'HarnessModules/Layout/*.swift'
+    ss.subspec 'Font' do |sss|
+      sss.source_files = 'HarnessModules/Font/*.swift'
     end
 
     ss.subspec 'JSON' do |sss|
@@ -99,51 +112,69 @@ Pod::Spec.new do |s|
       sss.dependency 'BDModules/HarnessModules/UserDefaults'
     end
 
+    ss.subspec 'Layout' do |sss|
+      sss.source_files = 'HarnessModules/Layout/*.swift'
+    end
+
     ss.subspec 'MainViewController' do |sss|
       sss.source_files = 'HarnessModules/MainViewController/*.swift'
+      sss.resources = 'HarnessModules/MainViewController/Images.xcassets'
+      sss.dependency 'BDModules/ContainerViewController'
+      sss.dependency 'BDModules/HarnessModules/FavoritesViewController'
+      sss.dependency 'BDModules/HarnessModules/MapViewController'
+      sss.dependency 'BDModules/HarnessModules/MenuViewController'
+      sss.dependency 'BDModules/HarnessModules/SettingsViewController'
+      sss.dependency 'BDModules/HarnessModules/UserDefaults'
+      sss.dependency 'BDModules/Image'
+      sss.dependency 'BDModules/ImageBlender'
+      sss.dependency 'BDModules/LifecycleViewController'
+      sss.dependency 'BDModules/NavigationDrawerViewController'
+      sss.dependency 'Snap'
+    end
+
+    ss.subspec 'MapViewController' do |sss|
+      sss.source_files = 'HarnessModules/MapViewController/*.swift'
       sss.framework    = 'CoreLocation'
       sss.framework    = 'MapKit'
-      sss.dependency 'BDModules/BlurView'
-      sss.dependency 'BDModules/Button'
-      sss.dependency 'BDModules/ContainerViewController'
       sss.dependency 'BDModules/HarnessModules/AccountUser'
       sss.dependency 'BDModules/HarnessModules/API'
       sss.dependency 'BDModules/HarnessModules/Color'
       sss.dependency 'BDModules/HarnessModules/Font'
-      sss.dependency 'BDModules/HarnessModules/JSON'
       sss.dependency 'BDModules/HarnessModules/Layout'
-      sss.dependency 'BDModules/HarnessModules/MenuViewController'
       sss.dependency 'BDModules/HarnessModules/Model'
       sss.dependency 'BDModules/HarnessModules/NavigationController'
       sss.dependency 'BDModules/HarnessModules/UserDefaults'
-      sss.dependency 'BDModules/ImageBlender'
-      sss.dependency 'BDModules/ImageViewLazyLoader'
       sss.dependency 'BDModules/LifecycleViewController'
-      sss.dependency 'BDModules/Loading'
-      sss.dependency 'BDModules/NavigationDrawerViewController'
       sss.dependency 'BDModules/ViewGeometry'
       sss.dependency 'Snap'
     end
 
     ss.subspec 'MenuViewController' do |sss|
       sss.source_files = 'HarnessModules/MenuViewController/*.swift'
+      sss.resources = 'HarnessModules/MenuViewController/Images.xcassets'
       sss.dependency 'BDModules/Button'
       sss.dependency 'BDModules/HarnessModules/AccountUser'
       sss.dependency 'BDModules/HarnessModules/Color'
       sss.dependency 'BDModules/HarnessModules/Font'
       sss.dependency 'BDModules/HarnessModules/Layout'
-      sss.dependency 'BDModules/LifecycleViewController'
+      sss.dependency 'BDModules/Image'
+      sss.dependency 'BDModules/ImageBlender'
       sss.dependency 'BDModules/ImageViewLazyLoader'
+      sss.dependency 'BDModules/LifecycleViewController'
+      sss.dependency 'BDModules/ScrollViewParallax'
       sss.dependency 'BDModules/ViewGeometry'
       sss.dependency 'Snap'
     end
 
     ss.subspec 'NavigationController' do |sss|
       sss.source_files = 'HarnessModules/NavigationController/*.swift'
+      sss.resources = 'HarnessModules/NavigationController/Images.xcassets'
       sss.dependency 'BDModules/Color'
+      sss.dependency 'BDModules/Image'
       sss.dependency 'BDModules/HarnessModules/Color'
       sss.dependency 'BDModules/HarnessModules/Font'
       sss.dependency 'BDModules/HarnessModules/Layout'
+      sss.dependency 'BDModules/ImageBlender'
     end
 
     ss.subspec 'Model' do |sss|
@@ -164,10 +195,30 @@ Pod::Spec.new do |s|
       sss.dependency 'Snap'
     end
 
+    ss.subspec 'SettingsViewController' do |sss|
+      sss.source_files = 'HarnessModules/SettingsViewController/*.swift'
+      sss.dependency 'BDModules/HarnessModules/API'
+      sss.dependency 'BDModules/HarnessModules/Color'
+      sss.dependency 'BDModules/HarnessModules/Font'
+      sss.dependency 'BDModules/HarnessModules/JSON'
+      sss.dependency 'BDModules/HarnessModules/Layout'
+      sss.dependency 'BDModules/HarnessModules/Model'
+      sss.dependency 'BDModules/HarnessModules/NavigationController'
+      sss.dependency 'BDModules/HarnessModules/UserDefaults'
+      sss.dependency 'BDModules/LifecycleViewController'
+      sss.dependency 'BDModules/Logging'
+      sss.dependency 'BDModules/ViewGeometry'
+      sss.dependency 'Snap'
+    end
+
     ss.subspec 'UserDefaults' do |sss|
       sss.source_files = 'HarnessModules/UserDefaults/*.swift'
       sss.dependency 'BDModules/Logging'
     end
+  end
+
+  s.subspec 'Image' do |ss|
+    ss.source_files = 'Image/*.swift'
   end
 
   s.subspec 'ImageBlender' do |ss|
