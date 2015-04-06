@@ -15,7 +15,6 @@ public class MapViewController: LifecycleViewController, CLLocationManagerDelega
     
     public lazy var accountUserProvider = AccountUserProvider()
     public lazy var oAuth2SessionManager = OAuth2SessionManager()
-    public lazy var mainFactory = MainFactory()
     public lazy var locationManager = CLLocationManager()
     public lazy var tripServiceClient = APIServiceClient<Trip>()
     public lazy var userDefaults = UserDefaults()

@@ -76,26 +76,31 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
     
     // MARK:- UI Update
     
-    public func updateUI(newElements: [ Location ]? = nil) {
-        if newElements != nil && count(newElements!) > 0 {
+    public func updateUI(animated: Bool = false, newElements: [ Location ]? = nil) {
+        if animated && newElements != nil && count(newElements!) > 0 {
             switch favoriteLocationRepository.fetchState {
-            case .NotFetched:
-                break
-            case .Fetching:
-                break
             case .Fetched:
                 tableView.beginUpdates()
+                
                 var currentIndex = favoriteLocationRepository.elementCount - count(newElements!)
                 for newElement in newElements! {
                     tableView.insertRowsAtIndexPaths(
-                        [ NSIndexPath(forRow: currentIndex, inSection: 0) ],
-                        withRowAnimation: UITableViewRowAnimation.Bottom
+                        [ NSIndexPath(forRow: currentIndex, inSection: Section.Collection.rawValue) ],
+                        withRowAnimation: UITableViewRowAnimation.Automatic
                     )
                     currentIndex++
                 }
+                
+                if favoriteLocationRepository.atEnd {
+                    tableView.deleteRowsAtIndexPaths(
+                        [ NSIndexPath(forRow: 0, inSection: Section.Loading.rawValue) ],
+                        withRowAnimation: UITableViewRowAnimation.Automatic
+                    )
+                }
+                
                 tableView.endUpdates()
                 break
-            case .Error:
+            case .NotFetched, .Fetching, .Error:
                 break
             }
         } else {
@@ -110,6 +115,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
             return
         }
         
+        let isEmptyLocationRepository = favoriteLocationRepository.elementCount == 0
         favoriteLocationRepository.fetch() { [weak self] locations, error in
             if let strongSelf = self {
                 if error != nil {
@@ -129,7 +135,7 @@ public class FavoritesViewController: LifecycleViewController, UITableViewDataSo
                     
                     strongSelf.presentViewController(alertController, animated: true, completion: nil)
                 }
-                strongSelf.updateUI()
+                strongSelf.updateUI(animated: !isEmptyLocationRepository, newElements: locations)
                 handler(locations, error)
             }
         }

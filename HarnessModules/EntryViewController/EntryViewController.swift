@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol EntryViewControllerDelegate {
+public protocol EntryViewControllerDelegate: class {
     func entryViewControllerDidLogin(entryViewController: EntryViewController)
 }
 

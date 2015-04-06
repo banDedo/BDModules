@@ -221,6 +221,7 @@
 				066575BC50B6A0081AB2F8A9 /* Check Pods Manifest.lock */,
 				71FB58971A985CE000DE27AD /* Sources */,
 				71FB58981A985CE000DE27AD /* Frameworks */,
+				712F4BEF1AC4777A00A6A65C /* Lint Scripts */,
 				71FB58991A985CE000DE27AD /* Resources */,
 				37C74906DBC7143EF456FD91 /* Embed Pods Frameworks */,
 				944B362EBEC327D554FC3672 /* Copy Pods Resources */,
@@ -341,6 +342,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Harness/Pods-Harness-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		712F4BEF1AC4777A00A6A65C /* Lint Scripts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Lint Scripts";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
 		};
 		944B362EBEC327D554FC3672 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -28,7 +28,7 @@ public class NavigationBar {
     
     public class func addMenuButton(#target: UIViewController, action: Selector) {
         target.navigationItem.leftBarButtonItem = {
-            let image = UIImage(named: "menu.png")!
+            let image = UIImage(named: "menu.png", inBundle: NSBundle(forClass: self), compatibleWithTraitCollection: nil)!
             let button = UIButton(frame: CGRectMake(0, 0, image.size.width, image.size.height))
             button.setImage(image, forState: UIControlState.Normal)
             button.addTarget(target, action: action, forControlEvents: UIControlEvents.TouchUpInside)
