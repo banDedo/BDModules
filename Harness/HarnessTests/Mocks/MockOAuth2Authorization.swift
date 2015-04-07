@@ -11,7 +11,7 @@ import Foundation
 
 class MockOAuth2Authorization: OAuth2Authorization {
     
-    var returnValue = false
+    var handleResponse = true
     var didCallMethod = false
     var handler: URLSessionDataTaskHandler?
     
@@ -30,10 +30,14 @@ class MockOAuth2Authorization: OAuth2Authorization {
         fatalError("init() not implemented.")
     }
     
-    override func willHandleResponse(#urlSessionDataTask: NSURLSessionDataTask, error: NSError?, handler: URLSessionDataTaskHandler) -> Bool {
-        didCallMethod = true
-        self.handler = handler
-        return returnValue
+    override func performAuthenticatedRequest(
+        #requestHandler: URLSessionDataTaskHandler -> Void,
+        completionHandler: URLSessionDataTaskHandler) {
+            self.didCallMethod = true
+            self.handler = completionHandler
+            if handleResponse {
+                requestHandler(completionHandler)
+            }
     }
-    
+
 }
