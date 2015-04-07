@@ -119,9 +119,33 @@ public class OAuth2Authorization {
         fatalError("init() not implemented")
     }
     
+    // MARK:- Authentication
+    
+    public func performAuthenticatedRequest(
+        #requestHandler: URLSessionDataTaskHandler -> Void,
+        completionHandler: URLSessionDataTaskHandler) {
+            requestHandler() { [weak self] urlSessionDataTask, responseObject, error in
+                if let strongSelf = self {
+                    let willHandleResponse = strongSelf.willHandleResponse(
+                        urlSessionDataTask: urlSessionDataTask,
+                        error: error) { urlSessionDataTask, responseObject, error in
+                            if error != nil {
+                                completionHandler(urlSessionDataTask, responseObject, error)
+                            } else {
+                                requestHandler(completionHandler)
+                            }
+                    }
+                    
+                    if !willHandleResponse {
+                        completionHandler(urlSessionDataTask, responseObject, error)
+                    }
+                }
+            }
+    }
+    
     // MARK:- Enqueued Handlers
     
-    public func willHandleResponse(
+    private func willHandleResponse(
         #urlSessionDataTask: NSURLSessionDataTask,
         error: NSError?,
         handler: URLSessionDataTaskHandler) -> Bool {

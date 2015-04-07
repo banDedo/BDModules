@@ -23,44 +23,30 @@ public class APIServiceClient<T: ValueObject> {
         files: [ MultipartFile ]? = nil,
         handler: (T?, NSError?) -> Void) {
             
-            performRequest(
-                method: method,
-                path: path,
-                parameters: parameters,
-                files: files) { [weak self] urlSessionDataTask, responseObject, error in
+            oAuth2Authorization.performAuthenticatedRequest(
+                requestHandler: { [weak self] completionHandler in
                     if let strongSelf = self {
-                        let completionHandler: URLSessionDataTaskHandler = { [weak self] urlSessionDataTask, responseObject, error in
-                            if let strongSelf = self {
-                                if error == nil {
-                                    let object = strongSelf.objectParser(responseObject!) as! T
-                                    handler(object, nil)
-                                } else {
-                                    handler(nil, error)
-                                }
-                            }
-                        }
-                        
-                        let willHandleResponse = strongSelf.oAuth2Authorization.willHandleResponse(
-                            urlSessionDataTask: urlSessionDataTask,
-                            error: error) { [weak self] urlSessionDataTask, responseObject, error in
-                                if let strongSelf = self {
-                                    strongSelf.performRequest(
-                                        method: method,
-                                        path: path,
-                                        parameters: parameters,
-                                        files: files,
-                                        handler: completionHandler)
-                                }
-                        }
-                        
-                        if !willHandleResponse {
-                            completionHandler(urlSessionDataTask, responseObject, error)
+                        strongSelf.performRequest(
+                            method: method,
+                            path: path,
+                            parameters: parameters,
+                            files: files,
+                            handler: completionHandler
+                        )
+                    }
+                }) { [weak self] urlSessionDataTask, responseObject, error in
+                    if let strongSelf = self {
+                        if error == nil {
+                            let object = strongSelf.objectParser(responseObject!) as! T
+                            handler(object, nil)
+                        } else {
+                            handler(nil, error)
                         }
                     }
             }
             
     }
-        
+    
     private func performRequest(
         #method: APISessionManager.Method,
         path: String,

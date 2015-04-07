@@ -95,7 +95,7 @@ class APIServiceClientTests: XCTestCase {
     }
     
     func testCheckOAuth2Authorization(errorOnSecondRequest: Bool) {
-        mockOAuth2Authorization.returnValue = true
+        mockOAuth2Authorization.handleResponse = false
         mockSessionManager.error = NSError()
 
         let uuid = "123"
@@ -119,11 +119,12 @@ class APIServiceClientTests: XCTestCase {
         XCTAssertFalse(didCallback)
         
         if !errorOnSecondRequest {
+            mockOAuth2Authorization.handleResponse = true
             mockSessionManager.responseObject = responseObject(uuid, pagingId: pagingId)
             mockSessionManager.error = nil
         }
 
-        self.mockOAuth2Authorization.handler!(nil, nil, nil)
+        self.mockOAuth2Authorization.handler!(MockURLSessionDataTask(), mockSessionManager.responseObject, mockSessionManager.error)
 
         XCTAssertTrue(didCallback)
     }
