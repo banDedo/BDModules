@@ -25,7 +25,10 @@ class OAuth2AuthorizationTests: XCTestCase {
         mockTask = MockURLSessionDataTask()
         
         mockAccountUserProvider = MockAccountUserProvider()
-        mockAccountUserProvider.backingOAuth2Credential = OAuth2Credential(accessToken: "access_token", refreshToken: "refresh_token")
+        mockAccountUserProvider.backingOAuth2Credential = OAuth2Credential(
+            accessToken: "access_token",
+            refreshToken: "refresh_token"
+        )
         
         mockSessionManager = MockOAuth2SessionManager()
         
@@ -41,13 +44,10 @@ class OAuth2AuthorizationTests: XCTestCase {
         
         var didCallback = false
         
-        let willHandleResponse = oAuth2Authorization.willHandleResponse(
-            urlSessionDataTask: mockTask,
-            error: nil) { task, responseObject, error in
+        oAuth2Authorization.performAuthenticatedRequest(
+            requestHandler: { handler in }) { urlSessionDataTask, responseObject, error in
                 didCallback = true
         }
-        
-        XCTAssertFalse(willHandleResponse)
         XCTAssertFalse(didCallback)
         
     }
@@ -58,30 +58,29 @@ class OAuth2AuthorizationTests: XCTestCase {
         
         mockTask.mockResponse.code = 403
 
-        let willHandleResponse = oAuth2Authorization.willHandleResponse(
-            urlSessionDataTask: mockTask,
-            error: NSError()) { task, responseObject, error in
+        oAuth2Authorization.performAuthenticatedRequest(
+            requestHandler: { handler in }) { urlSessionDataTask, responseObject, error in
                 didCallback = true
         }
         
-        XCTAssertFalse(willHandleResponse)
         XCTAssertFalse(didCallback)
         
     }
 
     func testShouldCallHandlerOnSuccessfulRefresh() {
         
+        var requestCounter = 0
         var didCallback = false
         
-        let willHandleResponse = oAuth2Authorization.willHandleResponse(
-            urlSessionDataTask: mockTask,
-            error: NSError()) { task, responseObject, error in
+        oAuth2Authorization.performAuthenticatedRequest(
+            requestHandler: { handler in
+                handler(self.mockTask, nil, requestCounter++ == 0 ? NSError() : nil)
+            }) { urlSessionDataTask, responseObject, error in
                 if error == nil {
                     didCallback = true
                 }
         }
         
-        XCTAssertTrue(willHandleResponse)
         XCTAssertTrue(didCallback)
         
     }
@@ -90,19 +89,17 @@ class OAuth2AuthorizationTests: XCTestCase {
         
         mockSessionManager.shouldRefreshSuccessfully = false
         
-        var didNotRetry = true
         var didReturnError = false
-        
-        let willHandleResponse = oAuth2Authorization.willHandleResponse(
-            urlSessionDataTask: mockTask,
-            error: NSError()) { task, responseObject, error in
+
+        oAuth2Authorization.performAuthenticatedRequest(
+            requestHandler: { handler in
+                handler(self.mockTask, nil, NSError())
+            }) { urlSessionDataTask, responseObject, error in
                 if error != nil {
                     didReturnError = true
                 }
         }
-        
-        XCTAssertTrue(willHandleResponse)
-        XCTAssertTrue(didNotRetry)
+
         XCTAssertTrue(didReturnError)
         XCTAssertEqual(mockSessionManager.refreshRetryCounter, 1)
 

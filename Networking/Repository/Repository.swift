@@ -131,38 +131,27 @@ public class Repository<T: ModelObject>: Hashable {
         handler: ([ T ]?, NSError?) -> Void) {
                         
             let updatedParameters = requestParameters(parameters)
-            
-            performRequest(
-                parameters: updatedParameters,
-                handler: { [weak self] urlSessionDataTask, responseObject, error in
+
+            oAuth2Authorization.performAuthenticatedRequest(
+                requestHandler: { [weak self] completionHandler in
                     if let strongSelf = self {
-                        let completionHandler: URLSessionDataTaskHandler = { [weak self] urlSessionDataTask, responseObject, error in
-                            if let strongSelf = self {
-                                if error == nil {
-                                    let newElements = strongSelf.collectionParser(responseObject!) as! [ T ]
-                                    strongSelf.updatePagingParameters(newElements, responseObject: responseObject!)
-                                    handler(newElements, nil)
-                                } else {
-                                    handler(nil, error)
-                                }
-                            }
-                        }
-                        
-                        let willHandleResponse = strongSelf.oAuth2Authorization.willHandleResponse(
-                            urlSessionDataTask: urlSessionDataTask,
-                            error: error) { [weak self] urlSessionDataTask, responseObject, error in
-                                if let strongSelf = self {
-                                    strongSelf.performRequest(
-                                        parameters: parameters,
-                                        handler: completionHandler)
-                                }
-                        }
-                        
-                        if !willHandleResponse {
-                            completionHandler(urlSessionDataTask, responseObject, error)
+                        strongSelf.performRequest(
+                            parameters: updatedParameters,
+                            handler: completionHandler
+                        )
+                    }
+                }) { [weak self] urlSessionDataTask, responseObject, error in
+                    if let strongSelf = self {
+                        if error == nil {
+                            let newElements = strongSelf.collectionParser(responseObject!) as! [ T ]
+                            strongSelf.updatePagingParameters(newElements, responseObject: responseObject!)
+                            handler(newElements, nil)
+                        } else {
+                            handler(nil, error)
                         }
                     }
-                })
+            }
+
     }
     
     private func performRequest(
